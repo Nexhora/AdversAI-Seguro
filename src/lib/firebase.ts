@@ -3,10 +3,6 @@ import { initializeApp, getApps, getApp, type FirebaseApp } from "firebase/app";
 import { getAuth, type Auth } from "firebase/auth";
 import { getFirestore, type Firestore } from "firebase/firestore";
 import { getStorage, type FirebaseStorage } from "firebase/storage";
-import { config } from 'dotenv';
-
-// Load environment variables from .env file at the very top
-config({ path: '.env' });
 
 // Your web app's Firebase configuration is read directly from Next.js environment variables
 const firebaseConfig = {
