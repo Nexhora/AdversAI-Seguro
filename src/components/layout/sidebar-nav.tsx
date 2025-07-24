@@ -6,11 +6,11 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import { FileText, FlaskConical, Briefcase, Wand2 } from "lucide-react";
+import { FileText, FlaskConical, Briefcase, Wand2, LayoutDashboard } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { href: "/dashboard/campaign-generator", label: "Campaña", icon: FileText },
+  { href: "/dashboard", label: "Campaña", icon: LayoutDashboard },
   { href: "/dashboard/landing-generator", label: "Landing AI", icon: Wand2 },
   { href: "/dashboard/builder", label: "Laboratorio", icon: FlaskConical },
   { href: "/dashboard/my-sites", label: "Mis Sitios", icon: Briefcase },
@@ -19,14 +19,28 @@ const navItems = [
 export function SidebarNav() {
   const pathname = usePathname();
 
+  const isDashboardPage = pathname === '/dashboard' || pathname === '/dashboard/campaign-generator';
+
   return (
     <SidebarMenu>
-      {navItems.map((item) => (
+       <SidebarMenuItem>
+          <SidebarMenuButton
+            asChild
+            tooltip="Generador de Campañas"
+            isActive={isDashboardPage}
+          >
+            <a href="/dashboard">
+              <FileText />
+              <span>Campaña</span>
+            </a>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      {navItems.slice(1).map((item) => (
         <SidebarMenuItem key={item.href}>
           <SidebarMenuButton
             asChild
             tooltip={item.label}
-            isActive={pathname.startsWith(item.href) && (item.href !== '/dashboard' || pathname === '/dashboard' || pathname === '/dashboard/campaign-generator')}
+            isActive={pathname.startsWith(item.href)}
           >
             <a href={item.href}>
               <item.icon />
