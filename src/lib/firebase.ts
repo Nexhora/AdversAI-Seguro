@@ -1,4 +1,3 @@
-
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps, getApp, type FirebaseApp } from "firebase/app";
 import { getAuth, type Auth } from "firebase/auth";
@@ -15,15 +14,15 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
+// A simple check to see if the necessary variables are present.
+// This will now check for the uppercase public variables.
+export const firebaseCredentialsExist = !!firebaseConfig.apiKey;
+
 // Conditionally initialize Firebase
 let app: FirebaseApp;
 let auth: Auth;
 let db: Firestore;
 let storage: FirebaseStorage;
-
-// A simple check to see if the necessary variables are present.
-export const firebaseCredentialsExist = !!firebaseConfig.apiKey;
-
 
 if (firebaseCredentialsExist) {
     app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
@@ -33,7 +32,7 @@ if (firebaseCredentialsExist) {
 } else {
     // This message will be logged on the server or in the browser console
     // if the Firebase environment variables are not set.
-    console.error("Firebase configuration variables are not set. Please check your hosting environment variables.");
+    console.error("Firebase configuration variables are not set. Please check your .env file or hosting environment variables.");
 }
 
 // Export the initialized services
