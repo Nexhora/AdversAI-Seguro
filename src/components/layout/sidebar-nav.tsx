@@ -22,9 +22,9 @@ export function SidebarNav() {
   return (
     <SidebarMenu>
       {navItems.map((item) => {
-        // La lógica de `isActive` ahora es más simple. El generador de campañas
-        // vive en /dashboard, por lo que una coincidencia exacta con item.href funciona.
-        const isActive = pathname === item.href;
+        // Si la ruta actual es /dashboard/campaign-generator, también activamos /dashboard.
+        // O si la ruta actual es exactamente /dashboard.
+        const isActive = pathname === item.href || (item.href === "/dashboard" && pathname === "/dashboard/campaign-generator");
         
         return (
           <SidebarMenuItem key={item.href}>

@@ -179,7 +179,17 @@ const parseAndValidateState = (content: string | null): BuilderState | null => {
         const parsed = JSON.parse(content);
         // Robust validation: Check for the { page: [...] } structure.
         if (parsed && typeof parsed === 'object' && Array.isArray(parsed.page)) {
-            return parsed as BuilderState;
+            // Further validation to ensure sections are objects with id, type, props
+            const isValid = parsed.page.every((section: any) => 
+                typeof section === 'object' &&
+                section !== null &&
+                'id' in section &&
+                'type' in section &&
+                'props' in section
+            );
+            if (isValid) {
+                return parsed as BuilderState;
+            }
         }
         console.error("Invalid page structure after parsing:", parsed);
         return null;
@@ -225,18 +235,18 @@ const BuilderPageContent = () => {
                   setActivePage({ id: pageId, name: pageData.name });
                   toast({ title: "¡Página Cargada!", description: `Editando "${pageData.name}".` });
               } else {
-                  toast({ variant: 'destructive', title: 'Error de Contenido', description: 'El formato de la página guardada está dañado. No se puede cargar.' });
+                  toast({ variant: 'destructive', title: 'Error de Contenido', description: 'El formato de la página guardada está dañado. Se cargará un lienzo en blanco.' });
                   router.replace('/dashboard/builder');
                   setState(EMPTY_STATE);
               }
           } else {
-              toast({ variant: 'destructive', title: 'Error', description: 'No se pudo encontrar la página para editar.' });
+              toast({ variant: 'destructive', title: 'Error', description: 'No se pudo encontrar la página para editar. Se cargará un lienzo en blanco.' });
               router.replace('/dashboard/builder');
               setState(EMPTY_STATE);
           }
       } catch (error) {
           console.error("Error al cargar datos de la página: ", error);
-          toast({ variant: 'destructive', title: 'Error al Cargar', description: 'No se pudieron obtener los datos de la página.' });
+          toast({ variant: 'destructive', title: 'Error al Cargar', description: 'No se pudieron obtener los datos de la página. Se cargará un lienzo en blanco.' });
           setState(EMPTY_STATE);
           router.replace('/dashboard/builder');
       } finally {
@@ -250,36 +260,47 @@ const BuilderPageContent = () => {
       return; // Wait for authentication to complete
     }
 
-    const pageIdToLoad = searchParams.get('pageId');
-    if (pageIdToLoad && user) {
-        loadPageFromUrl(pageIdToLoad);
-        return;
-    }
-    
-    // This logic now only runs on the client after the initial check for pageId
-    const generatedPageData = localStorage.getItem('generatedLandingPage');
-    if (generatedPageData) {
-        const contentToLoad = parseAndValidateState(generatedPageData);
-        if (contentToLoad) {
-            setState(contentToLoad);
-            setActivePage(null);
-            setPageName('Nueva Página Generada por IA');
-            toast({ title: 'Plantilla Cargada', description: 'Tu plantilla generada por IA está lista para editar.' });
-        } else {
-            toast({ variant: 'destructive', title: 'Error', description: 'No se pudo cargar la página generada. El formato era inválido.' });
-            setState(EMPTY_STATE);
-        }
-        // Always clean up after attempting to load
-        localStorage.removeItem('generatedLandingPage');
-    } else if (!pageIdToLoad) {
-        // Only set to empty if no pageId is being loaded and no localStorage data is found
-        setState(EMPTY_STATE);
-        setActivePage(null);
-        setPageName('');
-    }
-    
-    setIsLoading(false);
+    // This flag ensures the effect only runs once on initial load.
+    let isInitialLoad = true;
 
+    if (isInitialLoad) {
+        const pageIdToLoad = searchParams.get('pageId');
+        if (pageIdToLoad && user) {
+            loadPageFromUrl(pageIdToLoad);
+        } else {
+            // This logic now only runs on the client after the initial check for pageId
+            const generatedPageData = localStorage.getItem('generatedLandingPage');
+            if (generatedPageData) {
+                const contentToLoad = parseAndValidateState(generatedPageData);
+                if (contentToLoad) {
+                    setState(contentToLoad);
+                    setActivePage(null);
+                    setPageName('Nueva Página Generada por IA');
+                    toast({ title: 'Plantilla Cargada', description: 'Tu plantilla generada por IA está lista para editar.' });
+                } else {
+                    toast({ variant: 'destructive', title: 'Error', description: 'No se pudo cargar la página generada. El formato era inválido.' });
+                    setState(EMPTY_STATE);
+                }
+                // Always clean up after attempting to load
+                try {
+                    localStorage.removeItem('generatedLandingPage');
+                } catch (e) {
+                    console.error("Could not remove item from localstorage", e)
+                }
+            } else {
+                // Only set to empty if no pageId is being loaded and no localStorage data is found
+                setState(EMPTY_STATE);
+                setActivePage(null);
+                setPageName('');
+            }
+            setIsLoading(false);
+        }
+    }
+    
+    return () => {
+        isInitialLoad = false;
+    }
+    
   }, [searchParams, user, authLoading, loadPageFromUrl, toast]);
 
 
@@ -425,6 +446,9 @@ const BuilderPageContent = () => {
             setSavedPages(prev => prev.filter(p => p.id !== pageToDelete.id));
              if (activePage?.id === pageToDelete.id) {
                 router.replace('/dashboard/builder');
+                setState(EMPTY_STATE);
+                setActivePage(null);
+                setPageName('');
             }
         } catch (error) {
              toast({
