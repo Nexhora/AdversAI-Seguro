@@ -24,7 +24,7 @@ En `MI_CONFIG_DE_FIREBASE.md` verás `apiKey: "AIzaSy..."`. Copia ese valor y p�
 
 ---
 
-### **Paso 2: Consigue y Pega tu Clave de Google AI (la más importante)**
+### **Paso 2: Consigue y Pega tu ÚNICA Clave de Google AI**
 
 Esta es la única clave que debes generar tú. Es gratis y rápido.
 
