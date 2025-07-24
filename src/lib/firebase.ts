@@ -3,6 +3,10 @@ import { initializeApp, getApps, getApp, type FirebaseApp } from "firebase/app";
 import { getAuth, type Auth } from "firebase/auth";
 import { getFirestore, type Firestore } from "firebase/firestore";
 import { getStorage, type FirebaseStorage } from "firebase/storage";
+import { config } from 'dotenv';
+
+// Cargar las variables de entorno desde el archivo .env
+config();
 
 // Your web app's Firebase configuration is read directly from Next.js environment variables
 const firebaseConfig = {
@@ -16,12 +20,12 @@ const firebaseConfig = {
 
 // A simple check to see if the necessary variables are present.
 export const firebaseCredentialsExist = 
-    !!process.env.NEXT_PUBLIC_FIREBASE_API_KEY &&
-    !!process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN &&
-    !!process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID &&
-    !!process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET &&
-    !!process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID &&
-    !!process.env.NEXT_PUBLIC_FIREBASE_APP_ID &&
+    !!firebaseConfig.apiKey &&
+    !!firebaseConfig.authDomain &&
+    !!firebaseConfig.projectId &&
+    !!firebaseConfig.storageBucket &&
+    !!firebaseConfig.messagingSenderId &&
+    !!firebaseConfig.appId &&
     !!process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
 
 
