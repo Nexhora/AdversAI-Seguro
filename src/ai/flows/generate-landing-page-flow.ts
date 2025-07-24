@@ -23,7 +23,70 @@ export async function generateLandingPage(
       id: nanoid(),
   }));
 
-  return { page: sectionsWithIds };
+  // Map AI output to the strict component props.
+  const validatedSections = sectionsWithIds.map(section => {
+    // This mapping ensures that each component receives only the props it expects.
+    // For example, a "Hero" section will not receive a "features" array.
+    switch (section.type) {
+        case 'Hero':
+            return {
+                id: section.id,
+                type: 'Hero',
+                props: {
+                    title: section.props.title || '',
+                    subtitle: section.props.subtitle || '',
+                    buttonText: section.props.buttonText || '',
+                    bgColor: section.props.bgColor || 'bg-gray-900',
+                    textColor: section.props.textColor || 'text-white',
+                    textAlign: section.props.textAlign || 'center',
+                }
+            };
+        case 'Features':
+             return {
+                id: section.id,
+                type: 'Features',
+                props: {
+                    title: section.props.title || '',
+                    subtitle: section.props.subtitle || '',
+                    features: section.props.features || [],
+                    bgColor: section.props.bgColor || 'bg-background',
+                    textColor: section.props.textColor || 'text-foreground',
+                }
+            };
+        case 'Text':
+            return {
+                id: section.id,
+                type: 'Text',
+                props: {
+                    text: section.props.text || '',
+                    as: section.props.as || 'p',
+                    textAlign: section.props.textAlign || 'center',
+                    bgColor: section.props.bgColor || 'bg-background',
+                    textColor: section.props.textColor || 'text-foreground',
+                }
+            };
+        case 'Button':
+            return {
+                id: section.id,
+                type: 'Button',
+                props: {
+                    text: section.props.text || '',
+                    variant: section.props.variant || 'default',
+                    textAlign: section.props.textAlign || 'center',
+                    bgColor: section.props.bgColor || 'bg-background',
+                }
+            };
+        default:
+            // Return a minimal section or throw an error if an unknown type is received
+            return {
+                id: section.id,
+                type: 'Text',
+                props: { text: 'Sección de tipo desconocido', as: 'p', textAlign: 'center' }
+            };
+    }
+  });
+
+  return { page: validatedSections };
 }
 
 const prompt = ai.definePrompt({
@@ -44,20 +107,21 @@ const prompt = ai.definePrompt({
 1.  **Genera un Objeto con una Clave 'page':** Tu salida DEBE ser un único objeto JSON.
 2.  **El valor de 'page' debe ser un Array:** Dentro de ese objeto, la clave "page" debe contener un array de secciones.
 3.  **Crea CUATRO Secciones:** El array 'page' debe contener exactamente CUATRO secciones, en este orden: 'Hero', 'Text', 'Features' y 'Button'.
-4.  **Completa las 'props' de la Sección Hero:**
+4.  **Para cada sección, define su 'type' y su objeto 'props'.**
+5.  **Completa las 'props' de la Sección Hero (type: 'Hero'):**
     *   **title:** Un titular magnético que enganche, basado en el producto.
     *   **subtitle:** Un subtítulo que genere curiosidad y apoye al titular.
     *   **buttonText:** Texto para el botón de la sección Hero (ej. "Empezar Prueba Gratis").
     *   **bgColor:** Clase de color de fondo. Usa 'bg-gray-900' para tonos oscuros, 'bg-white' para claros.
     *   **textColor:** Clase de color de texto que contraste. Usa 'text-white' o 'text-gray-800'.
     *   **textAlign:** 'left', 'center' o 'right'.
-5.  **Completa las 'props' de la Sección Text:**
+6.  **Completa las 'props' de la Sección Text (type: 'Text'):**
     *   **text:** Un párrafo corto (2-3 frases) que introduzca las características o refuerce el mensaje principal.
     *   **as:** Usa 'p' para un párrafo normal.
     *   **textAlign:** 'center'.
     *   **bgColor:** 'bg-background'.
     *   **textColor:** 'text-foreground'.
-6.  **Completa las 'props' de la Sección Features:**
+7.  **Completa las 'props' de la Sección Features (type: 'Features'):**
     *   **title:** Un titular que resuma el valor (ej. "Todo lo que necesitas para triunfar").
     *   **subtitle:** Un subtítulo que dé más contexto a las características.
     *   **features:** Un array de EXACTAMENTE 3 objetos de características. Cada objeto con:
@@ -66,7 +130,7 @@ const prompt = ai.definePrompt({
         *   **description:** Descripción breve del beneficio.
     *   **bgColor:** 'bg-muted'.
     *   **textColor:** 'text-foreground'.
-7.  **Completa las 'props' de la Sección Button:**
+8.  **Completa las 'props' de la Sección Button (type: 'Button'):**
     *   **text:** Una llamada a la acción final y clara (ej. "¡Lo Quiero! Empiezo Hoy").
     *   **variant:** 'default'.
     *   **textAlign:** 'center'.

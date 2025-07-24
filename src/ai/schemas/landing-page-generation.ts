@@ -68,34 +68,36 @@ const ButtonSectionPropsSchema = z.object({
 // UNIFIED SECTION SCHEMA
 // =================================================================
 
-// Define individual schemas for each section type
-const HeroSectionSchema = z.object({
+// Define a single unified schema for any section
+const SectionSchema = z.object({
   id: z.string().optional(),
-  type: z.literal('Hero'),
-  props: HeroSectionPropsSchema,
+  type: z.enum(['Hero', 'Features', 'Text', 'Button']).describe("El tipo de componente de sección a renderizar."),
+  props: z.object({
+    // Hero Props
+    title: z.string().optional().describe("El titular principal de la página, magnético y que enganche. SOLO para sección Hero o Features."),
+    subtitle: z.string().optional().describe("Un subtítulo que genere curiosidad. SOLO para sección Hero o Features."),
+    buttonText: z.string().optional().describe("Un texto claro para el botón de llamada a la acción. SOLO para sección Hero."),
+    
+    // Features Props
+    features: z.array(z.object({
+        icon: z.string().describe("El nombre de un icono de 'lucide-react' (ej. 'ShieldCheck', 'Rocket', 'BarChart')."),
+        title: z.string().describe("El título de la característica (ej. 'Seguridad Avanzada')."),
+        description: z.string().describe("Una descripción breve (1-2 frases) que explique la característica."),
+    })).optional().describe("Un array de 3 a 6 características. SOLO para sección Features."),
+    
+    // Text Props
+    text: z.string().optional().describe("El contenido de texto. SOLO para sección Text o Button."),
+    as: z.enum(['p', 'h1', 'h2', 'h3']).optional().describe("El tipo de etiqueta HTML. SOLO para sección Text."),
+    
+    // Button Props
+    variant: z.enum(['default', 'destructive', 'outline', 'secondary', 'ghost', 'link']).optional().describe("El estilo del botón. SOLO para sección Button."),
+
+    // Common Props
+    bgColor: z.string().optional().describe("Una clase de color de fondo de Tailwind CSS (ej. 'bg-gray-900', 'bg-white')."),
+    textColor: z.string().optional().describe("Una clase de color de texto de Tailwind CSS que contraste (ej. 'text-white', 'text-gray-800')."),
+    textAlign: z.enum(['left', 'center', 'right']).optional().describe("La alineación del contenido."),
+  }),
 });
-
-const FeaturesSectionSchema = z.object({
-  id: z.string().optional(),
-  type: z.literal('Features'),
-  props: FeaturesSectionPropsSchema,
-});
-
-const TextSectionSchema = z.object({
-  id: z.string().optional(),
-  type: z.literal('Text'),
-  props: TextSectionPropsSchema,
-});
-
-const ButtonSectionSchema = z.object({
-  id: z.string().optional(),
-  type: z.literal('Button'),
-  props: ButtonSectionPropsSchema,
-});
-
-
-// Use a simple z.union instead of z.discriminatedUnion for better compatibility
-const SectionSchema = z.union([HeroSectionSchema, FeaturesSectionSchema, TextSectionSchema, ButtonSectionSchema]);
 
 
 // The final output schema from the AI flow. It is an object with a "page" key
