@@ -3,7 +3,7 @@
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
-import { auth, firebaseCredentialsExist } from '@/lib/firebase';
+import { auth } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { Logo } from '@/components/icons';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -20,34 +20,6 @@ const AuthContext = createContext<AuthContextType>({
   logout: () => {},
 });
 
-const FirebaseConfigurationNotice = () => {
-    return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-background p-4 text-center text-foreground">
-        <div className="flex items-center gap-4 mb-8">
-            <Logo className="size-12 text-primary" />
-            <div>
-                <h1 className="text-4xl font-semibold font-headline leading-tight">Nexhora</h1>
-                <p className="text-lg text-muted-foreground">AdversAI</p>
-            </div>
-        </div>
-        <Card className="w-full max-w-2xl">
-            <CardHeader>
-                <CardTitle>Error de Configuración</CardTitle>
-                <CardDescription>
-                    La aplicación no ha podido conectar con los servicios de Firebase.
-                    Por favor, comprueba que las variables de entorno están correctamente configuradas
-                    en tu archivo <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">.env</code>
-                    y en la configuración de tu hosting.
-                </CardDescription>
-            </CardHeader>
-            <CardContent>
-                <p>La aplicación no puede continuar sin una conexión válida.</p>
-            </CardContent>
-        </Card>
-      </div>
-    );
-};
-
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -55,10 +27,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!firebaseCredentialsExist) {
-        setLoading(false);
-        return;
-    }
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
@@ -85,10 +53,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     );
   }
 
-  if (!firebaseCredentialsExist) {
-    return <FirebaseConfigurationNotice />;
-  }
-
   const value = {
     user,
     loading,
@@ -99,5 +63,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useAuth = () => {
-  return useContext(AuthContext);
+    const context = useContext(AuthContext);
+    if (context === undefined) {
+        throw new Error('useAuth must be used within an AuthProvider');
+    }
+    return context;
 };
