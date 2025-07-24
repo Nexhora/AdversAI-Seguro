@@ -15,7 +15,8 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// A simple check to see if the essential variables are there.
+// This check is now simplified or can be considered implicit.
+// If the values aren't set, Firebase initialization will fail with a clear error.
 export const firebaseCredentialsExist = !!(
   firebaseConfig.apiKey &&
   firebaseConfig.projectId
@@ -24,7 +25,7 @@ export const firebaseCredentialsExist = !!(
 if (!firebaseCredentialsExist) {
     // This message will be logged on the server or in the browser console
     // if the Firebase environment variables are not set.
-    console.error("Firebase configuration variables are not set. Please check your .env file or hosting environment variables.");
+    console.error("Firebase basic configuration variables (apiKey, projectId) are not set. Please check your .env file or hosting environment variables.");
 }
 
 // Initialize Firebase

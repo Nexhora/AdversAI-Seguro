@@ -6,6 +6,8 @@ runConfig:
 # Required for Next.js frameworks and Firebase/Google services
 requires:
   - "GCP_PROJECT"
+environmentVariables:
+  - key: NEXT_PUBLIC_GOOGLE_API_KEY
 secretEnvironmentVariables:
   - key: NEXT_PUBLIC_FIREBASE_API_KEY
   - key: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
@@ -13,4 +15,3 @@ secretEnvironmentVariables:
   - key: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
   - key: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
   - key: NEXT_PUBLIC_FIREBASE_APP_ID
-  - key: NEXT_PUBLIC_GOOGLE_API_KEY

@@ -6,7 +6,7 @@ import { onAuthStateChanged, signOut, User } from 'firebase/auth';
 import { auth, firebaseCredentialsExist } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle, Loader2 } from 'lucide-react';
 
 interface AuthContextType {
   user: User | null;
@@ -28,11 +28,11 @@ const FirebaseConfigurationNotice = () => (
                     <AlertTriangle/> Error de Configuración de Firebase
                 </CardTitle>
                 <CardDescription className="text-destructive/90">
-                    Las credenciales de Firebase no están configuradas correctamente en el archivo.env. Por favor, contacta al soporte o revisa la configuración de tu proyecto.
+                    Las credenciales básicas de Firebase no están configuradas. La aplicación no puede inicializarse.
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <p className="text-sm text-muted-foreground">La aplicación no puede continuar sin una conexión válida a Firebase.</p>
+                <p className="text-sm text-muted-foreground">Asegúrate de que `NEXT_PUBLIC_FIREBASE_API_KEY` y `NEXT_PUBLIC_FIREBASE_PROJECT_ID` estén disponibles.</p>
             </CardContent>
         </Card>
     </div>
@@ -71,19 +71,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       return <FirebaseConfigurationNotice />;
   }
 
-  if (loading) {
-     return (
-        <div className="flex h-screen items-center justify-center">
-            <p>Cargando aplicación...</p>
-        </div>
-    );
-  }
-
   const value = {
     user,
     loading,
     logout
   };
+
+  if (loading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin" />
+          <p className='ml-2'>Cargando aplicación...</p>
+      </div>
+    );
+  }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
