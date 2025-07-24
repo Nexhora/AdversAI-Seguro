@@ -15,8 +15,15 @@ const firebaseConfig = {
 };
 
 // A simple check to see if the necessary variables are present.
-// This will now check for the uppercase public variables.
-export const firebaseCredentialsExist = !!firebaseConfig.apiKey;
+export const firebaseCredentialsExist = 
+    !!process.env.NEXT_PUBLIC_FIREBASE_API_KEY &&
+    !!process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN &&
+    !!process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID &&
+    !!process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET &&
+    !!process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID &&
+    !!process.env.NEXT_PUBLIC_FIREBASE_APP_ID &&
+    !!process.env.GOOGLE_API_KEY;
+
 
 // Conditionally initialize Firebase
 let app: FirebaseApp;
