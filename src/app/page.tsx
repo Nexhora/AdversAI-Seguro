@@ -30,10 +30,12 @@ export default function HomePage() {
              <Link href="#beneficios" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Beneficios</Link>
              <Link href="#herramientas" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Herramientas</Link>
              <Link href="/login" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Login</Link>
-             <Link href="/dashboard" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Dashboard</Link>
           </nav>
           <Button asChild className="hidden md:block bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold hover:from-orange-600 hover:to-amber-600">
             <Link href="/login?tab=register">Probar Gratis</Link>
+          </Button>
+           <Button asChild className="md:hidden bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold hover:from-orange-600 hover:to-amber-600">
+            <Link href="/login">Acceder</Link>
           </Button>
         </div>
       </header>
@@ -53,8 +55,7 @@ export default function HomePage() {
                 
                 <div className="mt-10 max-w-xl mx-auto">
                      <form className="flex flex-col sm:flex-row gap-4" onSubmit={handleFormSubmit}>
-                        <Input required type="text" placeholder="Tu nombre" className="flex-1 bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:ring-orange-500 rounded-md" />
-                        <Input required type="email" placeholder="Tu email" className="flex-1 bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:ring-orange-500 rounded-md" />
+                        <Input required type="email" placeholder="Tu email para empezar" className="flex-1 bg-gray-800 border-gray-700 text-white placeholder:text-gray-500 focus:ring-orange-500 rounded-md" />
                          <Button type="submit" size="lg" className="bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold hover:from-orange-600 hover:to-amber-600">
                            Comenzar Ahora
                         </Button>

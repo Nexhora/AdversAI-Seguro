@@ -19,26 +19,28 @@ const navItems = [
 export function SidebarNav() {
   const pathname = usePathname();
 
-  // El generador de campañas ahora está en /dashboard, por lo que esta lógica
-  // resalta correctamente el ícono de "Campaña".
-  const isCampaignPage = pathname === '/dashboard' || pathname === '/dashboard/campaign-generator';
-
   return (
     <SidebarMenu>
-      {navItems.map((item) => (
-        <SidebarMenuItem key={item.href}>
-          <SidebarMenuButton
-            asChild
-            tooltip={item.label}
-            isActive={pathname === item.href}
-          >
-            <a href={item.href}>
-              <item.icon />
-              <span>{item.label}</span>
-            </a>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      ))}
+      {navItems.map((item) => {
+        // La lógica de `isActive` ahora es más simple. El generador de campañas
+        // vive en /dashboard, por lo que una coincidencia exacta con item.href funciona.
+        const isActive = pathname === item.href;
+        
+        return (
+          <SidebarMenuItem key={item.href}>
+            <SidebarMenuButton
+              asChild
+              tooltip={item.label}
+              isActive={isActive}
+            >
+              <a href={item.href}>
+                <item.icon />
+                <span>{item.label}</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        );
+      })}
     </SidebarMenu>
   );
 }

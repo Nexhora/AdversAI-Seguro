@@ -138,13 +138,13 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4 bg-gray-900">
-      <div className="flex items-center gap-4 mb-8 text-white">
+      <Link href="/" className="flex items-center gap-4 mb-8 text-white">
           <Logo className="size-12 text-primary" />
           <div>
             <h1 className="text-4xl font-semibold font-headline leading-tight">Nexhora</h1>
             <p className="text-lg text-muted-foreground">AdversAI</p>
           </div>
-      </div>
+      </Link>
       <Tabs defaultValue={defaultTab} className="w-full max-w-md">
         <TabsList className="grid w-full grid-cols-2 bg-gray-800 text-gray-400">
           <TabsTrigger value="login">Iniciar Sesión</TabsTrigger>
