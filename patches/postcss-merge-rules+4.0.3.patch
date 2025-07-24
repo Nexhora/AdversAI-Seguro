@@ -1,0 +1,12 @@
+diff --git a/node_modules/postcss-merge-rules/dist/index.js b/node_modules/postcss-merge-rules/dist/index.js
+index 478631c..6e92751 100644
+--- a/node_modules/postcss-merge-rules/dist/index.js
++++ b/node_modules/postcss-merge-rules/dist/index.js
+@@ -1,5 +1,5 @@
+ 'use strict';
+ 
+-let { nanoid } = require('nanoid/non-secure');
++let { nanoid } = require('nanoid');
+ let { isAbsolute, resolve } = require('path');
+ let { SourceMapConsumer, SourceMapGenerator } = require('source-map-js');
+ let { fileURLToPath, pathToFileURL } = require('url');
