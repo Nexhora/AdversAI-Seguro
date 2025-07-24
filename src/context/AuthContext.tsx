@@ -32,15 +32,16 @@ const FirebaseConfigurationNotice = () => {
         </div>
         <Card className="w-full max-w-2xl">
             <CardHeader>
-                <CardTitle>Error de Configuración de Firebase</CardTitle>
+                <CardTitle>Error de Configuración</CardTitle>
                 <CardDescription>
-                    Las credenciales de Firebase no están configuradas correctamente en el archivo 
-                    <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">.env</code>.
-                    Por favor, contacta al soporte o revisa la configuración de tu proyecto.
+                    La aplicación no ha podido conectar con los servicios de Firebase.
+                    Por favor, comprueba que las variables de entorno están correctamente configuradas
+                    en tu archivo <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">.env</code>
+                    y en la configuración de tu hosting.
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <p>La aplicación no puede continuar sin una conexión válida a Firebase.</p>
+                <p>La aplicación no puede continuar sin una conexión válida.</p>
             </CardContent>
         </Card>
       </div>
