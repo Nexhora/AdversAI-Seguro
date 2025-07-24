@@ -1,10 +1,22 @@
 
-# ¡LISTO! Tu aplicación está funcionando.
+# ¡LISTO! Tu aplicación está casi funcionando.
 
-¡Felicidades! Has superado un proceso de configuración muy complejo y tu aplicación ya está desplegada y funcionando de forma segura.
+Has superado un proceso de configuración muy complejo. Solo falta un último paso crucial.
 
-El archivo `.env` que ves a la izquierda contiene todas las claves necesarias para que tu aplicación se conecte a Google AI y Firebase.
+**ACCIÓN REQUERIDA: Rellena tus claves secretas en el archivo `.env`**
 
-**No necesitas hacer nada más.**
+A la izquierda, en la lista de archivos, busca y abre el archivo llamado **`.env`**.
 
-El sistema ya
+Dentro de ese archivo, verás 7 campos que debes rellenar con tus propias claves. Pega cada clave **dentro de las comillas**.
+
+**Ejemplo:**
+
+Si tu clave de Google AI es `AIza123`, la línea debería quedar así:
+`GOOGLE_API_KEY="AIza123"`
+
+Si el `projectId` de tu Firebase es `mi-proyecto-cool`, la línea debería quedar así:
+`NEXT_PUBLIC_FIREBASE_PROJECT_ID="mi-proyecto-cool"`
+
+**Una vez que hayas rellenado las 7 claves y guardado el archivo `.env`, la aplicación se reiniciará automáticamente y el error que ves desaparecerá.**
+
+¡Ya casi lo tienes!
