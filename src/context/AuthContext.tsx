@@ -3,10 +3,10 @@
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
+import { auth, firebaseCredentialsExist } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
-import { Logo } from '@/components/icons';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { AlertTriangle } from 'lucide-react';
 
 interface AuthContextType {
   user: User | null;
@@ -20,6 +20,24 @@ const AuthContext = createContext<AuthContextType>({
   logout: () => {},
 });
 
+const FirebaseConfigurationNotice = () => (
+    <div className="flex min-h-screen items-center justify-center p-4 bg-background">
+        <Card className="max-w-md w-full border-destructive">
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-destructive">
+                    <AlertTriangle/> Error de Configuración de Firebase
+                </CardTitle>
+                <CardDescription className="text-destructive/90">
+                    Las credenciales de Firebase no están configuradas correctamente en el archivo.env. Por favor, contacta al soporte o revisa la configuración de tu proyecto.
+                </CardDescription>
+            </CardHeader>
+            <CardContent>
+                <p className="text-sm text-muted-foreground">La aplicación no puede continuar sin una conexión válida a Firebase.</p>
+            </CardContent>
+        </Card>
+    </div>
+);
+
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -27,6 +45,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
+    if (!firebaseCredentialsExist) {
+        setLoading(false);
+        return;
+    }
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
@@ -45,6 +67,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
   
+  if (!firebaseCredentialsExist) {
+      return <FirebaseConfigurationNotice />;
+  }
+
   if (loading) {
      return (
         <div className="flex h-screen items-center justify-center">

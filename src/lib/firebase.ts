@@ -16,8 +16,10 @@ const firebaseConfig = {
 };
 
 // A simple check to see if the essential variables are there.
-// This is primarily for debugging and server-side logging.
-export const firebaseCredentialsExist = !!firebaseConfig.projectId && !!firebaseConfig.apiKey;
+export const firebaseCredentialsExist = !!(
+  firebaseConfig.apiKey &&
+  firebaseConfig.projectId
+);
 
 if (!firebaseCredentialsExist) {
     // This message will be logged on the server or in the browser console
@@ -27,26 +29,10 @@ if (!firebaseCredentialsExist) {
 
 // Initialize Firebase
 // This pattern prevents re-initializing the app on hot-reloads
-let app: FirebaseApp;
-let auth: Auth;
-let db: Firestore;
-let storage: FirebaseStorage;
-
-if (firebaseCredentialsExist) {
-    app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-    auth = getAuth(app);
-    db = getFirestore(app);
-    storage = getStorage(app);
-} else {
-    // In case of missing credentials, we provide mock/dummy objects
-    // to prevent the application from crashing immediately.
-    // The UI will show a warning instead.
-    app = {} as FirebaseApp;
-    auth = {} as Auth;
-    db = {} as Firestore;
-    storage = {} as FirebaseStorage;
-}
-
+const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig);
+const auth: Auth = getAuth(app);
+const db: Firestore = getFirestore(app);
+const storage: FirebaseStorage = getStorage(app);
 
 // Export the initialized services
 export { app, auth, db, storage };
