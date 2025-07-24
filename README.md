@@ -34,7 +34,7 @@ Esta es la única clave que debes generar tú. Es gratis y rápido.
 2.  **Crea una nueva clave:** En esa página, haz clic en el botón **"Create API key in new project"**.
 3.  **Copia la clave generada:** Aparecerá una ventana con tu nueva clave (una cadena larga de letras y números). Cópiala.
 4.  **Pégala en el archivo `.env`:** Vuelve al editor y pega la clave en la primera línea:
-    `GOOGLE_API_KEY="...aquí va la clave que acabas de copiar..."`
+    `NEXT_PUBLIC_GOOGLE_API_KEY="...aquí va la clave que acabas de copiar..."`
 
 ---
 
