@@ -26,19 +26,20 @@ export async function generateLandingPage(
   // Map AI output to the strict component props.
   const validatedSections = sectionsWithIds.map(section => {
     // This mapping ensures that each component receives only the props it expects.
-    // For example, a "Hero" section will not receive a "features" array.
+    const props = section.props as any; // Cast to any to access properties dynamically
+
     switch (section.type) {
         case 'Hero':
             return {
                 id: section.id,
                 type: 'Hero',
                 props: {
-                    title: section.props.title || '',
-                    subtitle: section.props.subtitle || '',
-                    buttonText: section.props.buttonText || '',
-                    bgColor: section.props.bgColor || 'bg-gray-900',
-                    textColor: section.props.textColor || 'text-white',
-                    textAlign: section.props.textAlign || 'center',
+                    title: props.title || '',
+                    subtitle: props.subtitle || '',
+                    buttonText: props.buttonText || '',
+                    bgColor: props.bgColor || 'bg-gray-900',
+                    textColor: props.textColor || 'text-white',
+                    textAlign: props.textAlign || 'center',
                 }
             };
         case 'Features':
@@ -46,11 +47,11 @@ export async function generateLandingPage(
                 id: section.id,
                 type: 'Features',
                 props: {
-                    title: section.props.title || '',
-                    subtitle: section.props.subtitle || '',
-                    features: section.props.features || [],
-                    bgColor: section.props.bgColor || 'bg-background',
-                    textColor: section.props.textColor || 'text-foreground',
+                    title: props.title || '',
+                    subtitle: props.subtitle || '',
+                    features: props.features || [],
+                    bgColor: props.bgColor || 'bg-background',
+                    textColor: props.textColor || 'text-foreground',
                 }
             };
         case 'Text':
@@ -58,11 +59,11 @@ export async function generateLandingPage(
                 id: section.id,
                 type: 'Text',
                 props: {
-                    text: section.props.text || '',
-                    as: section.props.as || 'p',
-                    textAlign: section.props.textAlign || 'center',
-                    bgColor: section.props.bgColor || 'bg-background',
-                    textColor: section.props.textColor || 'text-foreground',
+                    text: props.text || '',
+                    as: props.as || 'p',
+                    textAlign: props.textAlign || 'center',
+                    bgColor: props.bgColor || 'bg-background',
+                    textColor: props.textColor || 'text-foreground',
                 }
             };
         case 'Button':
@@ -70,10 +71,10 @@ export async function generateLandingPage(
                 id: section.id,
                 type: 'Button',
                 props: {
-                    text: section.props.text || '',
-                    variant: section.props.variant || 'default',
-                    textAlign: section.props.textAlign || 'center',
-                    bgColor: section.props.bgColor || 'bg-background',
+                    text: props.text || '',
+                    variant: props.variant || 'default',
+                    textAlign: props.textAlign || 'center',
+                    bgColor: props.bgColor || 'bg-background',
                 }
             };
         default:
@@ -107,7 +108,7 @@ const prompt = ai.definePrompt({
 1.  **Genera un Objeto con una Clave 'page':** Tu salida DEBE ser un único objeto JSON.
 2.  **El valor de 'page' debe ser un Array:** Dentro de ese objeto, la clave "page" debe contener un array de secciones.
 3.  **Crea CUATRO Secciones:** El array 'page' debe contener exactamente CUATRO secciones, en este orden: 'Hero', 'Text', 'Features' y 'Button'.
-4.  **Para cada sección, define su 'type' y su objeto 'props'.**
+4.  **Para cada sección, define su 'type' y su objeto 'props'.** El 'type' debe ser uno de: "Hero", "Text", "Features", "Button".
 5.  **Completa las 'props' de la Sección Hero (type: 'Hero'):**
     *   **title:** Un titular magnético que enganche, basado en el producto.
     *   **subtitle:** Un subtítulo que genere curiosidad y apoye al titular.

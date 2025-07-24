@@ -4,7 +4,6 @@
  * following the new component-based architecture.
  */
 import { z } from 'zod';
-import type { BuilderState } from '@/types';
 
 // Schema for the user input form.
 export const GenerateLandingPageInputSchema = z.object({
@@ -23,56 +22,47 @@ export type GenerateLandingPageInput = z.infer<typeof GenerateLandingPageInputSc
 // SECTION-SPECIFIC PROP SCHEMAS
 // =================================================================
 
+// This enum is compatible with the Google AI API
+const SectionTypeSchema = z.enum(['Hero', 'Features', 'Text', 'Button']);
+
 // Define the exact props for the Hero section.
 const HeroSectionPropsSchema = z.object({
-    type: z.literal('Hero'),
-    props: z.object({
-        title: z.string().describe("El titular principal de la página, magnético y que enganche."),
-        subtitle: z.string().describe("Un subtítulo que genere curiosidad y apoye al titular."),
-        buttonText: z.string().describe("Un texto claro para el botón de llamada a la acción (ej. 'Comprar Ahora', 'Probar Gratis')."),
-        bgColor: z.string().describe("Una clase de color de fondo de Tailwind CSS (ej. 'bg-gray-900', 'bg-white', 'bg-gradient-to-r from-blue-500 to-green-400')."),
-        textColor: z.string().describe("Una clase de color de texto de Tailwind CSS que contraste con el fondo (ej. 'text-white', 'text-gray-800')."),
-        textAlign: z.enum(['left', 'center', 'right']).describe("La alineación del texto en la sección."),
-    })
+    title: z.string().describe("El titular principal de la página, magnético y que enganche."),
+    subtitle: z.string().describe("Un subtítulo que genere curiosidad y apoye al titular."),
+    buttonText: z.string().describe("Un texto claro para el botón de llamada a la acción (ej. 'Comprar Ahora', 'Probar Gratis')."),
+    bgColor: z.string().describe("Una clase de color de fondo de Tailwind CSS (ej. 'bg-gray-900', 'bg-white', 'bg-gradient-to-r from-blue-500 to-green-400')."),
+    textColor: z.string().describe("Una clase de color de texto de Tailwind CSS que contraste con el fondo (ej. 'text-white', 'text-gray-800')."),
+    textAlign: z.enum(['left', 'center', 'right']).describe("La alineación del texto en la sección."),
 });
 
 // Define the props for the Features section
 const FeaturesSectionPropsSchema = z.object({
-    type: z.literal('Features'),
-    props: z.object({
-        title: z.string().describe("Un titular para la sección que resuma el valor (ej. 'Todo lo que necesitas para tener éxito')."),
-        subtitle: z.string().optional().describe("Un subtítulo opcional que dé más contexto a las características."),
-        features: z.array(z.object({
-            icon: z.string().describe("El nombre de un icono de 'lucide-react' (ej. 'ShieldCheck', 'Rocket', 'BarChart')."),
-            title: z.string().describe("El título de la característica (ej. 'Seguridad Avanzada')."),
-            description: z.string().describe("Una descripción breve (1-2 frases) que explique la característica."),
-        })).describe("Un array de 3 a 6 características clave del producto."),
-        bgColor: z.string().describe("Clase de color de fondo (ej. 'bg-background' o 'bg-muted')."),
-        textColor: z.string().describe("Clase de color de texto (ej. 'text-foreground')."),
-    })
+    title: z.string().describe("Un titular para la sección que resuma el valor (ej. 'Todo lo que necesitas para tener éxito')."),
+    subtitle: z.string().optional().describe("Un subtítulo opcional que dé más contexto a las características."),
+    features: z.array(z.object({
+        icon: z.string().describe("El nombre de un icono de 'lucide-react' (ej. 'ShieldCheck', 'Rocket', 'BarChart')."),
+        title: z.string().describe("El título de la característica (ej. 'Seguridad Avanzada')."),
+        description: z.string().describe("Una descripción breve (1-2 frases) que explique la característica."),
+    })).describe("Un array de 3 a 6 características clave del producto."),
+    bgColor: z.string().describe("Clase de color de fondo (ej. 'bg-background' o 'bg-muted')."),
+    textColor: z.string().describe("Clase de color de texto (ej. 'text-foreground')."),
 });
 
 // Define the props for the Text section
 const TextSectionPropsSchema = z.object({
-    type: z.literal('Text'),
-    props: z.object({
-        text: z.string().describe("El contenido de texto (puede incluir Markdown básico)."),
-        as: z.enum(['p', 'h1', 'h2', 'h3']).default('p').describe("El tipo de etiqueta HTML a usar para el texto (párrafo, titular, etc.)."),
-        textAlign: z.enum(['left', 'center', 'right']).default('left').describe("La alineación del texto."),
-        bgColor: z.string().default('bg-transparent').describe("Clase de color de fondo."),
-        textColor: z.string().default('text-foreground').describe("Clase de color de texto."),
-    })
+    text: z.string().describe("El contenido de texto (puede incluir Markdown básico)."),
+    as: z.enum(['p', 'h1', 'h2', 'h3']).default('p').describe("El tipo de etiqueta HTML a usar para el texto (párrafo, titular, etc.)."),
+    textAlign: z.enum(['left', 'center', 'right']).default('left').describe("La alineación del texto."),
+    bgColor: z.string().default('bg-transparent').describe("Clase de color de fondo."),
+    textColor: z.string().default('text-foreground').describe("Clase de color de texto."),
 });
 
 // Define the props for the Button section
 const ButtonSectionPropsSchema = z.object({
-    type: z.literal('Button'),
-    props: z.object({
-        text: z.string().describe("El texto que se mostrará en el botón."),
-        variant: z.enum(['default', 'destructive', 'outline', 'secondary', 'ghost', 'link']).default('default').describe("El estilo del botón."),
-        textAlign: z.enum(['left', 'center', 'right']).default('center').describe("La alineación del contenedor del botón."),
-        bgColor: z.string().default('bg-transparent').describe("Clase de color de fondo del contenedor."),
-    })
+    text: z.string().describe("El texto que se mostrará en el botón."),
+    variant: z.enum(['default', 'destructive', 'outline', 'secondary', 'ghost', 'link']).default('default').describe("El estilo del botón."),
+    textAlign: z.enum(['left', 'center', 'right']).default('center').describe("La alineación del contenedor del botón."),
+    bgColor: z.string().default('bg-transparent').describe("Clase de color de fondo del contenedor."),
 });
 
 
@@ -80,17 +70,19 @@ const ButtonSectionPropsSchema = z.object({
 // UNIFIED SECTION SCHEMA
 // =================================================================
 
-// A union of all possible section types. This is more compatible than the previous approach.
-const SectionSchema = z.discriminatedUnion('type', [
-  HeroSectionPropsSchema,
-  FeaturesSectionPropsSchema,
-  TextSectionPropsSchema,
-  ButtonSectionPropsSchema,
-]);
+const SectionSchema = z.object({
+  type: SectionTypeSchema,
+  props: z.union([
+    HeroSectionPropsSchema,
+    FeaturesSectionPropsSchema,
+    TextSectionPropsSchema,
+    ButtonSectionPropsSchema,
+  ]),
+});
 
 
 // The final output schema from the AI flow. It is an object with a "page" key
-// containing an array of sections. This is now aligned with BuilderState.
+// containing an array of sections.
 export const GenerateLandingPageOutputFlowSchema = z.object({
   page: z.array(SectionSchema),
 });
@@ -104,5 +96,4 @@ export const GenerateLandingPageOutputFlowSchema = z.object({
 export type GenerateLandingPageOutputFlow = z.infer<typeof GenerateLandingPageOutputFlowSchema>;
 
 // This is the final type expected by the frontend (wrapped object)
-// This now matches the flow output structure.
 export type GenerateLandingPageOutput = GenerateLandingPageOutputFlow;
