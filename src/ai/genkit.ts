@@ -6,7 +6,7 @@ config(); // Load environment variables from .env file
 
 export const ai = genkit({
   plugins: [
-    googleAI(), // Genkit will automatically use GOOGLE_API_KEY from .env
+    googleAI({apiKey: process.env.google_api_key}), // Genkit will use the lowercase key
   ],
   logLevel: 'debug',
   enableTracingAndMetrics: true,
