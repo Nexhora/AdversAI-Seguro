@@ -168,6 +168,28 @@ const EditPanel = ({ selectedSection, onChange, onMove, onDelete, onDuplicate, s
 };
 
 
+/**
+ * Helper function to safely parse and validate the structure of the page content.
+ * @param content Stringified JSON content.
+ * @returns A valid BuilderState or null if parsing/validation fails.
+ */
+const parseAndValidateState = (content: string | null): BuilderState | null => {
+    if (!content) return null;
+    try {
+        const parsed = JSON.parse(content);
+        // Robust validation: Check for the { page: [...] } structure.
+        if (parsed && typeof parsed === 'object' && Array.isArray(parsed.page)) {
+            return parsed as BuilderState;
+        }
+        console.error("Invalid page structure after parsing:", parsed);
+        return null;
+    } catch (error) {
+        console.error("Error parsing page content JSON:", error);
+        return null;
+    }
+};
+
+
 const BuilderPageContent = () => {
   const { user, loading: authLoading } = useAuth();
   const { toast } = useToast();
@@ -189,84 +211,75 @@ const BuilderPageContent = () => {
   const [pageToDelete, setPageToDelete] = useState<SavedPage | null>(null);
   const [isDeleting, startDeletingTransition] = useTransition();
 
-
+  
   const loadPageFromUrl = useCallback(async (pageId: string) => {
-    if (!user) return;
-    setIsLoading(true);
-    try {
-        const pageData = await getPageData(user.uid, pageId);
-        if (pageData && pageData.content) {
-            let contentToLoad: BuilderState;
-            try {
-                contentToLoad = JSON.parse(pageData.content);
-                 // Robust validation: Check for the { page: [...] } structure.
-                 if (!contentToLoad || typeof contentToLoad !== 'object' || !Array.isArray(contentToLoad.page)) {
-                    throw new Error("El JSON de la página guardada no tiene la estructura de BuilderState esperada (debe ser un objeto con una propiedad 'page' que es un array).");
-                }
-            } catch (error) {
-                console.error("Error al analizar o validar el contenido de la página: ", error);
-                toast({ variant: 'destructive', title: 'Error de Contenido', description: 'El formato de la página guardada está dañado. No se puede cargar.' });
-                router.replace('/dashboard/builder');
-                return;
-            }
-
-            setState(contentToLoad);
-            setPageName(pageData.name);
-            setActivePage({ id: pageId, name: pageData.name });
-            toast({ title: "¡Página Cargada!", description: `Editando "${pageData.name}".` });
-        } else {
-            toast({ variant: 'destructive', title: 'Error', description: 'No se pudo encontrar la página para editar.' });
-            router.replace('/dashboard/builder');
-        }
-    } catch (error) {
-        console.error("Error al cargar datos de la página: ", error);
-        toast({ variant: 'destructive', title: 'Error al Cargar', description: 'No se pudieron obtener los datos de la página.' });
-        setState(EMPTY_STATE);
-        router.replace('/dashboard/builder');
-    } finally {
-        setIsLoading(false);
-    }
+      if (!user) return;
+      setIsLoading(true);
+      try {
+          const pageData = await getPageData(user.uid, pageId);
+          if (pageData && pageData.content) {
+              const contentToLoad = parseAndValidateState(pageData.content);
+              if (contentToLoad) {
+                  setState(contentToLoad);
+                  setPageName(pageData.name);
+                  setActivePage({ id: pageId, name: pageData.name });
+                  toast({ title: "¡Página Cargada!", description: `Editando "${pageData.name}".` });
+              } else {
+                  toast({ variant: 'destructive', title: 'Error de Contenido', description: 'El formato de la página guardada está dañado. No se puede cargar.' });
+                  router.replace('/dashboard/builder');
+                  setState(EMPTY_STATE);
+              }
+          } else {
+              toast({ variant: 'destructive', title: 'Error', description: 'No se pudo encontrar la página para editar.' });
+              router.replace('/dashboard/builder');
+              setState(EMPTY_STATE);
+          }
+      } catch (error) {
+          console.error("Error al cargar datos de la página: ", error);
+          toast({ variant: 'destructive', title: 'Error al Cargar', description: 'No se pudieron obtener los datos de la página.' });
+          setState(EMPTY_STATE);
+          router.replace('/dashboard/builder');
+      } finally {
+          setIsLoading(false);
+      }
   }, [user, router, toast]);
+  
 
   useEffect(() => {
     if (authLoading) {
       return; // Wait for authentication to complete
     }
-    
-    // This part of the code causes build errors because it runs on the server.
-    // We need to move the localStorage access to be client-side only.
-    const pageIdToLoad = searchParams.get('pageId');
 
+    const pageIdToLoad = searchParams.get('pageId');
     if (pageIdToLoad && user) {
-      loadPageFromUrl(pageIdToLoad);
-    } else {
-      // Client-side only logic
-      const generatedPageData = localStorage.getItem('generatedLandingPage');
-      if (generatedPageData) {
-        try {
-          const pageContent: BuilderState = JSON.parse(generatedPageData);
-          if (pageContent && typeof pageContent === 'object' && Array.isArray(pageContent.page)) {
-              setState(pageContent);
-              setActivePage(null);
-              setPageName('Nueva Página Generada por IA');
-              toast({ title: 'Plantilla Cargada', description: 'Tu plantilla generada por IA está lista para editar.' });
-          } else {
-              throw new Error("El contenido de localStorage no es válido.");
-          }
-        } catch (error) {
-          toast({ variant: 'destructive', title: 'Error', description: 'No se pudo cargar la página generada desde localStorage.' });
-          setState(EMPTY_STATE);
-        } finally {
-          localStorage.removeItem('generatedLandingPage');
-          setIsLoading(false);
+        loadPageFromUrl(pageIdToLoad);
+        return;
+    }
+    
+    // This logic now only runs on the client after the initial check for pageId
+    const generatedPageData = localStorage.getItem('generatedLandingPage');
+    if (generatedPageData) {
+        const contentToLoad = parseAndValidateState(generatedPageData);
+        if (contentToLoad) {
+            setState(contentToLoad);
+            setActivePage(null);
+            setPageName('Nueva Página Generada por IA');
+            toast({ title: 'Plantilla Cargada', description: 'Tu plantilla generada por IA está lista para editar.' });
+        } else {
+            toast({ variant: 'destructive', title: 'Error', description: 'No se pudo cargar la página generada. El formato era inválido.' });
+            setState(EMPTY_STATE);
         }
-      } else {
-        setIsLoading(false);
+        // Always clean up after attempting to load
+        localStorage.removeItem('generatedLandingPage');
+    } else if (!pageIdToLoad) {
+        // Only set to empty if no pageId is being loaded and no localStorage data is found
         setState(EMPTY_STATE);
         setActivePage(null);
         setPageName('');
-      }
     }
+    
+    setIsLoading(false);
+
   }, [searchParams, user, authLoading, loadPageFromUrl, toast]);
 
 
@@ -600,3 +613,5 @@ export default function BuilderPage() {
         </React.Suspense>
     )
 }
+
+    
