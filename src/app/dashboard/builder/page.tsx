@@ -236,19 +236,19 @@ const BuilderPageContent = () => {
                   toast({ title: "¡Página Cargada!", description: `Editando "${pageData.name}".` });
               } else {
                   toast({ variant: 'destructive', title: 'Error de Contenido', description: 'El formato de la página guardada está dañado. Se cargará un lienzo en blanco.' });
-                  router.replace('/dashboard/builder');
+                  router.replace('/dashboard/builder', { scroll: false });
                   setState(EMPTY_STATE);
               }
           } else {
               toast({ variant: 'destructive', title: 'Error', description: 'No se pudo encontrar la página para editar. Se cargará un lienzo en blanco.' });
-              router.replace('/dashboard/builder');
+              router.replace('/dashboard/builder', { scroll: false });
               setState(EMPTY_STATE);
           }
       } catch (error) {
           console.error("Error al cargar datos de la página: ", error);
           toast({ variant: 'destructive', title: 'Error al Cargar', description: 'No se pudieron obtener los datos de la página. Se cargará un lienzo en blanco.' });
           setState(EMPTY_STATE);
-          router.replace('/dashboard/builder');
+          router.replace('/dashboard/builder', { scroll: false });
       } finally {
           setIsLoading(false);
       }
@@ -256,50 +256,46 @@ const BuilderPageContent = () => {
   
 
   useEffect(() => {
-    if (authLoading) {
-      return; // Wait for authentication to complete
-    }
-
-    // This flag ensures the effect only runs once on initial load.
-    let isInitialLoad = true;
-
-    if (isInitialLoad) {
-        const pageIdToLoad = searchParams.get('pageId');
-        if (pageIdToLoad && user) {
-            loadPageFromUrl(pageIdToLoad);
-        } else {
-            // This logic now only runs on the client after the initial check for pageId
-            const generatedPageData = localStorage.getItem('generatedLandingPage');
-            if (generatedPageData) {
-                const contentToLoad = parseAndValidateState(generatedPageData);
-                if (contentToLoad) {
-                    setState(contentToLoad);
-                    setActivePage(null);
-                    setPageName('Nueva Página Generada por IA');
-                    toast({ title: 'Plantilla Cargada', description: 'Tu plantilla generada por IA está lista para editar.' });
-                } else {
-                    toast({ variant: 'destructive', title: 'Error', description: 'No se pudo cargar la página generada. El formato era inválido.' });
-                    setState(EMPTY_STATE);
-                }
-                // Always clean up after attempting to load
-                try {
-                    localStorage.removeItem('generatedLandingPage');
-                } catch (e) {
-                    console.error("Could not remove item from localstorage", e)
-                }
-            } else {
-                // Only set to empty if no pageId is being loaded and no localStorage data is found
-                setState(EMPTY_STATE);
-                setActivePage(null);
-                setPageName('');
-            }
-            setIsLoading(false);
-        }
+    if (authLoading) return;
+    if (!user) {
+        // Auth context will handle redirect
+        setIsLoading(false);
+        return;
     }
     
-    return () => {
-        isInitialLoad = false;
+    const pageIdToLoad = searchParams.get('pageId');
+    if (pageIdToLoad) {
+        loadPageFromUrl(pageIdToLoad);
+        return;
     }
+
+    // This logic now only runs on the client after the initial check for pageId
+    // It's safe because it's guarded by the isLoading state.
+    const generatedPageData = localStorage.getItem('generatedLandingPage');
+    if (generatedPageData) {
+        const contentToLoad = parseAndValidateState(generatedPageData);
+        if (contentToLoad) {
+            setState(contentToLoad);
+            setActivePage(null);
+            setPageName('Nueva Página Generada por IA');
+            toast({ title: 'Plantilla Cargada', description: 'Tu plantilla generada por IA está lista para editar.' });
+        } else {
+            toast({ variant: 'destructive', title: 'Error', description: 'No se pudo cargar la página generada. El formato era inválido.' });
+            setState(EMPTY_STATE);
+        }
+        // Always clean up after attempting to load
+        try {
+            localStorage.removeItem('generatedLandingPage');
+        } catch (e) {
+            console.error("Could not remove item from localstorage", e)
+        }
+    } else {
+        // Only set to empty if no pageId is being loaded and no localStorage data is found
+        setState(EMPTY_STATE);
+        setActivePage(null);
+        setPageName('');
+    }
+    setIsLoading(false);
     
   }, [searchParams, user, authLoading, loadPageFromUrl, toast]);
 
@@ -637,5 +633,3 @@ export default function BuilderPage() {
         </React.Suspense>
     )
 }
-
-    

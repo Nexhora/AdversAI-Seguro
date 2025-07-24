@@ -22,9 +22,10 @@ export function SidebarNav() {
   return (
     <SidebarMenu>
       {navItems.map((item) => {
-        // Si la ruta actual es /dashboard/campaign-generator, también activamos /dashboard.
-        // O si la ruta actual es exactamente /dashboard.
-        const isActive = pathname === item.href || (item.href === "/dashboard" && pathname === "/dashboard/campaign-generator");
+        // The campaign generator is now the root of the dashboard
+        const isActive = (pathname === '/dashboard' && item.href === '/dashboard') ||
+                         (pathname.startsWith('/dashboard/campaign-generator') && item.href === '/dashboard') ||
+                         (pathname === item.href && item.href !== '/dashboard');
         
         return (
           <SidebarMenuItem key={item.href}>
