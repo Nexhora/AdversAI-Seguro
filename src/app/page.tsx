@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Logo } from '@/components/icons';
@@ -8,6 +7,7 @@ import { Zap, BookOpen, MousePointerClick } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import FirebaseDebug from "@/components/debug/FirebaseDebug";
 
 export default function HomePage() {
   const router = useRouter();
@@ -41,6 +41,7 @@ export default function HomePage() {
       </header>
 
       <main>
+        <FirebaseDebug />
         {/* Hero Section */}
         <section className="relative py-20 md:py-32 overflow-hidden">
             <div className="absolute inset-0 bg-grid-white/[0.05] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
