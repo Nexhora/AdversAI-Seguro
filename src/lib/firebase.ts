@@ -16,6 +16,12 @@ const firebaseConfig = {
   appId: "1:291201286336:web:7388bf9d0963f69e41ad25"
 };
 
+// For hard debugging: this should be visible in Cloud Logging in production
+console.log("[firebase.ts] firebaseConfig loaded:", {
+  hasApiKey: !!firebaseConfig.apiKey,
+  hasProjectId: !!firebaseConfig.projectId,
+});
+
 // A simple boolean check to see if the essential keys exist in the hardcoded config.
 // This helps prevent runtime errors if the object is accidentally left empty.
 export const firebaseCredentialsExist = !!(
@@ -31,20 +37,22 @@ let db: Firestore;
 let storage: FirebaseStorage;
 
 // This pattern prevents re-initializing the app on every hot-reload.
-if (firebaseCredentialsExist) {
-  app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-  auth = getAuth(app);
-  db = getFirestore(app);
-  storage = getStorage(app);
+if (getApps().length === 0) {
+  if (firebaseCredentialsExist) {
+    app = initializeApp(firebaseConfig);
+  } else {
+    // If the credentials are not there, we log an error but do not throw,
+    // to avoid crashing the server during build or render. The AuthProvider will handle the user-facing notice.
+    console.error("Firebase configuration is missing or incomplete in src/lib/firebase.ts. The app will not connect to Firebase.");
+    app = {} as FirebaseApp;
+  }
 } else {
-  // If the credentials are not there, we log an error but do not throw,
-  // to avoid crashing the server during build or render. The AuthProvider will handle the user-facing notice.
-  console.error("Firebase configuration is missing or incomplete in src/lib/firebase.ts. The app will not connect to Firebase.");
-  // Assign dummy objects to prevent app crashes on import when credentials are not present.
-  app = {} as FirebaseApp;
-  auth = {} as Auth;
-  db = {} as Firestore;
-  storage = {} as FirebaseStorage;
+    app = getApp();
 }
+
+auth = getAuth(app);
+db = getFirestore(app);
+storage = getStorage(app);
+
 
 export { app, auth, db, storage };

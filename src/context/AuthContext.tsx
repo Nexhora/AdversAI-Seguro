@@ -33,14 +33,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
+    // This check is now just a console warning and does not block the app.
     if (!firebaseCredentialsExist) {
-        // This is not a fatal error, just a warning in the console.
-        // The app will proceed, and Firebase might fail gracefully if rules are set up.
-        console.warn("Advertencia: Las credenciales de Firebase en src/lib/firebase.ts parecen estar incompletas. La aplicación puede no funcionar correctamente.");
+        console.error("ALERTA: Las credenciales de Firebase en src/lib/firebase.ts están incompletas. La autenticación no funcionará.");
     }
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
         setUser(user);
+        setLoading(false);
+    }, (error) => {
+        // Handle potential errors from onAuthStateChanged itself
+        console.error("Error en el listener de autenticación de Firebase:", error);
+        setUser(null);
         setLoading(false);
     });
 
