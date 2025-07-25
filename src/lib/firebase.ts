@@ -33,20 +33,11 @@ let db: Firestore;
 let storage: FirebaseStorage;
 
 // This pattern prevents re-initializing the app on every hot-reload.
-if (firebaseCredentialsExist) {
-    app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-    auth = getAuth(app);
-    db = getFirestore(app);
-    storage = getStorage(app);
-} else {
-    // If credentials don't exist, we provide dummy objects to prevent the app from crashing,
-    // The AuthProvider will show a proper error message.
-    console.error("Firebase configuration is missing or incomplete in src/lib/firebase.ts. The application cannot function.");
-    app = {} as FirebaseApp;
-    auth = {} as Auth;
-    db = {} as Firestore;
-    storage = {} as FirebaseStorage;
-}
+// The check for credentials is now done inside AuthProvider to show a nicer error.
+app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+auth = getAuth(app);
+db = getFirestore(app);
+storage = getStorage(app);
 
 
 export { app, auth, db, storage };
