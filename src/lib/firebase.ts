@@ -23,7 +23,7 @@ export const firebaseCredentialsExist = !!(
   firebaseConfig.authDomain &&
   firebaseConfig.projectId &&
   firebaseConfig.appId &&
-  !firebaseConfig.apiKey.includes('placeholder') // A simple check for placeholder values
+  firebaseConfig.apiKey !== "YOUR_API_KEY" // A simple check for placeholder values
 );
 
 
