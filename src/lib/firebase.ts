@@ -5,7 +5,8 @@ import { getAuth, type Auth } from "firebase/auth";
 import { getFirestore, type Firestore } from "firebase/firestore";
 import { getStorage, type FirebaseStorage } from "firebase/storage";
 
-// Your web app's Firebase configuration is read directly from Next.js environment variables
+// --- Configuración para el Lado del Cliente (Build-Time) ---
+// Leídas durante 'next build' y empaquetadas en el JS del cliente.
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -15,25 +16,43 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// This check is now more robust. It warns in the console if vars are missing
-// but doesn't block the app from trying to initialize, which is better for production.
+// --- Configuración para el Lado del Servidor (Run-Time) ---
+// Leídas en el servidor en tiempo de ejecución, donde los secretos de App Hosting están disponibles.
+const getServerFirebaseConfig = () => ({
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
+});
+
+// Decidimos qué configuración usar. Si estamos en el servidor, usamos la de run-time,
+// si no, la de build-time (cliente).
+const finalConfig = typeof window === 'undefined' ? getServerFirebaseConfig() : firebaseConfig;
+
+// Esta comprobación es ahora más robusta y verifica la configuración final.
 export const firebaseCredentialsExist = !!(
-  firebaseConfig.apiKey &&
-  firebaseConfig.projectId
+  finalConfig.apiKey &&
+  finalConfig.projectId
 );
 
 if (!firebaseCredentialsExist) {
     console.error("Firebase configuration variables are missing. The app might not work correctly. Please check your environment variables.");
     // Detailed log for easier debugging
-    console.log("Loaded Firebase Config:", {
+    console.log("Loaded Firebase Client Config:", {
         apiKey: firebaseConfig.apiKey ? 'loaded' : 'MISSING',
-        authDomain: firebaseConfig.authDomain ? 'loaded' : 'MISSING',
         projectId: firebaseConfig.projectId ? 'loaded' : 'MISSING',
-        storageBucket: firebaseConfig.storageBucket ? 'loaded' : 'MISSING',
-        messagingSenderId: firebaseConfig.messagingSenderId ? 'loaded' : 'MISSING',
-        appId: firebaseConfig.appId ? 'loaded' : 'MISSING',
     });
+     if (typeof window === 'undefined') {
+        const serverConfig = getServerFirebaseConfig();
+        console.log("Loaded Firebase Server Config:", {
+            apiKey: serverConfig.apiKey ? 'loaded' : 'MISSING',
+            projectId: serverConfig.projectId ? 'loaded' : 'MISSING',
+        });
+    }
 }
+
 
 // Initialize Firebase
 // This pattern prevents re-initializing the app on every hot-reload.
@@ -43,7 +62,7 @@ let db: Firestore;
 let storage: FirebaseStorage;
 
 if (firebaseCredentialsExist) {
-    app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+    app = getApps().length ? getApp() : initializeApp(finalConfig);
     auth = getAuth(app);
     db = getFirestore(app);
     storage = getStorage(app);
