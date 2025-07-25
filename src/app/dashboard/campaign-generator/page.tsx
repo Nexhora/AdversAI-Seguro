@@ -226,7 +226,8 @@ export default function CampaignGenerator() {
 
         // Generate ad copy first
         const creatives = await generateAdCreative(data);
-        setAdCreatives(creatives); // Set creatives without images first
+        // Cast the initial creatives to AdCreative[] to satisfy TypeScript
+        setAdCreatives(creatives as AdCreative[]); // Set creatives without images first
         toast({
           title: '¡Textos Generados!',
           description: 'Ahora, la IA está creando las imágenes para tus anuncios.',
@@ -420,7 +421,7 @@ export default function CampaignGenerator() {
       
       {/* Columna de Resultados */}
       <div className="w-full mx-auto space-y-6">
-        {isGenerating && (
+        {isGenerating && adCreatives.length === 0 && (
           <Card className="flex flex-col items-center justify-center p-10 text-center">
             <Loader2 className="h-12 w-12 animate-spin text-primary mb-4" />
             <CardTitle>Generando tus anuncios...</CardTitle>
@@ -549,7 +550,7 @@ export default function CampaignGenerator() {
                   </div>
                 </CardContent>
                 <div className="p-6 pt-0">
-                  <Button className="w-full" onClick={() => handleCreateLandingPage(ad)}>
+                  <Button className="w-full" onClick={() => handleCreateLandingPage(ad)} disabled={!ad.imageUrl}>
                     <Wand2 className="mr-2 h-4 w-4" />
                     Crear Landing Page para este Anuncio
                   </Button>
@@ -574,5 +575,3 @@ export default function CampaignGenerator() {
     </div>
   );
 }
-
-    
