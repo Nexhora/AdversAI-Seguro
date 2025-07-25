@@ -31,18 +31,20 @@ let db: Firestore;
 let storage: FirebaseStorage;
 
 // This pattern prevents re-initializing the app on every hot-reload.
-// We use the firebaseCredentialsExist check to avoid errors during development if the config is empty
-// and to provide a clear error message in the AuthProvider.
 if (firebaseCredentialsExist) {
   app = getApps().length ? getApp() : initializeApp(firebaseConfig);
   auth = getAuth(app);
   db = getFirestore(app);
   storage = getStorage(app);
 } else {
-  // If the credentials are not there, we initialize dummy variables
-  // to avoid crashing the app on import. The AuthProvider will show a clear error notice.
+  // If the credentials are not there, we log an error but do not throw,
+  // to avoid crashing the server during build or render. The AuthProvider will handle the user-facing notice.
   console.error("Firebase configuration is missing or incomplete in src/lib/firebase.ts. The app will not connect to Firebase.");
+  // Assign dummy objects to prevent app crashes on import when credentials are not present.
+  app = {} as FirebaseApp;
+  auth = {} as Auth;
+  db = {} as Firestore;
+  storage = {} as FirebaseStorage;
 }
 
-// @ts-ignore
 export { app, auth, db, storage };
