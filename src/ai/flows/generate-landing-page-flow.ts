@@ -6,7 +6,7 @@
  */
 import {ai} from '@/ai/genkit';
 import { nanoid } from 'nanoid';
-import { GenerateLandingPageInput, GenerateLandingPageInputSchema, GenerateLandingPageOutput, GenerateLandingPageOutputFlowSchema } from '@/ai/schemas/landing-page-generation';
+import { GenerateLandingPageInput, GenerateLandingPageInputSchema, GenerateLandingPageOutput, GenerateLandingPageOutputFlowSchema, SectionSchema } from '@/ai/schemas/landing-page-generation';
 import { analyzeUrlForCampaign } from './analyze-url-flow';
 
 
@@ -24,15 +24,19 @@ export async function generateLandingPage(
   }));
 
   // Map AI output to the strict component props.
+  // This explicit validation and casting step resolves the TypeScript error during build.
   const validatedSections = sectionsWithIds.map(section => {
     // This mapping ensures that each component receives only the props it expects.
     const props = section.props as any; // Cast to any to access properties dynamically
+    const type = section.type as 'Hero' | 'Features' | 'Text' | 'Button'; // Assert the type
 
-    switch (section.type) {
+    let validatedSection: { id: string; type: typeof type; props: any };
+
+    switch (type) {
         case 'Hero':
-            return {
+             validatedSection = {
                 id: section.id,
-                type: 'Hero',
+                type: type,
                 props: {
                     title: props.title || '',
                     subtitle: props.subtitle || '',
@@ -42,10 +46,11 @@ export async function generateLandingPage(
                     textAlign: props.textAlign || 'center',
                 }
             };
+            break;
         case 'Features':
-             return {
+             validatedSection = {
                 id: section.id,
-                type: 'Features',
+                type: type,
                 props: {
                     title: props.title || '',
                     subtitle: props.subtitle || '',
@@ -54,10 +59,11 @@ export async function generateLandingPage(
                     textColor: props.textColor || 'text-foreground',
                 }
             };
+            break;
         case 'Text':
-            return {
+            validatedSection = {
                 id: section.id,
-                type: 'Text',
+                type: type,
                 props: {
                     text: props.text || '',
                     as: props.as || 'p',
@@ -66,10 +72,11 @@ export async function generateLandingPage(
                     textColor: props.textColor || 'text-foreground',
                 }
             };
+            break;
         case 'Button':
-            return {
+            validatedSection = {
                 id: section.id,
-                type: 'Button',
+                type: type,
                 props: {
                     text: props.text || '',
                     variant: props.variant || 'default',
@@ -77,14 +84,17 @@ export async function generateLandingPage(
                     bgColor: props.bgColor || 'bg-background',
                 }
             };
+            break;
         default:
-            // Return a minimal section or throw an error if an unknown type is received
-            return {
+            // Fallback for any unknown type to prevent crashing.
+            validatedSection = {
                 id: section.id,
                 type: 'Text',
                 props: { text: 'Sección de tipo desconocido', as: 'p', textAlign: 'center' }
             };
+            break;
     }
+    return validatedSection;
   });
 
   return { page: validatedSections };
@@ -189,3 +199,5 @@ const generateLandingPageFlow = ai.defineFlow(
     return pageData;
   }
 );
+
+    
