@@ -4,22 +4,38 @@ runConfig:
   minInstances: 0
   maxInstances: 10
   env:
-    # Variables sin prefijo para el lado del servidor (run-time)
-    - secret: FIREBASE_API_KEY
-    - secret: FIREBASE_AUTH_DOMAIN
-    - secret: FIREBASE_PROJECT_ID
-    - secret: FIREBASE_STORAGE_BUCKET
-    - secret: FIREBASE_MESSAGING_SENDER_ID
-    - secret: FIREBASE_APP_ID
-    - secret: NEXT_PUBLIC_GOOGLE_API_KEY
-    
     # Variables con prefijo NEXT_PUBLIC_ para el proceso de build
-    - secret: NEXT_PUBLIC_FIREBASE_API_KEY
-    - secret: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
-    - secret: NEXT_PUBLIC_FIREBASE_PROJECT_ID
-    - secret: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
-    - secret: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
-    - secret: NEXT_PUBLIC_FIREBASE_APP_ID
+    - key: NEXT_PUBLIC_FIREBASE_API_KEY
+      secret: NEXT_PUBLIC_FIREBASE_API_KEY
+    - key: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+      secret: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    - key: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+      secret: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    - key: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+      secret: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+    - key: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+      secret: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+    - key: NEXT_PUBLIC_FIREBASE_APP_ID
+      secret: NEXT_PUBLIC_FIREBASE_APP_ID
+    - key: NEXT_PUBLIC_GOOGLE_API_KEY
+      secret: NEXT_PUBLIC_GOOGLE_API_KEY
+
+    # MISMAS variables sin prefijo para el lado del servidor (run-time)
+    - key: FIREBASE_API_KEY
+      secret: NEXT_PUBLIC_FIREBASE_API_KEY
+    - key: FIREBASE_AUTH_DOMAIN
+      secret: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+    - key: FIREBASE_PROJECT_ID
+      secret: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    - key: FIREBASE_STORAGE_BUCKET
+      secret: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+    - key: FIREBASE_MESSAGING_SENDER_ID
+      secret: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
+    - key: FIREBASE_APP_ID
+      secret: NEXT_PUBLIC_FIREBASE_APP_ID
+    - key: GOOGLE_API_KEY # Genkit usa esta variable en el servidor
+      secret: NEXT_PUBLIC_GOOGLE_API_KEY
+
 
 # Required for Next.js frameworks and Firebase/Google services
 requires:

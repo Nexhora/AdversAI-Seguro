@@ -7,7 +7,7 @@ import { getStorage, type FirebaseStorage } from "firebase/storage";
 
 // --- Configuración para el Lado del Cliente (Build-Time) ---
 // Leídas durante 'next build' y empaquetadas en el JS del cliente.
-const firebaseConfig = {
+const clientConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
@@ -18,18 +18,18 @@ const firebaseConfig = {
 
 // --- Configuración para el Lado del Servidor (Run-Time) ---
 // Leídas en el servidor en tiempo de ejecución, donde los secretos de App Hosting están disponibles.
-const getServerFirebaseConfig = () => ({
+const serverConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
   projectId: process.env.FIREBASE_PROJECT_ID,
   storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.FIREBASE_APP_ID,
-});
+};
 
 // Decidimos qué configuración usar. Si estamos en el servidor, usamos la de run-time,
 // si no, la de build-time (cliente).
-const finalConfig = typeof window === 'undefined' ? getServerFirebaseConfig() : firebaseConfig;
+const finalConfig = typeof window === 'undefined' ? serverConfig : clientConfig;
 
 // Esta comprobación es ahora más robusta y verifica la configuración final.
 export const firebaseCredentialsExist = !!(
@@ -40,13 +40,12 @@ export const firebaseCredentialsExist = !!(
 if (!firebaseCredentialsExist) {
     console.error("Firebase configuration variables are missing. The app might not work correctly. Please check your environment variables.");
     // Detailed log for easier debugging
-    console.log("Loaded Firebase Client Config:", {
-        apiKey: firebaseConfig.apiKey ? 'loaded' : 'MISSING',
-        projectId: firebaseConfig.projectId ? 'loaded' : 'MISSING',
+    console.log("Loaded Firebase Client-Side Config:", {
+        apiKey: clientConfig.apiKey ? 'loaded' : 'MISSING',
+        projectId: clientConfig.projectId ? 'loaded' : 'MISSING',
     });
      if (typeof window === 'undefined') {
-        const serverConfig = getServerFirebaseConfig();
-        console.log("Loaded Firebase Server Config:", {
+        console.log("Loaded Firebase Server-Side Config:", {
             apiKey: serverConfig.apiKey ? 'loaded' : 'MISSING',
             projectId: serverConfig.projectId ? 'loaded' : 'MISSING',
         });
