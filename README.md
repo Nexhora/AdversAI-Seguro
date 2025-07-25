@@ -3,28 +3,15 @@
 
 Has superado un proceso de configuración muy complejo. Solo falta un último paso crucial.
 
-**ACCIÓN REQUERIDA: Rellena tus claves secretas en el archivo `.env`**
+**ACCIÓN REQUERIDA: Rellena tu clave secreta en el archivo `.env`**
 
 A la izquierda, en la lista de archivos, busca y abre el archivo llamado **`.env`**.
 
-Dentro de ese archivo, verás 7 campos que debes rellenar con tus propias claves. Pega cada clave **dentro de las comillas**.
+Dentro de ese archivo, verás UN campo que debes rellenar con tu propia clave. Pega la clave **dentro de las comillas**.
 
 ---
 
-### **Paso 1: Copia tus 6 Claves de Firebase**
-
-He guardado las 6 claves de Firebase que ya obtuvimos en un nuevo archivo para tu comodidad.
-
-1.  Abre el archivo `MI_CONFIG_DE_FIREBASE.md` que ha aparecido a la izquierda.
-2.  Copia cada valor de ese archivo y pégalo en su lugar correspondiente en el archivo `.env`.
-
-**Ejemplo:**
-En `MI_CONFIG_DE_FIREBASE.md` verás `apiKey: "AIzaSy..."`. Copia ese valor y pégalo en `.env` para que la línea quede así:
-`NEXT_PUBLIC_FIREBASE_API_KEY="AIzaSy..."`
-
----
-
-### **Paso 2: Consigue y Pega tu ÚNICA Clave de Google AI**
+### **Consigue y Pega tu ÚNICA Clave de Google AI**
 
 Esta es la única clave que debes generar tú. Es gratis y rápido.
 
@@ -33,11 +20,11 @@ Esta es la única clave que debes generar tú. Es gratis y rápido.
 
 2.  **Crea una nueva clave:** En esa página, haz clic en el botón **"Create API key in new project"**.
 3.  **Copia la clave generada:** Aparecerá una ventana con tu nueva clave (una cadena larga de letras y números). Cópiala.
-4.  **Pégala en el archivo `.env`:** Vuelve al editor y pega la clave en la primera línea:
+4.  **Pégala en el archivo `.env`:** Vuelve al editor y pega la clave en la línea:
     `NEXT_PUBLIC_GOOGLE_API_KEY="...aquí va la clave que acabas de copiar..."`
 
 ---
 
-Una vez que hayas rellenado las 7 claves y guardado el archivo `.env`, **la aplicación se reiniciará automáticamente y el error que ves desaparecerá.**
+Las claves de Firebase se han integrado directamente en el código para asegurar que la aplicación funcione correctamente en producción.
 
-¡Ya casi lo tienes!
+Una vez que hayas rellenado la clave de Google AI y guardado el archivo `.env`, la aplicación estará completamente funcional.

@@ -4,28 +4,10 @@ runConfig:
   minInstances: 0
   maxInstances: 10
   env:
-    # Estas variables son para la inicialización de Firebase en el cliente y servidor.
-    # Usan el prefijo NEXT_PUBLIC_ para ser accesibles por Next.js durante el build.
-    - secret: NEXT_PUBLIC_FIREBASE_API_KEY
-      key: NEXT_PUBLIC_FIREBASE_API_KEY
-    - secret: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
-      key: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
-    - secret: NEXT_PUBLIC_FIREBASE_PROJECT_ID
-      key: NEXT_PUBLIC_FIREBASE_PROJECT_ID
-    - secret: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
-      key: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
-    - secret: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
-      key: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
-    - secret: NEXT_PUBLIC_FIREBASE_APP_ID
-      key: NEXT_PUBLIC_FIREBASE_APP_ID
-    
-    # Esta variable también necesita el prefijo para ser accesible en el lado del cliente.
-    - secret: NEXT_PUBLIC_GOOGLE_API_KEY
-      key: NEXT_PUBLIC_GOOGLE_API_KEY
-
-    # Genkit en el servidor busca la variable sin el prefijo NEXT_PUBLIC_.
-    # Apuntamos el mismo secreto a una variable con el nombre que Genkit espera.
+    # Esta variable de la API de Google es para Genkit en el servidor.
+    # Genkit en el servidor busca la variable GOOGLE_API_KEY o GOOGLE_API.
     - secret: NEXT_PUBLIC_GOOGLE_API_KEY
       key: GOOGLE_API_KEY
-requires:
-  - 'GCP_PROJECT'
+    # Esta variable también es para el cliente
+    - secret: NEXT_PUBLIC_GOOGLE_API_KEY
+      key: NEXT_PUBLIC_GOOGLE_API_KEY

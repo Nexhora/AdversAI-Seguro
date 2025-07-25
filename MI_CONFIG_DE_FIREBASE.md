@@ -1,6 +1,10 @@
 # Tu Configuración de Firebase
 
-Aquí tienes las 6 claves de tu proyecto de Firebase. Úsalas para rellenar el archivo `.env`.
+Esta información se ha movido directamente al código de la aplicación para asegurar su funcionamiento.
+
+**No necesitas realizar ninguna acción con este archivo.**
+
+La configuración de Firebase ya está integrada en `src/lib/firebase.ts`.
 
 ```javascript
 {

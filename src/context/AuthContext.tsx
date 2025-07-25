@@ -28,11 +28,11 @@ const FirebaseConfigurationNotice = () => (
                     <AlertTriangle/> Error de Configuración de Firebase
                 </CardTitle>
                 <CardDescription className="text-destructive/90">
-                   Las credenciales de Firebase no están configuradas correctamente. La aplicación no puede continuar.
+                   La configuración de Firebase en `src/lib/firebase.ts` parece estar incompleta o incorrecta.
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <p className="text-sm text-muted-foreground">Por favor, revisa que tus variables de entorno `NEXT_PUBLIC_FIREBASE_*` y `NEXT_PUBLIC_GOOGLE_API_KEY` estén definidas en el archivo `.env` para desarrollo local, y configuradas en los ajustes de tu proveedor de hosting para producción.</p>
+                <p className="text-sm text-muted-foreground">Por favor, revisa que el objeto `firebaseConfig` en el archivo `src/lib/firebase.ts` contenga todas las claves correctas de tu proyecto de Firebase. La aplicación no puede continuar sin una configuración válida.</p>
             </CardContent>
         </Card>
     </div>
@@ -42,20 +42,18 @@ const FirebaseConfigurationNotice = () => (
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isConfigured, setIsConfigured] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    // If Firebase is not configured, we stop loading and the notice will be displayed.
+    // This check is now against the hardcoded config.
     if (!firebaseCredentialsExist) {
         setLoading(false);
-        setIsConfigured(false);
         return;
     }
 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setLoading(false);
+        setUser(user);
+        setLoading(false);
     });
 
     return () => unsubscribe();
@@ -70,6 +68,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
   
+  if (!firebaseCredentialsExist) {
+      return <FirebaseConfigurationNotice />;
+  }
+
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -77,10 +79,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           <p className='ml-2'>Cargando aplicación...</p>
       </div>
     );
-  }
-  
-  if (!isConfigured) {
-      return <FirebaseConfigurationNotice />;
   }
 
   const value = {
