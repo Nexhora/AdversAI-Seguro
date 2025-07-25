@@ -310,12 +310,12 @@ export default function CampaignGenerator() {
 
   const handleCreateLandingPage = (ad: AdCreative) => {
     const campaignData = form.getValues();
-    const landingPageData = {
+    const queryParams = new URLSearchParams({
         productDescription: `Basado en el anuncio con titular "${ad.headline}", describe el producto: ${campaignData.productDescription}`,
         targetAudience: campaignData.targetAudience,
-    };
-    localStorage.setItem('landingPageDataFromAd', JSON.stringify(landingPageData));
-    router.push('/dashboard/landing-generator');
+    }).toString();
+    
+    router.push(`/dashboard/landing-generator?${queryParams}`);
   };
 
   return (

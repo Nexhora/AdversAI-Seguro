@@ -1,10 +1,10 @@
 
 'use client';
 
-import React, { useState, useTransition, useCallback, useEffect } from 'react';
+import React, { useState, useTransition, useCallback, useEffect, Suspense } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { z } from 'zod';
 import { nanoid } from 'nanoid';
 
@@ -99,9 +99,10 @@ const ResultCard: React.FC<{
 };
 
 
-export default function LandingGeneratorPage() {
+function LandingGeneratorContent() {
   const { toast } = useToast();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { user } = useAuth();
   const [isGenerating, startGeneration] = useTransition();
   const [isSaving, startSaving] = useTransition();
@@ -123,23 +124,20 @@ export default function LandingGeneratorPage() {
 
   // Effect to load data from campaign generator
   useEffect(() => {
-    const dataFromAd = localStorage.getItem('landingPageDataFromAd');
-    if (dataFromAd) {
-        try {
-            const parsedData = JSON.parse(dataFromAd);
-            form.setValue('productDescription', parsedData.productDescription);
-            form.setValue('targetAudience', parsedData.targetAudience);
-            toast({
-                title: 'Información de Anuncio Cargada',
-                description: 'Hemos rellenado el formulario con los datos de tu campaña publicitaria.'
-            });
-        } catch (e) {
-            console.error("Failed to parse landing page data from ad", e);
-        } finally {
-            localStorage.removeItem('landingPageDataFromAd');
-        }
+    const productDescription = searchParams.get('productDescription');
+    const targetAudience = searchParams.get('targetAudience');
+
+    if (productDescription && targetAudience) {
+      form.setValue('productDescription', productDescription);
+      form.setValue('targetAudience', targetAudience);
+      toast({
+          title: 'Información de Anuncio Cargada',
+          description: 'Hemos rellenado el formulario con los datos de tu campaña publicitaria.'
+      });
+      // Clean the URL to avoid re-triggering
+      router.replace('/dashboard/landing-generator', { scroll: false });
     }
-  }, [form, toast]);
+  }, [searchParams, form, toast, router]);
 
   const onSubmit = useCallback((data: GenerateLandingPageInput) => {
     setGenerationStatus('loading');
@@ -341,4 +339,12 @@ export default function LandingGeneratorPage() {
 
     </div>
   );
+}
+
+export default function LandingGeneratorPage() {
+    return (
+        <Suspense fallback={<div>Cargando...</div>}>
+            <LandingGeneratorContent />
+        </Suspense>
+    )
 }
