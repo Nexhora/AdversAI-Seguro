@@ -617,3 +617,164 @@ Type error: Argument of type '{ page: { type: "Hero" | "Features" | "Text" | "Bu
 [debug] [2025-07-25T22:56:55.640Z] Error: ENOENT: no such file or directory, open '/home/user/studio/.next/export-marker.json'
 [error] 
 [error] Error: An unexpected error has occurred.
+[debug] [2025-07-25T23:00:33.083Z] ----------------------------------------------------------------------
+[debug] [2025-07-25T23:00:33.085Z] Command:       /nix/store/ws50yvm6vzlzf7jzz6n7xh4szddrack1-nodejs-20.19.1/bin/node /nix/store/gv0i9ndcpzjpfi2yr06402kzy90q51ki-firebase-tools-14.10.1/lib/node_modules/firebase-tools/lib/bin/firebase.js deploy
+[debug] [2025-07-25T23:00:33.086Z] CLI Version:   14.10.1
+[debug] [2025-07-25T23:00:33.086Z] Platform:      linux
+[debug] [2025-07-25T23:00:33.086Z] Node Version:  v20.19.1
+[debug] [2025-07-25T23:00:33.086Z] Time:          Fri Jul 25 2025 23:00:33 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-07-25T23:00:33.087Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-25T23:00:33.601Z] Object "/hosting" in "firebase.json" has unknown property: {"additionalProperty":"backend"}
+[debug] [2025-07-25T23:00:33.601Z] Field "/hosting" in "firebase.json" is possibly invalid: must be array
+[debug] [2025-07-25T23:00:33.601Z] Field "/hosting" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2025-07-25T23:00:33.610Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-25T23:00:33.612Z] > authorizing via signed-in user (ahssuarez@gmail.com)
+[debug] [2025-07-25T23:00:33.612Z] [iam] checking project adverseai-yw88y for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-07-25T23:00:33.615Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:00:33.615Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:00:33.617Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions [none]
+[debug] [2025-07-25T23:00:33.617Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions x-goog-quota-user=projects/adverseai-yw88y
+[debug] [2025-07-25T23:00:33.618Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-25T23:00:33.930Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions 200
+[debug] [2025-07-25T23:00:33.931Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-25T23:00:33.932Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:00:33.932Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:00:33.933Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y [none]
+[debug] [2025-07-25T23:00:34.231Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y 200
+[debug] [2025-07-25T23:00:34.231Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y {"projectId":"adverseai-yw88y","projectNumber":"291201286336","displayName":"AdVerseAI","name":"projects/adverseai-yw88y","resources":{"hostingSite":"adverseai-yw88y"},"state":"ACTIVE","etag":"1_f501cb6e-c4f9-4e77-b146-cc67406d0967"}
+[debug] [2025-07-25T23:00:37.747Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:00:37.747Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:00:37.749Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites pageToken=&pageSize=10
+[debug] [2025-07-25T23:00:38.752Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 200
+[debug] [2025-07-25T23:00:38.753Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites {"sites":[{"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-07-25T23:00:38.758Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:00:38.759Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:00:38.759Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 
+[debug] [2025-07-25T23:00:39.127Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 200
+[debug] [2025-07-25T23:00:39.129Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites {"sites":[{"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-07-25T23:00:39.130Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:00:39.130Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:00:39.130Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config [none]
+[debug] [2025-07-25T23:00:39.847Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config 200
+[debug] [2025-07-25T23:00:39.850Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config {"projectId":"adverseai-yw88y","appId":"1:291201286336:web:7388bf9d0963f69e41ad25","storageBucket":"adverseai-yw88y.firebasestorage.app","apiKey":"AIzaSyDI7mUnIQkf2JjvdYA2x9KirLVy0ixvofE","authDomain":"adverseai-yw88y.firebaseapp.com","messagingSenderId":"291201286336"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2025-07-25T23:00:57.657Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:00:57.665Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:00:57.665Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y [none]
+[debug] [2025-07-25T23:00:58.572Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y 200
+[debug] [2025-07-25T23:00:58.573Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y {"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}
+[info]   ▲ Next.js 14.2.4
+
+[info]   - Environments: .env
+
+
+[info]    Creating an optimized production build ...
+
+[info]  ⚠ Compiled with warnings
+
+
+[info] ./node_modules/@opentelemetry/sdk-node/build/src/TracerProviderWithEnvExporter.js
+Module not found: Can't resolve '@opentelemetry/exporter-jaeger' in '/home/user/studio/node_modules/@opentelemetry/sdk-node/build/src'
+
+Import trace for requested module:
+./node_modules/@opentelemetry/sdk-node/build/src/TracerProviderWithEnvExporter.js
+./node_modules/@opentelemetry/sdk-node/build/src/sdk.js
+./node_modules/@opentelemetry/sdk-node/build/src/index.js
+./node_modules/@genkit-ai/core/lib/tracing.js
+./node_modules/genkit/lib/tracing.js
+./node_modules/genkit/lib/genkit.js
+./node_modules/genkit/lib/index.mjs
+./src/ai/flows/analyze-url-flow.ts
+
+./node_modules/handlebars/lib/index.js
+require.extensions is not supported by webpack. Use a loader instead.
+
+Import trace for requested module:
+./node_modules/handlebars/lib/index.js
+./node_modules/dotprompt/dist/index.js
+./node_modules/@genkit-ai/core/lib/registry.js
+./node_modules/genkit/lib/registry.js
+./node_modules/genkit/lib/genkit.js
+./node_modules/genkit/lib/index.mjs
+./src/ai/flows/analyze-url-flow.ts
+
+./node_modules/handlebars/lib/index.js
+require.extensions is not supported by webpack. Use a loader instead.
+
+Import trace for requested module:
+./node_modules/handlebars/lib/index.js
+./node_modules/dotprompt/dist/index.js
+./node_modules/@genkit-ai/core/lib/registry.js
+./node_modules/genkit/lib/registry.js
+./node_modules/genkit/lib/genkit.js
+./node_modules/genkit/lib/index.mjs
+./src/ai/flows/analyze-url-flow.ts
+
+./node_modules/handlebars/lib/index.js
+require.extensions is not supported by webpack. Use a loader instead.
+
+Import trace for requested module:
+./node_modules/handlebars/lib/index.js
+./node_modules/dotprompt/dist/index.js
+./node_modules/@genkit-ai/core/lib/registry.js
+./node_modules/genkit/lib/registry.js
+./node_modules/genkit/lib/genkit.js
+./node_modules/genkit/lib/index.mjs
+./src/ai/flows/analyze-url-flow.ts
+
+./node_modules/require-in-the-middle/index.js
+Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
+
+Import trace for requested module:
+./node_modules/require-in-the-middle/index.js
+./node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+./node_modules/@opentelemetry/instrumentation/build/esm/platform/node/index.js
+./node_modules/@opentelemetry/instrumentation/build/esm/platform/index.js
+./node_modules/@opentelemetry/instrumentation/build/esm/index.js
+./node_modules/@opentelemetry/sdk-node/build/src/sdk.js
+./node_modules/@opentelemetry/sdk-node/build/src/index.js
+./node_modules/@genkit-ai/core/lib/tracing.js
+./node_modules/genkit/lib/tracing.js
+./node_modules/genkit/lib/genkit.js
+./node_modules/genkit/lib/index.mjs
+./src/ai/flows/analyze-url-flow.ts
+
+
+[info]  ✓ Compiled successfully
+
+[info]    Linting and checking validity of types ...
+
+[info] Failed to compile.
+
+
+[info] ./src/app/dashboard/landing-generator/page.tsx:156:29
+Type error: Argument of type '{ page: { type: "Hero" | "Features" | "Text" | "Button"; props: { textColor: string; title: string; subtitle: string; buttonText: string; bgColor: string; textAlign: "left" | "center" | "right"; } | { ...; } | { ...; } | { ...; }; id?: string | undefined; }[]; }' is not assignable to parameter of type 'SetStateAction<BuilderState | null>'.
+  Type '{ page: { type: "Hero" | "Features" | "Text" | "Button"; props: { textColor: string; title: string; subtitle: string; buttonText: string; bgColor: string; textAlign: "left" | "center" | "right"; } | { ...; } | { ...; } | { ...; }; id?: string | undefined; }[]; }' is not assignable to type 'BuilderState'.
+    Types of property 'page' are incompatible.
+      Type '{ type: "Hero" | "Features" | "Text" | "Button"; props: { textColor: string; title: string; subtitle: string; buttonText: string; bgColor: string; textAlign: "left" | "center" | "right"; } | { ...; } | { ...; } | { ...; }; id?: string | undefined; }[]' is not assignable to type 'Section[]'.
+        Type '{ type: "Hero" | "Features" | "Text" | "Button"; props: { textColor: string; title: string; subtitle: string; buttonText: string; bgColor: string; textAlign: "left" | "center" | "right"; } | { ...; } | { ...; } | { ...; }; id?: string | undefined; }' is not assignable to type 'Section'.
+          Types of property 'id' are incompatible.
+            Type 'string | undefined' is not assignable to type 'string'.
+              Type 'undefined' is not assignable to type 'string'.
+
+  154 |         }
+  155 |         
+> 156 |         setGeneratedContent(pageStructure);
+      |                             ^
+  157 |         setGenerationStatus('success');
+  158 |         toast({
+  159 |           title: '¡Estructura Generada!',
+
+[debug] [2025-07-25T23:02:27.922Z] Error: ENOENT: no such file or directory, open '/home/user/studio/.next/export-marker.json'
+[error] 
+[error] Error: An unexpected error has occurred.

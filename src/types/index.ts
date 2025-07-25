@@ -37,7 +37,7 @@ export type AudienceAnalysis = {
  * This is the structure the AI will generate and what will be stored in Firestore.
  */
 export interface Section {
-  id: string;
+  id?: string; // ID is optional, as it can be assigned after generation.
   type: keyof typeof import('@/components/sections'); // Matches component names in /components/sections
   props: {
     [key: string]: any; // Allows for flexible properties for each component
@@ -52,3 +52,5 @@ export interface Section {
 export interface BuilderState {
   page: Section[];
 }
+
+    

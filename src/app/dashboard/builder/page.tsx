@@ -179,16 +179,20 @@ const parseAndValidateState = (content: string | null): BuilderState | null => {
         const parsed = JSON.parse(content);
         // Robust validation: Check for the { page: [...] } structure.
         if (parsed && typeof parsed === 'object' && Array.isArray(parsed.page)) {
-            // Further validation to ensure sections are objects with id, type, props
+            // Further validation to ensure sections are objects with type and props
             const isValid = parsed.page.every((section: any) => 
                 typeof section === 'object' &&
                 section !== null &&
-                'id' in section &&
                 'type' in section &&
                 'props' in section
             );
             if (isValid) {
-                return parsed as BuilderState;
+                // Ensure all sections have an ID for the builder
+                const pageWithIds = parsed.page.map((section: Section) => ({
+                    ...section,
+                    id: section.id || nanoid(),
+                }));
+                return { ...parsed, page: pageWithIds };
             }
         }
         console.error("Invalid page structure after parsing:", parsed);
@@ -633,3 +637,5 @@ export default function BuilderPage() {
         </React.Suspense>
     )
 }
+
+    
