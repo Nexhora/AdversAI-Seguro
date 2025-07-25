@@ -1,3 +1,4 @@
+
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps, getApp, type FirebaseApp } from "firebase/app";
 import { getAuth, type Auth } from "firebase/auth";
@@ -23,14 +24,37 @@ export const firebaseCredentialsExist = !!(
 
 if (!firebaseCredentialsExist) {
     console.error("Firebase configuration variables are missing. The app might not work correctly. Please check your environment variables.");
+    // Detailed log for easier debugging
+    console.log("Loaded Firebase Config:", {
+        apiKey: firebaseConfig.apiKey ? 'loaded' : 'MISSING',
+        authDomain: firebaseConfig.authDomain ? 'loaded' : 'MISSING',
+        projectId: firebaseConfig.projectId ? 'loaded' : 'MISSING',
+        storageBucket: firebaseConfig.storageBucket ? 'loaded' : 'MISSING',
+        messagingSenderId: firebaseConfig.messagingSenderId ? 'loaded' : 'MISSING',
+        appId: firebaseConfig.appId ? 'loaded' : 'MISSING',
+    });
 }
 
 // Initialize Firebase
 // This pattern prevents re-initializing the app on every hot-reload.
-const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig);
-const auth: Auth = getAuth(app);
-const db: Firestore = getFirestore(app);
-const storage: FirebaseStorage = getStorage(app);
+let app: FirebaseApp;
+let auth: Auth;
+let db: Firestore;
+let storage: FirebaseStorage;
+
+if (firebaseCredentialsExist) {
+    app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
+    storage = getStorage(app);
+} else {
+    // Provide dummy objects if not configured, to avoid fatal errors on import
+    app = {} as FirebaseApp;
+    auth = {} as Auth;
+    db = {} as Firestore;
+    storage = {} as FirebaseStorage;
+}
+
 
 // Export the initialized services
 export { app, auth, db, storage };

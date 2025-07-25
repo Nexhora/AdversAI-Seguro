@@ -7,6 +7,7 @@ runConfig:
 requires:
   - "GCP_PROJECT"
 # Environment variables are made available to your running app
+# Using the explicit secret reference format for clarity and correctness
 environmentVariables:
   NEXT_PUBLIC_GOOGLE_API_KEY: "secret:NEXT_PUBLIC_GOOGLE_API_KEY"
   NEXT_PUBLIC_FIREBASE_API_KEY: "secret:NEXT_PUBLIC_FIREBASE_API_KEY"
