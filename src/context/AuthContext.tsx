@@ -1,12 +1,12 @@
 
 "use client";
 
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
 import { auth, firebaseCredentialsExist } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { AlertTriangle, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
+import { FirebaseErrorNotice } from '@/components/auth/FirebaseErrorNotice';
 
 interface AuthContextType {
   user: User | null;
@@ -19,25 +19,6 @@ const AuthContext = createContext<AuthContextType>({
   loading: true,
   logout: () => {},
 });
-
-const FirebaseConfigurationNotice = () => (
-    <div className="flex min-h-screen items-center justify-center p-4 bg-background">
-        <Card className="max-w-md w-full border-destructive">
-            <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-destructive">
-                    <AlertTriangle/> Error de Configuración de Firebase
-                </Title>
-                <CardDescription className="text-destructive/90">
-                   La aplicación no puede continuar sin una conexión válida a Firebase.
-                </CardDescription>
-            </CardHeader>
-            <CardContent>
-                <p className="text-sm text-muted-foreground">La configuración en `src/lib/firebase.ts` parece estar incompleta. Por favor, asegúrate de que el objeto `firebaseConfig` contenga las claves correctas de tu proyecto.</p>
-            </CardContent>
-        </Card>
-    </div>
-);
-
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -68,7 +49,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
   
   if (!firebaseCredentialsExist) {
-      return <FirebaseConfigurationNotice />;
+      return <FirebaseErrorNotice />;
   }
 
   if (loading) {
@@ -92,7 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 export const useAuth = () => {
     const context = useContext(AuthContext);
     if (context === undefined) {
-        throw new Error('useAuth must be used within an AuthProvider');
+        throw new Error('useAuth must be in an AuthProvider');
     }
     return context;
 };
