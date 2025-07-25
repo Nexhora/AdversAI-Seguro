@@ -2,9 +2,8 @@
 'use client';
 
 import React from 'react';
-import type { Section, Element, ElementType } from '@/types';
-import { cn } from '@/lib/utils';
-import { PageRenderer as LegacyPageRenderer } from '@/components/PageRenderer';
+import type { Section } from '@/types';
+import { PageRenderer } from '@/components/PageRenderer';
 
 /**
  * Represents the entire state of a landing page in the builder.
@@ -20,5 +19,5 @@ export const PreviewContent = ({ pageData }: { pageData: { name: string, content
     if (!pageData?.content?.page) {
         return <div>Contenido no válido.</div>;
     }
-    return <LegacyPageRenderer sections={pageData.content.page} />;
+    return <PageRenderer sections={pageData.content.page} />;
 };
