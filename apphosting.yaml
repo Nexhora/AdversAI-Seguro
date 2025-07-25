@@ -7,7 +7,6 @@ runConfig:
 requires:
   - "GCP_PROJECT"
 # Environment variables are made available to your running app
-# This section now uses the correct syntax for App Hosting environment variables
 environmentVariables:
   NEXT_PUBLIC_GOOGLE_API_KEY: "secret:NEXT_PUBLIC_GOOGLE_API_KEY"
   NEXT_PUBLIC_FIREBASE_API_KEY: "secret:NEXT_PUBLIC_FIREBASE_API_KEY"
