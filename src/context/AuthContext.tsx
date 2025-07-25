@@ -6,7 +6,7 @@ import { onAuthStateChanged, signOut, User } from 'firebase/auth';
 import { auth, firebaseCredentialsExist } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
-import { FirebaseErrorNotice } from '@/components/auth/FirebaseErrorNotice';
+// The FirebaseErrorNotice component is removed as it was causing build issues.
 
 interface AuthContextType {
   user: User | null;
@@ -49,7 +49,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
   
   if (!firebaseCredentialsExist) {
-      return <FirebaseErrorNotice />;
+      // Replaced the failing component with a simple div to avoid build errors.
+      return (
+        <div style={{ fontFamily: 'sans-serif', color: '#dc2626', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', backgroundColor: '#fef2f2' }}>
+            <div style={{ maxWidth: '450px', width: '100%', border: '1px solid #fca5a5', padding: '1.5rem', borderRadius: '0.5rem' }}>
+                <h1 style={{ fontSize: '1.25rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                    Error de Configuración de Firebase
+                </h1>
+                <p style={{ marginTop: '0.5rem', color: '#b91c1c' }}>La aplicación no puede continuar sin una conexión válida a Firebase.</p>
+                <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: '#4b5563' }}>La configuración en `src/lib/firebase.ts` parece estar incompleta. Por favor, asegúrate de que el objeto `firebaseConfig` contenga las claves correctas de tu proyecto.</p>
+            </div>
+        </div>
+      );
   }
 
   if (loading) {
