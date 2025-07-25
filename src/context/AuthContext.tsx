@@ -32,7 +32,7 @@ const FirebaseConfigurationNotice = () => (
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <p className="text-sm text-muted-foreground">La configuración en `src/lib/firebase.ts` parece estar incompleta. Por favor, asegúrate de que el objeto `firebaseConfig` contenga las claves correctas de tu proyecto. Si acabas de crear el proyecto, esto puede tardar unos minutos en propagarse.</p>
+                <p className="text-sm text-muted-foreground">La configuración en `src/lib/firebase.ts` parece estar incompleta. Por favor, asegúrate de que el objeto `firebaseConfig` contenga las claves correctas de tu proyecto.</p>
             </CardContent>
         </Card>
     </div>
@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return (
       <div className="flex h-screen items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin" />
-          <p className='ml-2'>Conectando con Firebase...</p>
+          <p className='ml-2'>Conectando con la aplicación...</p>
       </div>
     );
   }

@@ -1,4 +1,3 @@
-
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps, getApp, type FirebaseApp } from "firebase/app";
 import { getAuth, type Auth } from "firebase/auth";
@@ -18,8 +17,7 @@ const firebaseConfig = {
 };
 
 // A simple boolean check to see if the essential keys exist in the hardcoded config.
-// This helps prevent runtime errors if the object is accidentally left empty,
-// especially during development before the values are filled in.
+// This helps prevent runtime errors if the object is accidentally left empty.
 export const firebaseCredentialsExist = !!(
   firebaseConfig.apiKey &&
   firebaseConfig.projectId &&
@@ -33,7 +31,6 @@ let db: Firestore;
 let storage: FirebaseStorage;
 
 // This pattern prevents re-initializing the app on every hot-reload.
-// The check for credentials is now done inside AuthProvider to show a nicer error.
 if (firebaseCredentialsExist) {
   app = getApps().length ? getApp() : initializeApp(firebaseConfig);
   auth = getAuth(app);
@@ -42,7 +39,7 @@ if (firebaseCredentialsExist) {
 } else {
   // If the credentials are not there, we initialize dummy variables
   // to avoid crashing the app on import. The AuthProvider will show an error.
-  console.log("Firebase credentials are not set. The app will not connect to Firebase.");
+  console.error("Firebase configuration is missing or incomplete in src/lib/firebase.ts. The app will not connect to Firebase.");
 }
 
 // @ts-ignore
