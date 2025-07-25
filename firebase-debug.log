@@ -1,41 +1,140 @@
-[debug] [2025-07-25T21:51:21.461Z] ----------------------------------------------------------------------
-[debug] [2025-07-25T21:51:21.463Z] Command:       /nix/store/ws50yvm6vzlzf7jzz6n7xh4szddrack1-nodejs-20.19.1/bin/node /nix/store/gv0i9ndcpzjpfi2yr06402kzy90q51ki-firebase-tools-14.10.1/lib/node_modules/firebase-tools/lib/bin/firebase.js deploy
-[debug] [2025-07-25T21:51:21.464Z] CLI Version:   14.10.1
-[debug] [2025-07-25T21:51:21.464Z] Platform:      linux
-[debug] [2025-07-25T21:51:21.465Z] Node Version:  v20.19.1
-[debug] [2025-07-25T21:51:21.465Z] Time:          Fri Jul 25 2025 21:51:21 GMT+0000 (Coordinated Universal Time)
-[debug] [2025-07-25T21:51:21.465Z] ----------------------------------------------------------------------
+[debug] [2025-07-25T22:06:29.634Z] ----------------------------------------------------------------------
+[debug] [2025-07-25T22:06:29.638Z] Command:       /nix/store/ws50yvm6vzlzf7jzz6n7xh4szddrack1-nodejs-20.19.1/bin/node /nix/store/gv0i9ndcpzjpfi2yr06402kzy90q51ki-firebase-tools-14.10.1/lib/node_modules/firebase-tools/lib/bin/firebase.js deploy
+[debug] [2025-07-25T22:06:29.639Z] CLI Version:   14.10.1
+[debug] [2025-07-25T22:06:29.639Z] Platform:      linux
+[debug] [2025-07-25T22:06:29.640Z] Node Version:  v20.19.1
+[debug] [2025-07-25T22:06:29.640Z] Time:          Fri Jul 25 2025 22:06:29 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-07-25T22:06:29.640Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2025-07-25T21:51:21.949Z] Object "/hosting" in "firebase.json" has unknown property: {"additionalProperty":"backend"}
-[debug] [2025-07-25T21:51:21.949Z] Field "/hosting" in "firebase.json" is possibly invalid: must be array
-[debug] [2025-07-25T21:51:21.950Z] Field "/hosting" in "firebase.json" is possibly invalid: must match a schema in anyOf
-[debug] [2025-07-25T21:51:21.954Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2025-07-25T21:51:21.955Z] > authorizing via signed-in user (ahssuarez@gmail.com)
-[debug] [2025-07-25T21:51:21.955Z] [iam] checking project ad-gen-416117 for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2025-07-25T21:51:21.957Z] Checked if tokens are valid: true, expires at: 1753483743513
-[debug] [2025-07-25T21:51:21.957Z] Checked if tokens are valid: true, expires at: 1753483743513
-[debug] [2025-07-25T21:51:21.958Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ad-gen-416117:testIamPermissions [none]
-[debug] [2025-07-25T21:51:21.958Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ad-gen-416117:testIamPermissions x-goog-quota-user=projects/ad-gen-416117
-[debug] [2025-07-25T21:51:21.959Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ad-gen-416117:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2025-07-25T21:51:22.400Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/ad-gen-416117:testIamPermissions 200
-[debug] [2025-07-25T21:51:22.401Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ad-gen-416117:testIamPermissions {}
-[debug] [2025-07-25T21:51:22.401Z] [iam] error while checking permissions, command may fail: Authorization failed. This account is missing the following required permissions on project ad-gen-416117:
+[debug] [2025-07-25T22:06:30.192Z] Object "/hosting" in "firebase.json" has unknown property: {"additionalProperty":"backend"}
+[debug] [2025-07-25T22:06:30.192Z] Field "/hosting" in "firebase.json" is possibly invalid: must be array
+[debug] [2025-07-25T22:06:30.192Z] Field "/hosting" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2025-07-25T22:06:30.198Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-25T22:06:30.199Z] > authorizing via signed-in user (ahssuarez@gmail.com)
+[debug] [2025-07-25T22:06:30.199Z] [iam] checking project adverseai-yw88y for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-07-25T22:06:30.200Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:06:30.200Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:06:30.202Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions [none]
+[debug] [2025-07-25T22:06:30.202Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions x-goog-quota-user=projects/adverseai-yw88y
+[debug] [2025-07-25T22:06:30.203Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-25T22:06:30.467Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions 200
+[debug] [2025-07-25T22:06:30.468Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-25T22:06:30.469Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:06:30.469Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:06:30.470Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y [none]
+[debug] [2025-07-25T22:06:30.751Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y 200
+[debug] [2025-07-25T22:06:30.751Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y {"projectId":"adverseai-yw88y","projectNumber":"291201286336","displayName":"AdVerseAI","name":"projects/adverseai-yw88y","resources":{"hostingSite":"adverseai-yw88y"},"state":"ACTIVE","etag":"1_f501cb6e-c4f9-4e77-b146-cc67406d0967"}
+[debug] [2025-07-25T22:06:34.607Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:06:34.607Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:06:34.608Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites pageToken=&pageSize=10
+[debug] [2025-07-25T22:06:35.652Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 200
+[debug] [2025-07-25T22:06:35.652Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites {"sites":[{"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-07-25T22:06:35.653Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:06:35.653Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:06:35.653Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 
+[debug] [2025-07-25T22:06:36.017Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 200
+[debug] [2025-07-25T22:06:36.017Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites {"sites":[{"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-07-25T22:06:36.018Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:06:36.018Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:06:36.020Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config [none]
+[debug] [2025-07-25T22:06:36.852Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config 200
+[debug] [2025-07-25T22:06:36.853Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config {"projectId":"adverseai-yw88y","appId":"1:291201286336:web:7388bf9d0963f69e41ad25","storageBucket":"adverseai-yw88y.firebasestorage.app","apiKey":"AIzaSyDI7mUnIQkf2JjvdYA2x9KirLVy0ixvofE","authDomain":"adverseai-yw88y.firebaseapp.com","messagingSenderId":"291201286336"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
 
-  datastore.indexes.create
-  datastore.indexes.delete
-  datastore.indexes.list
-  datastore.indexes.update
-  firebase.projects.get
-  firebasehosting.sites.update
-[debug] [2025-07-25T21:51:22.402Z] Checked if tokens are valid: true, expires at: 1753483743513
-[debug] [2025-07-25T21:51:22.402Z] Checked if tokens are valid: true, expires at: 1753483743513
-[debug] [2025-07-25T21:51:22.403Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ad-gen-416117 [none]
-[debug] [2025-07-25T21:51:22.871Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ad-gen-416117 403
-[debug] [2025-07-25T21:51:22.871Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ad-gen-416117 {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
-[debug] [2025-07-25T21:51:22.873Z] Request to https://firebase.googleapis.com/v1beta1/projects/ad-gen-416117 had HTTP Error: 403, The caller does not have permission
-[debug] [2025-07-25T21:51:22.877Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/ad-gen-416117 had HTTP Error: 403, The caller does not have permission
-    at responseToError (/nix/store/gv0i9ndcpzjpfi2yr06402kzy90q51ki-firebase-tools-14.10.1/lib/node_modules/firebase-tools/lib/responseToError.js:52:12)
-    at RetryOperation._fn (/nix/store/gv0i9ndcpzjpfi2yr06402kzy90q51ki-firebase-tools-14.10.1/lib/node_modules/firebase-tools/lib/apiv2.js:312:77)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2025-07-25T22:06:44.747Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:06:44.747Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:06:44.750Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y [none]
+[debug] [2025-07-25T22:06:45.626Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y 200
+[debug] [2025-07-25T22:06:45.627Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y {"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}
+[info] 
+
+[info] > Build error occurred
+
+[info] Error: Configuring Next.js via 'next.config.ts' is not supported. Please replace the file with 'next.config.js' or 'next.config.mjs'.
+    at loadConfig (/home/user/studio/node_modules/next/dist/server/config.js:787:19)
+    at async Span.traceAsyncFn (/home/user/studio/node_modules/next/dist/trace/trace.js:154:20)
+    at async /home/user/studio/node_modules/next/dist/build/index.js:372:28
+    at async Span.traceAsyncFn (/home/user/studio/node_modules/next/dist/trace/trace.js:154:20)
+    at async build (/home/user/studio/node_modules/next/dist/build/index.js:366:9)
+
+[debug] [2025-07-25T22:06:46.576Z] Error: ENOENT: no such file or directory, open '/home/user/studio/.next/server/middleware-manifest.json'
 [error] 
-[error] Error: Failed to get Firebase project ad-gen-416117. Please make sure the project exists and your account has permission to access it.
+[error] Error: An unexpected error has occurred.
+[debug] [2025-07-25T22:07:10.506Z] ----------------------------------------------------------------------
+[debug] [2025-07-25T22:07:10.509Z] Command:       /nix/store/ws50yvm6vzlzf7jzz6n7xh4szddrack1-nodejs-20.19.1/bin/node /nix/store/gv0i9ndcpzjpfi2yr06402kzy90q51ki-firebase-tools-14.10.1/lib/node_modules/firebase-tools/lib/bin/firebase.js deploy
+[debug] [2025-07-25T22:07:10.509Z] CLI Version:   14.10.1
+[debug] [2025-07-25T22:07:10.510Z] Platform:      linux
+[debug] [2025-07-25T22:07:10.510Z] Node Version:  v20.19.1
+[debug] [2025-07-25T22:07:10.510Z] Time:          Fri Jul 25 2025 22:07:10 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-07-25T22:07:10.510Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-25T22:07:11.025Z] Object "/hosting" in "firebase.json" has unknown property: {"additionalProperty":"backend"}
+[debug] [2025-07-25T22:07:11.025Z] Field "/hosting" in "firebase.json" is possibly invalid: must be array
+[debug] [2025-07-25T22:07:11.025Z] Field "/hosting" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2025-07-25T22:07:11.030Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-25T22:07:11.031Z] > authorizing via signed-in user (ahssuarez@gmail.com)
+[debug] [2025-07-25T22:07:11.031Z] [iam] checking project adverseai-yw88y for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-07-25T22:07:11.033Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:07:11.033Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:07:11.034Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions [none]
+[debug] [2025-07-25T22:07:11.034Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions x-goog-quota-user=projects/adverseai-yw88y
+[debug] [2025-07-25T22:07:11.035Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-25T22:07:11.312Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions 200
+[debug] [2025-07-25T22:07:11.312Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-25T22:07:11.313Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:07:11.314Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:07:11.314Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y [none]
+[debug] [2025-07-25T22:07:11.609Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y 200
+[debug] [2025-07-25T22:07:11.610Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y {"projectId":"adverseai-yw88y","projectNumber":"291201286336","displayName":"AdVerseAI","name":"projects/adverseai-yw88y","resources":{"hostingSite":"adverseai-yw88y"},"state":"ACTIVE","etag":"1_f501cb6e-c4f9-4e77-b146-cc67406d0967"}
+[debug] [2025-07-25T22:07:15.467Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:07:15.468Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:07:15.469Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites pageToken=&pageSize=10
+[debug] [2025-07-25T22:07:16.481Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 200
+[debug] [2025-07-25T22:07:16.488Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites {"sites":[{"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-07-25T22:07:16.490Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:07:16.491Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:07:16.491Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 
+[debug] [2025-07-25T22:07:16.879Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 200
+[debug] [2025-07-25T22:07:16.883Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites {"sites":[{"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-07-25T22:07:16.883Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:07:16.883Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:07:16.886Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config [none]
+[debug] [2025-07-25T22:07:17.520Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config 200
+[debug] [2025-07-25T22:07:17.521Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config {"projectId":"adverseai-yw88y","appId":"1:291201286336:web:7388bf9d0963f69e41ad25","storageBucket":"adverseai-yw88y.firebasestorage.app","apiKey":"AIzaSyDI7mUnIQkf2JjvdYA2x9KirLVy0ixvofE","authDomain":"adverseai-yw88y.firebaseapp.com","messagingSenderId":"291201286336"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2025-07-25T22:07:26.975Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:07:26.975Z] Checked if tokens are valid: true, expires at: 1753483743513
+[debug] [2025-07-25T22:07:26.976Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y [none]
+[debug] [2025-07-25T22:07:27.841Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y 200
+[debug] [2025-07-25T22:07:27.841Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y {"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}
+[info] 
+
+[info] > Build error occurred
+
+[info] Error: Configuring Next.js via 'next.config.ts' is not supported. Please replace the file with 'next.config.js' or 'next.config.mjs'.
+    at loadConfig (/home/user/studio/node_modules/next/dist/server/config.js:787:19)
+    at async Span.traceAsyncFn (/home/user/studio/node_modules/next/dist/trace/trace.js:154:20)
+    at async /home/user/studio/node_modules/next/dist/build/index.js:372:28
+    at async Span.traceAsyncFn (/home/user/studio/node_modules/next/dist/trace/trace.js:154:20)
+    at async build (/home/user/studio/node_modules/next/dist/build/index.js:366:9)
+
+[debug] [2025-07-25T22:07:28.884Z] Error: ENOENT: no such file or directory, open '/home/user/studio/.next/server/middleware-manifest.json'
+[error] 
+[error] Error: An unexpected error has occurred.
