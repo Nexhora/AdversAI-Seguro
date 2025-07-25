@@ -17,9 +17,8 @@ const firebaseConfig = {
   appId: "1:291201286336:web:7388bf9d0963f69e41ad25"
 };
 
-// This check was causing issues on the server-side build.
-// Since the config is now hardcoded, we can rely on Firebase's own initialization errors
-// if the config is truly invalid, which is handled by the AuthProvider.
+// A simple boolean check to see if the essential keys exist in the hardcoded config.
+// This helps prevent runtime errors if the object is accidentally left empty.
 export const firebaseCredentialsExist = !!(
   firebaseConfig.apiKey &&
   firebaseConfig.projectId &&
