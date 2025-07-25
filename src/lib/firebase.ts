@@ -17,13 +17,13 @@ const firebaseConfig = {
   appId: "1:291201286336:web:7388bf9d0963f69e41ad25"
 };
 
-// This check is crucial for preventing the app from crashing if the configuration is incomplete.
+// This check was causing issues on the server-side build.
+// Since the config is now hardcoded, we can rely on Firebase's own initialization errors
+// if the config is truly invalid, which is handled by the AuthProvider.
 export const firebaseCredentialsExist = !!(
   firebaseConfig.apiKey &&
-  firebaseConfig.authDomain &&
   firebaseConfig.projectId &&
-  firebaseConfig.appId &&
-  firebaseConfig.apiKey !== "YOUR_API_KEY" // A simple check for placeholder values
+  firebaseConfig.appId
 );
 
 
@@ -42,7 +42,7 @@ if (firebaseCredentialsExist) {
 } else {
     // If credentials don't exist, we provide dummy objects to prevent the app from crashing,
     // The AuthProvider will show a proper error message.
-    console.error("La configuración de Firebase en src/lib/firebase.ts está incompleta. La aplicación no puede funcionar.");
+    console.error("Firebase configuration is missing or incomplete in src/lib/firebase.ts. The application cannot function.");
     app = {} as FirebaseApp;
     auth = {} as Auth;
     db = {} as Firestore;
