@@ -40,7 +40,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { Logo } from "@/components/icons"
+import { Logo } from "../../components/icons"
 import { Loader2 } from "lucide-react"
 import Link from "next/link"
 
