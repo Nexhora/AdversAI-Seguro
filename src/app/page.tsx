@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Logo } from '@/components/icons';
@@ -41,14 +40,13 @@ export default function HomePage() {
       </header>
 
       <main>
-        {/* FirebaseDebug component removed */}
         {/* Hero Section */}
         <section className="relative py-20 md:py-32 overflow-hidden">
             <div className="absolute inset-0 bg-grid-white/[0.05] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
              <div className="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse"></div>
              <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
                 <h1 className="text-4xl md:text-6xl font-bold font-headline tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
-                    PRUEBA DE DESPLIEGUE: ¿Ves este nuevo título?
+                    Construye Activos de Marketing con IA en Minutos
                 </h1>
                 <p className="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-300">
                     Crea anuncios, landing pages, y más. Sin necesidad de experiencia técnica. Empieza a construir tu futuro hoy.
@@ -196,5 +194,3 @@ export default function HomePage() {
     </div>
   );
 }
-
-    
