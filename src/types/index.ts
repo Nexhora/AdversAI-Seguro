@@ -7,7 +7,7 @@ export type AdCreative = {
   visualDescription: string;
   visualDescriptionEnglish: string;
   callToAction: string;
-  imageUrl?: string; // Made optional to allow setting state before image generation
+  imageUrl?: string; 
 };
 
 export type PerformancePrediction = {
