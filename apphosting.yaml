@@ -4,10 +4,11 @@ runConfig:
   minInstances: 0
   maxInstances: 10
   env:
-    # Esta variable de la API de Google es para Genkit en el servidor.
-    # Genkit en el servidor busca la variable GOOGLE_API_KEY o GOOGLE_API.
+    # This secret is for Genkit on the server-side.
+    # It does NOT need the NEXT_PUBLIC_ prefix.
     - secret: NEXT_PUBLIC_GOOGLE_API_KEY
       key: GOOGLE_API_KEY
-    # Esta variable también es para el cliente
-    - secret: NEXT_PUBLIC_GOOGLE_API_KEY
-      key: NEXT_PUBLIC_GOOGLE_API_KEY
+
+# The client-side Firebase config is now hardcoded in src/lib/firebase.ts
+# to prevent build-time issues with environment variables.
+# We no longer need to pass Firebase-related secrets here.

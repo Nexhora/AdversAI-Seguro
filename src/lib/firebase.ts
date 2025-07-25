@@ -4,9 +4,9 @@ import { getAuth, type Auth } from "firebase/auth";
 import { getFirestore, type Firestore } from "firebase/firestore";
 import { getStorage, type FirebaseStorage } from "firebase/storage";
 
-// Your web app's Firebase configuration is read directly from Next.js environment variables
+// Your web app's Firebase configuration is read directly from this object.
 // IMPORTANT: These keys are public and are secured by Firebase Security Rules.
-// It is safe to have them in the source code for client-side initialization.
+// It is safe and standard practice to have them in the source code for client-side initialization.
 const firebaseConfig = {
   apiKey: "AIzaSyDI7mUnIQkf2JjvdYA2x9KirLVy0ixvofE",
   authDomain: "adverseai-yw88y.firebaseapp.com",
@@ -16,17 +16,17 @@ const firebaseConfig = {
   appId: "1:291201286336:web:7388bf9d0963f69e41ad25"
 };
 
-// This check is crucial for preventing the app from crashing in production
-// if the environment variables are not set.
-// It checks for the essential keys required for initialization.
+// This check is crucial for preventing the app from crashing if the configuration is incomplete.
 export const firebaseCredentialsExist = !!(
   firebaseConfig.apiKey &&
   firebaseConfig.authDomain &&
-  firebaseConfig.projectId
+  firebaseConfig.projectId &&
+  firebaseConfig.appId
 );
 
 if (!firebaseCredentialsExist) {
-    // This will now only trigger if the hardcoded config is somehow empty.
+    // This will now only trigger if the hardcoded config above is somehow empty.
+    // This error is primarily for development feedback.
     throw new Error("Firebase credentials are not configured correctly in src/lib/firebase.ts");
 }
 
