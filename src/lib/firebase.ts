@@ -1,3 +1,4 @@
+
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps, getApp, type FirebaseApp } from "firebase/app";
 import { getAuth, type Auth } from "firebase/auth";
@@ -25,11 +26,6 @@ export const firebaseCredentialsExist = !!(
   !firebaseConfig.apiKey.includes('placeholder') // A simple check for placeholder values
 );
 
-if (!firebaseCredentialsExist) {
-    // This will now only trigger if the hardcoded config above is somehow empty or still a placeholder.
-    // This error is primarily for development feedback.
-    console.error("Firebase credentials are not configured correctly in src/lib/firebase.ts");
-}
 
 // Initialize Firebase services
 let app: FirebaseApp;
@@ -46,6 +42,7 @@ if (firebaseCredentialsExist) {
 } else {
     // If credentials don't exist, we provide dummy objects to prevent the app from crashing,
     // The AuthProvider will show a proper error message.
+    console.error("La configuración de Firebase en src/lib/firebase.ts está incompleta. La aplicación no puede funcionar.");
     app = {} as FirebaseApp;
     auth = {} as Auth;
     db = {} as Firestore;

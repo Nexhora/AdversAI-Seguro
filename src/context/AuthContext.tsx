@@ -45,7 +45,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // This check is now against the hardcoded config.
     if (!firebaseCredentialsExist) {
         setLoading(false);
         return;
