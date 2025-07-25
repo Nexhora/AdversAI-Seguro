@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "gcp-prepare": "next build",
+    "gcp-prepare": "next build --no-cache",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
