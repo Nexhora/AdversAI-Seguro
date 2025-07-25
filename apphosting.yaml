@@ -4,6 +4,8 @@ runConfig:
   minInstances: 0
   maxInstances: 10
   env:
+    # Estas variables son para la inicialización de Firebase en el cliente y servidor.
+    # Usan el prefijo NEXT_PUBLIC_ para ser accesibles por Next.js durante el build.
     - secret: NEXT_PUBLIC_FIREBASE_API_KEY
       key: NEXT_PUBLIC_FIREBASE_API_KEY
     - secret: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
@@ -16,9 +18,13 @@ runConfig:
       key: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
     - secret: NEXT_PUBLIC_FIREBASE_APP_ID
       key: NEXT_PUBLIC_FIREBASE_APP_ID
+    
+    # Esta variable también necesita el prefijo para ser accesible en el lado del cliente.
     - secret: NEXT_PUBLIC_GOOGLE_API_KEY
       key: NEXT_PUBLIC_GOOGLE_API_KEY
-    # Esta variable es necesaria para que Genkit funcione en el servidor
+
+    # Genkit en el servidor busca la variable sin el prefijo NEXT_PUBLIC_.
+    # Apuntamos el mismo secreto a una variable con el nombre que Genkit espera.
     - secret: NEXT_PUBLIC_GOOGLE_API_KEY
       key: GOOGLE_API_KEY
 requires:

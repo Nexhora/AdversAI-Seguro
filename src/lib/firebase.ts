@@ -17,15 +17,16 @@ const firebaseConfig = {
 
 // This check is crucial for preventing the app from crashing in production
 // if the environment variables are not set.
+// It checks for the essential keys required for initialization.
 export const firebaseCredentialsExist = !!(
   firebaseConfig.apiKey &&
-  firebaseConfig.projectId &&
-  process.env.NEXT_PUBLIC_GOOGLE_API_KEY
+  firebaseConfig.authDomain &&
+  firebaseConfig.projectId
 );
 
 if (!firebaseCredentialsExist) {
     // Log a more descriptive error in the server console or browser console
-    console.error("Firebase or Google AI credentials are not configured correctly. Please check your environment variables (.env file for local development or hosting provider settings for production).");
+    console.error("Firebase credentials are not configured correctly. Please check your NEXT_PUBLIC_FIREBASE_* environment variables.");
 }
 
 // Initialize Firebase services only if credentials exist
@@ -34,6 +35,8 @@ let auth: Auth;
 let db: Firestore;
 let storage: FirebaseStorage;
 
+// This conditional logic ensures that Firebase is only initialized when credentials are valid.
+// This prevents the application from crashing both on the server and the client.
 if (firebaseCredentialsExist) {
   // This pattern prevents re-initializing the app on every hot-reload.
   app = getApps().length ? getApp() : initializeApp(firebaseConfig);
