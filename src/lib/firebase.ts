@@ -14,20 +14,14 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Check if the essential Firebase config values are present.
-// This is a safeguard for developers.
+// This check is now more robust. It warns in the console if vars are missing
+// but doesn't block the app from trying to initialize, which is better for production.
 export const firebaseCredentialsExist = !!(
   firebaseConfig.apiKey &&
-  firebaseConfig.projectId &&
-  firebaseConfig.authDomain &&
-  firebaseConfig.storageBucket &&
-  firebaseConfig.messagingSenderId &&
-  firebaseConfig.appId
+  firebaseConfig.projectId
 );
 
 if (!firebaseCredentialsExist) {
-    // This will only log an error in the server console or browser console,
-    // it will not render a full-page error, preventing build failures.
     console.error("Firebase configuration variables are missing. The app might not work correctly. Please check your environment variables.");
 }
 

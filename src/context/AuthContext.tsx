@@ -32,7 +32,7 @@ const FirebaseConfigurationNotice = () => (
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <p className="text-sm text-muted-foreground">Por favor, asegúrate de que todas las variables de entorno `NEXT_PUBLIC_FIREBASE_*` estén definidas en tu archivo `.env` o en la configuración de tu proveedor de hosting.</p>
+                <p className="text-sm text-muted-foreground">Por favor, revisa que tus variables de entorno `NEXT_PUBLIC_FIREBASE_*` y `NEXT_PUBLIC_GOOGLE_API_KEY` estén definidas en el archivo `.env` para desarrollo local, y configuradas en los ajustes de tu proveedor de hosting para producción.</p>
             </CardContent>
         </Card>
     </div>
@@ -42,12 +42,14 @@ const FirebaseConfigurationNotice = () => (
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isConfigured, setIsConfigured] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     // If Firebase is not configured, we stop loading and the notice will be displayed.
     if (!firebaseCredentialsExist) {
         setLoading(false);
+        setIsConfigured(false);
         return;
     }
 
@@ -68,7 +70,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
   
-  // Display loading indicator while checking for credentials and auth state.
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -78,8 +79,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     );
   }
   
-  // If Firebase is not configured, show the error notice instead of the app.
-  if (!firebaseCredentialsExist) {
+  if (!isConfigured) {
       return <FirebaseConfigurationNotice />;
   }
 
