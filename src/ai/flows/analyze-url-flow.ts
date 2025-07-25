@@ -55,7 +55,7 @@ const analyzeUrlPrompt = ai.definePrompt({
 
 Usa la herramienta httpGet con la URL: {{{url}}}
 
-Una vez que tengas el contenido resumido de la página (título, encabezados, párrafos), analízalo con precisión. NO INVENTES información. Si no encuentras algo, déjalo vacío.
+Una vez que tengas el contenido resumido de la página (título, encabezados, párrafos), analízalo con precisión. NO INVENTES información. Si no encuentras algún campo obligatorio, haz tu mejor esfuerzo para inferirlo del contexto. Si no encuentras un campo opcional, déjalo vacío.
 
 1.  **brandName:** Busca el nombre de la empresa o marca. Prioriza el título de la página o el propio dominio de la URL.
 2.  **productName:** Identifica el producto o servicio principal. Búscalo en los titulares principales (H1, H2s). Sé conciso y directo.
@@ -81,7 +81,10 @@ const analyzeUrlFlow = ai.defineFlow(
   async (input) => {
     const {output} = await analyzeUrlPrompt(input);
     if (!output) {
-      throw new Error('The AI returned an empty response.');
+      // This provides a much clearer error message to the user.
+      throw new Error(
+        'La IA no devolvió una respuesta válida. Esto puede ocurrir si la URL no es accesible, no contiene suficiente información de texto, o está protegida. Por favor, prueba con una URL diferente o rellena los campos del formulario manualmente.'
+      );
     }
     return output;
   }

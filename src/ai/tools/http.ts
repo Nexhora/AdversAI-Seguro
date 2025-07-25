@@ -39,6 +39,7 @@ export const httpGet = ai.defineTool(
           'Accept-Language': 'en-US,en;q=0.9',
           'Cache-Control': 'no-cache',
         },
+        redirect: 'follow', // Follow redirects
       });
 
       if (!response.ok) {
@@ -48,22 +49,23 @@ export const httpGet = ai.defineTool(
       const html = await response.text();
       const root = parse(html);
       
-      // Remove script, style, and other non-content tags
-      root.querySelectorAll('script, style, noscript, svg, header, footer, nav').forEach(node => node.remove());
+      // Remove script, style, and other non-content tags for cleaner text extraction
+      root.querySelectorAll('script, style, noscript, svg, header, footer, nav, aside, form').forEach(node => node.remove());
 
-      const body = root.querySelector('body');
+      const body = root.querySelector('body, main, article');
       if (!body) {
-        throw new Error('Could not find the body of the page.');
+        // Return a minimal valid response if no body is found
+        return { title: 'No content body found', paragraphs: [], links: [] };
       }
       
-      const title = root.querySelector('title')?.text.trim() || 'No title found';
+      const title = root.querySelector('title')?.text.trim() || root.querySelector('h1')?.text.trim() || 'No title found';
       const h1 = root.querySelector('h1')?.text.trim();
       const h2s = root.querySelectorAll('h2').map(h => h.text.trim()).filter(Boolean);
       
-      // Get paragraphs, filter out short/irrelevant ones
+      // Get paragraphs, filter out short/irrelevant ones, and join them for a more coherent block of text.
       const paragraphs = root.querySelectorAll('p')
         .map(p => p.text.trim())
-        .filter(p => p.length > 50); // Only keep paragraphs with some substance
+        .filter(p => p.length > 50 && p.split(' ').length > 5); // Only keep paragraphs with some substance
 
       // Get descriptive links, filter out vague ones
       const links = root.querySelectorAll('a')
@@ -80,11 +82,12 @@ export const httpGet = ai.defineTool(
 
     } catch (error) {
       console.error('Error in httpGet tool:', error);
+      let errorMessage = 'An unknown error occurred while fetching the URL.';
       if (error instanceof Error) {
-        // Return a valid empty structure on error to prevent flow failure
-        return { title: `Failed to fetch URL: ${error.message}`, paragraphs: [], links: [] };
+        errorMessage = `Failed to fetch URL: ${error.message}`;
       }
-      return { title: 'An unknown error occurred while fetching the URL.', paragraphs: [], links: [] };
+      // Return a valid empty structure on error to prevent flow failure
+      return { title: errorMessage, paragraphs: [], links: [] };
     }
   }
 );
