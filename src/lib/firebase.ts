@@ -25,8 +25,8 @@ export const firebaseCredentialsExist = !!(
 );
 
 if (!firebaseCredentialsExist) {
-    // Log a more descriptive error in the server console or browser console
-    console.error("Firebase credentials are not configured correctly. Please check your NEXT_PUBLIC_FIREBASE_* environment variables.");
+    // This message will appear in the server or browser console if variables are missing.
+    console.log("Firebase credentials are not fully configured. The app might not work as expected.");
 }
 
 // Initialize Firebase services only if credentials exist
