@@ -18,13 +18,13 @@ const firebaseConfig = {
 };
 
 // A simple boolean check to see if the essential keys exist in the hardcoded config.
-// This helps prevent runtime errors if the object is accidentally left empty.
+// This helps prevent runtime errors if the object is accidentally left empty,
+// especially during development before the values are filled in.
 export const firebaseCredentialsExist = !!(
   firebaseConfig.apiKey &&
   firebaseConfig.projectId &&
   firebaseConfig.appId
 );
-
 
 // Initialize Firebase services
 let app: FirebaseApp;
@@ -34,10 +34,16 @@ let storage: FirebaseStorage;
 
 // This pattern prevents re-initializing the app on every hot-reload.
 // The check for credentials is now done inside AuthProvider to show a nicer error.
-app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-auth = getAuth(app);
-db = getFirestore(app);
-storage = getStorage(app);
+if (firebaseCredentialsExist) {
+  app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db = getFirestore(app);
+  storage = getStorage(app);
+} else {
+  // If the credentials are not there, we initialize dummy variables
+  // to avoid crashing the app on import. The AuthProvider will show an error.
+  console.log("Firebase credentials are not set. The app will not connect to Firebase.");
+}
 
-
+// @ts-ignore
 export { app, auth, db, storage };

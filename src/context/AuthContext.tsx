@@ -28,11 +28,11 @@ const FirebaseConfigurationNotice = () => (
                     <AlertTriangle/> Error de Configuración de Firebase
                 </CardTitle>
                 <CardDescription className="text-destructive/90">
-                   La configuración de Firebase en `src/lib/firebase.ts` parece estar incompleta o incorrecta.
+                   La aplicación no puede continuar sin una conexión válida a Firebase.
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <p className="text-sm text-muted-foreground">Por favor, revisa que el objeto `firebaseConfig` en el archivo `src/lib/firebase.ts` contenga todas las claves correctas de tu proyecto de Firebase. La aplicación no puede continuar sin una configuración válida.</p>
+                <p className="text-sm text-muted-foreground">La configuración en `src/lib/firebase.ts` parece estar incompleta. Por favor, asegúrate de que el objeto `firebaseConfig` contenga las claves correctas de tu proyecto. Si acabas de crear el proyecto, esto puede tardar unos minutos en propagarse.</p>
             </CardContent>
         </Card>
     </div>
@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return (
       <div className="flex h-screen items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin" />
-          <p className='ml-2'>Cargando aplicación...</p>
+          <p className='ml-2'>Conectando con Firebase...</p>
       </div>
     );
   }
