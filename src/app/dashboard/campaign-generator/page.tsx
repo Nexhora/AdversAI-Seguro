@@ -177,6 +177,7 @@ export default function CampaignGenerator() {
     // Automatically add "https://" if no protocol is present.
     if (!/^https?:\/\//i.test(url)) {
       url = 'https://' + url;
+      form.setValue('url', url, { shouldValidate: true });
     }
 
     // Manually trigger validation for the now-corrected URL.
@@ -573,5 +574,3 @@ export default function CampaignGenerator() {
     </div>
   );
 }
-
-    
