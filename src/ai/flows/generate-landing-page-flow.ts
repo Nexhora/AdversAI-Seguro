@@ -87,9 +87,10 @@ export async function generateLandingPage(
             break;
         default:
             // Fallback for any unknown type to prevent crashing.
+            // This is a safe cast because 'Text' is one of the valid types.
             validatedSection = {
                 id: section.id,
-                type: 'Text',
+                type: 'Text' as 'Text',
                 props: { text: 'Sección de tipo desconocido', as: 'p', textAlign: 'center' }
             };
             break;
@@ -199,5 +200,3 @@ const generateLandingPageFlow = ai.defineFlow(
     return pageData;
   }
 );
-
-    
