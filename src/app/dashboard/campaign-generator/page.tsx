@@ -164,7 +164,7 @@ export default function CampaignGenerator() {
   });
 
   const handleUrlAnalysis = async () => {
-    const url = form.getValues('url');
+    let url = form.getValues('url');
     if (!url) {
       toast({
         variant: 'destructive',
@@ -173,6 +173,19 @@ export default function CampaignGenerator() {
       });
       return;
     }
+
+    // Automatically add "https://" if no protocol is present.
+    if (!/^https?:\/\//i.test(url)) {
+      url = 'https://' + url;
+    }
+
+    // Manually trigger validation for the now-corrected URL.
+    const isUrlValid = await form.trigger('url');
+    if (!isUrlValid) {
+        // If it's still not valid, the Zod schema message will be displayed.
+        return;
+    }
+
 
     startUrlAnalysis(async () => {
       try {
@@ -560,3 +573,5 @@ export default function CampaignGenerator() {
     </div>
   );
 }
+
+    
