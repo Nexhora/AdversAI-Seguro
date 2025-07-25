@@ -26,7 +26,7 @@ const FirebaseConfigurationNotice = () => (
             <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-destructive">
                     <AlertTriangle/> Error de Configuración de Firebase
-                </CardTitle>
+                </Title>
                 <CardDescription className="text-destructive/90">
                    La aplicación no puede continuar sin una conexión válida a Firebase.
                 </CardDescription>
