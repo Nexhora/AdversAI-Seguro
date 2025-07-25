@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  output: 'standalone',
+  serverActions: false,
   typescript: {
     ignoreBuildErrors: true,
   },
   eslint: {
-    // Setting this to true can help prevent build failures on the server
-    // due to linting rules that are not critical for production.
     ignoreDuringBuilds: true,
   },
   images: {
