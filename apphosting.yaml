@@ -3,10 +3,9 @@
 runConfig:
   minInstances: 0
   maxInstances: 10
-  env:
-    - secret: NEXT_PUBLIC_GOOGLE_API_KEY
-      key: GOOGLE_API_KEY
 
 # The client-side Firebase config is now hardcoded in src/lib/firebase.ts
 # to prevent build-time issues with environment variables.
-# We no longer need to pass Firebase-related secrets here.
+# The GOOGLE_API_KEY secret is automatically made available to the build
+# environment by App Hosting if permissions are granted. We no longer need
+# to pass Firebase-related secrets or GOOGLE_API_KEY here.
