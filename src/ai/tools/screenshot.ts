@@ -2,10 +2,10 @@
 'use server';
 /**
  * @fileoverview Defines a screenshot tool for Genkit flows.
- * This is a placeholder as it cannot run a real browser in this environment.
- * The logic is simulated to return a placeholder image.
+ * THIS TOOL IS TEMPORARILY DEACTIVATED.
  */
-
+// All logic is commented out to prevent build issues.
+/*
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 
@@ -58,3 +58,5 @@ export const takeScreenshot = ai.defineTool(
     };
   }
 );
+*/
+export const takeScreenshot = {};

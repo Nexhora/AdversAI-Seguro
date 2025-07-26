@@ -2,8 +2,10 @@
 'use server';
 /**
  * @fileoverview Defines an HTTP GET tool for Genkit flows.
+ * THIS TOOL IS TEMPORARILY DEACTIVATED.
  */
-
+// All logic is commented out to prevent build issues.
+/*
 import {ai} from '@/ai/genkit';
 import { z } from 'zod';
 import {parse} from 'node-html-parser';
@@ -91,3 +93,5 @@ export const httpGet = ai.defineTool(
     }
   }
 );
+*/
+export const httpGet = {};

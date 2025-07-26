@@ -1,13 +1,13 @@
+
 'use server';
 
 /**
- * @fileOverview A flow for generating ad creatives, including headlines, text, visuals, and CTAs, and presenting them as coherent ad concepts.
- *
- * - generateAdCreative - A function that generates ad creatives.
- * - GenerateAdCreativeInput - The input type for the generateAdCreative function.
- * - GenerateAdCreativeOutput - The return type for the generateAdCreative function.
+ * @fileOverview A flow for generating ad creatives.
+ * THIS FLOW IS TEMPORARILY DEACTIVATED.
  */
 
+// All logic is commented out to prevent build issues.
+/*
 import {ai} from '@/ai/genkit';
 import { z } from 'zod';
 
@@ -107,3 +107,10 @@ const generateAdCreativeFlow = ai.defineFlow(
     return output;
   }
 );
+*/
+
+// Placeholder function
+export async function generateAdCreative(input: any): Promise<any> {
+    console.log("generateAdCreative is temporarily deactivated.");
+    throw new Error("La función de generación de creatividades está desactivada temporalmente.");
+}

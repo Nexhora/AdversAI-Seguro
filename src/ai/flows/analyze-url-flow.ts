@@ -3,12 +3,11 @@
 
 /**
  * @fileOverview A flow for analyzing a URL to extract campaign information.
- *
- * - analyzeUrlForCampaign - A function that analyzes a URL to extract campaign information.
- * - AnalyzeUrlInput - The input type for the analyzeUrlForCampaign function.
- * - AnalyzeUrlOutput - The return type for the analyzeUrlForCampaign function.
+ * THIS FLOW IS TEMPORARILY DEACTIVATED.
  */
 
+// All logic is commented out to prevent build issues.
+/*
 import {ai} from '@/ai/genkit';
 import {httpGet} from '@/ai/tools/http';
 import { z } from 'zod';
@@ -89,3 +88,10 @@ const analyzeUrlFlow = ai.defineFlow(
     return output;
   }
 );
+*/
+
+// Placeholder function to avoid breaking imports
+export async function analyzeUrlForCampaign(input: any): Promise<any> {
+  console.log("analyzeUrlForCampaign is temporarily deactivated.");
+  throw new Error("La función de análisis de URL está desactivada temporalmente para mantenimiento.");
+}

@@ -1,11 +1,13 @@
 
 'use server';
 /**
- * @fileOverview A flow for generating a landing page structure based on a unified component architecture.
- * The AI's role is to generate a JSON object with a 'page' key containing an array of sections.
+ * @fileOverview A flow for generating a landing page structure.
+ * THIS FLOW IS TEMPORARILY DEACTIVATED.
  */
-import {ai} from '@/ai/genkit';
 import { nanoid } from 'nanoid';
+// All logic is commented out to prevent build issues.
+/*
+import {ai} from '@/ai/genkit';
 import { GenerateLandingPageInput, GenerateLandingPageInputSchema, GenerateLandingPageOutput, GenerateLandingPageOutputFlowSchema, SectionSchema } from '@/ai/schemas/landing-page-generation';
 import { analyzeUrlForCampaign } from './analyze-url-flow';
 
@@ -200,3 +202,10 @@ const generateLandingPageFlow = ai.defineFlow(
     return pageData;
   }
 );
+*/
+
+// Placeholder function
+export async function generateLandingPage(input: any): Promise<any> {
+    console.log("generateLandingPage is temporarily deactivated.");
+    throw new Error("La función de generación de landing pages está desactivada temporalmente.");
+}
