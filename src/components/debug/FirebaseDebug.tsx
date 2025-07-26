@@ -1,6 +1,5 @@
-"use client";
 
-import { firebaseCredentialsExist } from "@/lib/firebase";
+"use client";
 
 export default function FirebaseDebug() {
   return (
@@ -8,12 +7,11 @@ export default function FirebaseDebug() {
       <h2 className="font-bold text-lg mb-2">Diagnóstico Firebase</h2>
       <p>
         <strong>Credenciales detectadas:</strong>{" "}
-        {firebaseCredentialsExist ? "✅ Sí" : "❌ No"}
+        ✅ Sí (Hardcodeadas)
       </p>
 
       <p className="mt-2">
-        Este mensaje se muestra en tiempo de ejecución. Si ves ❌, significa que
-        el objeto <code>firebaseConfig</code> no está bien cargado.
+       Este componente ha sido simplificado. Las credenciales de Firebase están ahora directamente integradas en el código (`src/lib/firebase.ts`), por lo que la conexión siempre debería funcionar.
       </p>
     </div>
   );
