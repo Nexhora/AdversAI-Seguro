@@ -778,3 +778,391 @@ Type error: Argument of type '{ page: { type: "Hero" | "Features" | "Text" | "Bu
 [debug] [2025-07-25T23:02:27.922Z] Error: ENOENT: no such file or directory, open '/home/user/studio/.next/export-marker.json'
 [error] 
 [error] Error: An unexpected error has occurred.
+[debug] [2025-07-25T23:08:32.440Z] ----------------------------------------------------------------------
+[debug] [2025-07-25T23:08:32.443Z] Command:       /nix/store/ws50yvm6vzlzf7jzz6n7xh4szddrack1-nodejs-20.19.1/bin/node /nix/store/gv0i9ndcpzjpfi2yr06402kzy90q51ki-firebase-tools-14.10.1/lib/node_modules/firebase-tools/lib/bin/firebase.js deploy
+[debug] [2025-07-25T23:08:32.444Z] CLI Version:   14.10.1
+[debug] [2025-07-25T23:08:32.444Z] Platform:      linux
+[debug] [2025-07-25T23:08:32.444Z] Node Version:  v20.19.1
+[debug] [2025-07-25T23:08:32.444Z] Time:          Fri Jul 25 2025 23:08:32 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-07-25T23:08:32.444Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-25T23:08:32.955Z] Object "/hosting" in "firebase.json" has unknown property: {"additionalProperty":"backend"}
+[debug] [2025-07-25T23:08:32.956Z] Field "/hosting" in "firebase.json" is possibly invalid: must be array
+[debug] [2025-07-25T23:08:32.956Z] Field "/hosting" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2025-07-25T23:08:32.961Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-25T23:08:32.962Z] > authorizing via signed-in user (ahssuarez@gmail.com)
+[debug] [2025-07-25T23:08:32.962Z] [iam] checking project adverseai-yw88y for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-07-25T23:08:32.963Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:08:32.964Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:08:32.965Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions [none]
+[debug] [2025-07-25T23:08:32.965Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions x-goog-quota-user=projects/adverseai-yw88y
+[debug] [2025-07-25T23:08:32.966Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-25T23:08:33.242Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions 200
+[debug] [2025-07-25T23:08:33.243Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-25T23:08:33.244Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:08:33.244Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:08:33.244Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y [none]
+[debug] [2025-07-25T23:08:33.527Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y 200
+[debug] [2025-07-25T23:08:33.527Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y {"projectId":"adverseai-yw88y","projectNumber":"291201286336","displayName":"AdVerseAI","name":"projects/adverseai-yw88y","resources":{"hostingSite":"adverseai-yw88y"},"state":"ACTIVE","etag":"1_f501cb6e-c4f9-4e77-b146-cc67406d0967"}
+[debug] [2025-07-25T23:08:36.677Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:08:36.677Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:08:36.678Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites pageToken=&pageSize=10
+[debug] [2025-07-25T23:08:37.679Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 200
+[debug] [2025-07-25T23:08:37.679Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites {"sites":[{"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-07-25T23:08:37.686Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:08:37.687Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:08:37.687Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 
+[debug] [2025-07-25T23:08:38.030Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 200
+[debug] [2025-07-25T23:08:38.034Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites {"sites":[{"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-07-25T23:08:38.034Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:08:38.034Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:08:38.040Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config [none]
+[debug] [2025-07-25T23:08:38.870Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config 200
+[debug] [2025-07-25T23:08:38.872Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config {"projectId":"adverseai-yw88y","appId":"1:291201286336:web:7388bf9d0963f69e41ad25","storageBucket":"adverseai-yw88y.firebasestorage.app","apiKey":"AIzaSyDI7mUnIQkf2JjvdYA2x9KirLVy0ixvofE","authDomain":"adverseai-yw88y.firebaseapp.com","messagingSenderId":"291201286336"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2025-07-25T23:08:50.571Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:08:50.575Z] Checked if tokens are valid: true, expires at: 1753486690107
+[debug] [2025-07-25T23:08:50.575Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y [none]
+[debug] [2025-07-25T23:08:51.492Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y 200
+[debug] [2025-07-25T23:08:51.495Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y {"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}
+[info]   ▲ Next.js 14.2.4
+
+[info]   - Environments: .env
+
+
+[info]    Creating an optimized production build ...
+
+[info]  ⚠ Compiled with warnings
+
+
+[info] ./node_modules/@opentelemetry/sdk-node/build/src/TracerProviderWithEnvExporter.js
+Module not found: Can't resolve '@opentelemetry/exporter-jaeger' in '/home/user/studio/node_modules/@opentelemetry/sdk-node/build/src'
+
+Import trace for requested module:
+./node_modules/@opentelemetry/sdk-node/build/src/TracerProviderWithEnvExporter.js
+./node_modules/@opentelemetry/sdk-node/build/src/sdk.js
+./node_modules/@opentelemetry/sdk-node/build/src/index.js
+./node_modules/@genkit-ai/core/lib/tracing.js
+./node_modules/genkit/lib/tracing.js
+./node_modules/genkit/lib/genkit.js
+./node_modules/genkit/lib/index.mjs
+./src/ai/flows/analyze-url-flow.ts
+
+./node_modules/handlebars/lib/index.js
+require.extensions is not supported by webpack. Use a loader instead.
+
+Import trace for requested module:
+./node_modules/handlebars/lib/index.js
+./node_modules/dotprompt/dist/index.js
+./node_modules/@genkit-ai/core/lib/registry.js
+./node_modules/genkit/lib/registry.js
+./node_modules/genkit/lib/genkit.js
+./node_modules/genkit/lib/index.mjs
+./src/ai/flows/analyze-url-flow.ts
+
+./node_modules/handlebars/lib/index.js
+require.extensions is not supported by webpack. Use a loader instead.
+
+Import trace for requested module:
+./node_modules/handlebars/lib/index.js
+./node_modules/dotprompt/dist/index.js
+./node_modules/@genkit-ai/core/lib/registry.js
+./node_modules/genkit/lib/registry.js
+./node_modules/genkit/lib/genkit.js
+./node_modules/genkit/lib/index.mjs
+./src/ai/flows/analyze-url-flow.ts
+
+./node_modules/handlebars/lib/index.js
+require.extensions is not supported by webpack. Use a loader instead.
+
+Import trace for requested module:
+./node_modules/handlebars/lib/index.js
+./node_modules/dotprompt/dist/index.js
+./node_modules/@genkit-ai/core/lib/registry.js
+./node_modules/genkit/lib/registry.js
+./node_modules/genkit/lib/genkit.js
+./node_modules/genkit/lib/index.mjs
+./src/ai/flows/analyze-url-flow.ts
+
+./node_modules/require-in-the-middle/index.js
+Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
+
+Import trace for requested module:
+./node_modules/require-in-the-middle/index.js
+./node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+./node_modules/@opentelemetry/instrumentation/build/esm/platform/node/index.js
+./node_modules/@opentelemetry/instrumentation/build/esm/platform/index.js
+./node_modules/@opentelemetry/instrumentation/build/esm/index.js
+./node_modules/@opentelemetry/sdk-node/build/src/sdk.js
+./node_modules/@opentelemetry/sdk-node/build/src/index.js
+./node_modules/@genkit-ai/core/lib/tracing.js
+./node_modules/genkit/lib/tracing.js
+./node_modules/genkit/lib/genkit.js
+./node_modules/genkit/lib/index.mjs
+./src/ai/flows/analyze-url-flow.ts
+
+
+[info]  ✓ Compiled successfully
+
+[info]    Linting and checking validity of types ...
+
+[info] Failed to compile.
+
+
+[info] ./src/components/ui/carousel.tsx:6:8
+Type error: Cannot find module 'embla-carousel-react' or its corresponding type declarations.
+
+  4 | import useEmblaCarousel, {
+  5 |   type UseEmblaCarouselType,
+> 6 | } from "embla-carousel-react"
+    |        ^
+  7 | import { ArrowLeft, ArrowRight } from "lucide-react"
+  8 |
+  9 | import { cn } from "@/lib/utils"
+
+[debug] [2025-07-25T23:10:37.288Z] Error: ENOENT: no such file or directory, open '/home/user/studio/.next/export-marker.json'
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2025-07-25T23:32:20.589Z] ----------------------------------------------------------------------
+[debug] [2025-07-25T23:32:20.591Z] Command:       /nix/store/ws50yvm6vzlzf7jzz6n7xh4szddrack1-nodejs-20.19.1/bin/node /nix/store/gv0i9ndcpzjpfi2yr06402kzy90q51ki-firebase-tools-14.10.1/lib/node_modules/firebase-tools/lib/bin/firebase.js deploy
+[debug] [2025-07-25T23:32:20.592Z] CLI Version:   14.10.1
+[debug] [2025-07-25T23:32:20.593Z] Platform:      linux
+[debug] [2025-07-25T23:32:20.593Z] Node Version:  v20.19.1
+[debug] [2025-07-25T23:32:20.593Z] Time:          Fri Jul 25 2025 23:32:20 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-07-25T23:32:20.593Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-25T23:32:21.115Z] Object "/hosting" in "firebase.json" has unknown property: {"additionalProperty":"backend"}
+[debug] [2025-07-25T23:32:21.115Z] Field "/hosting" in "firebase.json" is possibly invalid: must be array
+[debug] [2025-07-25T23:32:21.116Z] Field "/hosting" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2025-07-25T23:32:21.121Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-25T23:32:21.121Z] > authorizing via signed-in user (ahssuarez@gmail.com)
+[debug] [2025-07-25T23:32:21.121Z] [iam] checking project adverseai-yw88y for permissions ["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-07-25T23:32:21.123Z] Checked if tokens are valid: false, expires at: 1753486690107
+[debug] [2025-07-25T23:32:21.123Z] Checked if tokens are valid: false, expires at: 1753486690107
+[debug] [2025-07-25T23:32:21.123Z] > refreshing access token with scopes: []
+[debug] [2025-07-25T23:32:21.126Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-07-25T23:32:21.126Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-07-25T23:32:21.245Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-07-25T23:32:21.246Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-07-25T23:32:21.261Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions [none]
+[debug] [2025-07-25T23:32:21.262Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions x-goog-quota-user=projects/adverseai-yw88y
+[debug] [2025-07-25T23:32:21.262Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-25T23:32:21.452Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions 200
+[debug] [2025-07-25T23:32:21.452Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions {"permissions":["datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-25T23:32:21.453Z] Checked if tokens are valid: true, expires at: 1753489940246
+[debug] [2025-07-25T23:32:21.456Z] Checked if tokens are valid: true, expires at: 1753489940246
+[debug] [2025-07-25T23:32:21.457Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y [none]
+[debug] [2025-07-25T23:32:21.753Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y 200
+[debug] [2025-07-25T23:32:21.753Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y {"projectId":"adverseai-yw88y","projectNumber":"291201286336","displayName":"AdVerseAI","name":"projects/adverseai-yw88y","resources":{"hostingSite":"adverseai-yw88y"},"state":"ACTIVE","etag":"1_f501cb6e-c4f9-4e77-b146-cc67406d0967"}
+[debug] [2025-07-25T23:32:25.277Z] Checked if tokens are valid: true, expires at: 1753489940246
+[debug] [2025-07-25T23:32:25.278Z] Checked if tokens are valid: true, expires at: 1753489940246
+[debug] [2025-07-25T23:32:25.279Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites pageToken=&pageSize=10
+[debug] [2025-07-25T23:32:26.319Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 200
+[debug] [2025-07-25T23:32:26.321Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites {"sites":[{"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-07-25T23:32:26.325Z] Checked if tokens are valid: true, expires at: 1753489940246
+[debug] [2025-07-25T23:32:26.325Z] Checked if tokens are valid: true, expires at: 1753489940246
+[debug] [2025-07-25T23:32:26.326Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 
+[debug] [2025-07-25T23:32:26.712Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 200
+[debug] [2025-07-25T23:32:26.713Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites {"sites":[{"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-07-25T23:32:26.713Z] Checked if tokens are valid: true, expires at: 1753489940246
+[debug] [2025-07-25T23:32:26.713Z] Checked if tokens are valid: true, expires at: 1753489940246
+[debug] [2025-07-25T23:32:26.714Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config [none]
+[debug] [2025-07-25T23:32:27.324Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config 200
+[debug] [2025-07-25T23:32:27.330Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config {"projectId":"adverseai-yw88y","appId":"1:291201286336:web:7388bf9d0963f69e41ad25","storageBucket":"adverseai-yw88y.firebasestorage.app","apiKey":"AIzaSyDI7mUnIQkf2JjvdYA2x9KirLVy0ixvofE","authDomain":"adverseai-yw88y.firebaseapp.com","messagingSenderId":"291201286336"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2025-07-25T23:32:39.091Z] Checked if tokens are valid: true, expires at: 1753489940246
+[debug] [2025-07-25T23:32:39.095Z] Checked if tokens are valid: true, expires at: 1753489940246
+[debug] [2025-07-25T23:32:39.095Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y [none]
+[debug] [2025-07-25T23:32:40.021Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y 200
+[debug] [2025-07-25T23:32:40.022Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y {"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}
+[info]   ▲ Next.js 14.2.4
+
+[info]   - Environments: .env
+
+
+[info]    Creating an optimized production build ...
+
+[info]  ⚠ Compiled with warnings
+
+
+[info] ./node_modules/@opentelemetry/sdk-node/build/src/TracerProviderWithEnvExporter.js
+Module not found: Can't resolve '@opentelemetry/exporter-jaeger' in '/home/user/studio/node_modules/@opentelemetry/sdk-node/build/src'
+
+Import trace for requested module:
+./node_modules/@opentelemetry/sdk-node/build/src/TracerProviderWithEnvExporter.js
+./node_modules/@opentelemetry/sdk-node/build/src/sdk.js
+./node_modules/@opentelemetry/sdk-node/build/src/index.js
+./node_modules/@genkit-ai/core/lib/tracing.js
+./node_modules/genkit/lib/tracing.js
+./node_modules/genkit/lib/genkit.js
+./node_modules/genkit/lib/index.mjs
+./src/ai/flows/analyze-url-flow.ts
+
+./node_modules/handlebars/lib/index.js
+require.extensions is not supported by webpack. Use a loader instead.
+
+Import trace for requested module:
+./node_modules/handlebars/lib/index.js
+./node_modules/dotprompt/dist/index.js
+./node_modules/@genkit-ai/core/lib/registry.js
+./node_modules/genkit/lib/registry.js
+./node_modules/genkit/lib/genkit.js
+./node_modules/genkit/lib/index.mjs
+./src/ai/flows/analyze-url-flow.ts
+
+./node_modules/handlebars/lib/index.js
+require.extensions is not supported by webpack. Use a loader instead.
+
+Import trace for requested module:
+./node_modules/handlebars/lib/index.js
+./node_modules/dotprompt/dist/index.js
+./node_modules/@genkit-ai/core/lib/registry.js
+./node_modules/genkit/lib/registry.js
+./node_modules/genkit/lib/genkit.js
+./node_modules/genkit/lib/index.mjs
+./src/ai/flows/analyze-url-flow.ts
+
+./node_modules/handlebars/lib/index.js
+require.extensions is not supported by webpack. Use a loader instead.
+
+Import trace for requested module:
+./node_modules/handlebars/lib/index.js
+./node_modules/dotprompt/dist/index.js
+./node_modules/@genkit-ai/core/lib/registry.js
+./node_modules/genkit/lib/registry.js
+./node_modules/genkit/lib/genkit.js
+./node_modules/genkit/lib/index.mjs
+./src/ai/flows/analyze-url-flow.ts
+
+./node_modules/require-in-the-middle/index.js
+Critical dependency: require function is used in a way in which dependencies cannot be statically extracted
+
+Import trace for requested module:
+./node_modules/require-in-the-middle/index.js
+./node_modules/@opentelemetry/instrumentation/build/esm/platform/node/instrumentation.js
+./node_modules/@opentelemetry/instrumentation/build/esm/platform/node/index.js
+./node_modules/@opentelemetry/instrumentation/build/esm/platform/index.js
+./node_modules/@opentelemetry/instrumentation/build/esm/index.js
+./node_modules/@opentelemetry/sdk-node/build/src/sdk.js
+./node_modules/@opentelemetry/sdk-node/build/src/index.js
+./node_modules/@genkit-ai/core/lib/tracing.js
+./node_modules/genkit/lib/tracing.js
+./node_modules/genkit/lib/genkit.js
+./node_modules/genkit/lib/index.mjs
+./src/ai/flows/analyze-url-flow.ts
+
+
+[info]  ✓ Compiled successfully
+
+[info]    Linting and checking validity of types ...
+
+[info] Failed to compile.
+
+
+[info] ./src/components/ui/carousel.tsx:6:8
+Type error: Cannot find module 'embla-carousel-react' or its corresponding type declarations.
+
+  4 | import useEmblaCarousel, {
+  5 |   type UseEmblaCarouselType,
+> 6 | } from "embla-carousel-react"
+    |        ^
+  7 | import { ArrowLeft, ArrowRight } from "lucide-react"
+  8 |
+  9 | import { cn } from "@/lib/utils"
+
+[debug] [2025-07-25T23:34:33.846Z] Error: ENOENT: no such file or directory, open '/home/user/studio/.next/export-marker.json'
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2025-07-26T01:52:11.321Z] ----------------------------------------------------------------------
+[debug] [2025-07-26T01:52:11.324Z] Command:       /nix/store/ws50yvm6vzlzf7jzz6n7xh4szddrack1-nodejs-20.19.1/bin/node /nix/store/gv0i9ndcpzjpfi2yr06402kzy90q51ki-firebase-tools-14.10.1/lib/node_modules/firebase-tools/lib/bin/firebase.js emulators:start --project=demo-app --only=auth,firestore
+[debug] [2025-07-26T01:52:11.325Z] CLI Version:   14.10.1
+[debug] [2025-07-26T01:52:11.326Z] Platform:      linux
+[debug] [2025-07-26T01:52:11.326Z] Node Version:  v20.19.1
+[debug] [2025-07-26T01:52:11.326Z] Time:          Sat Jul 26 2025 01:52:11 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-07-26T01:52:11.327Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-26T01:52:12.387Z] Object "/hosting" in "firebase.json" has unknown property: {"additionalProperty":"backend"}
+[debug] [2025-07-26T01:52:12.388Z] Field "/hosting" in "firebase.json" is possibly invalid: must be array
+[debug] [2025-07-26T01:52:12.388Z] Field "/hosting" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2025-07-26T01:52:13.332Z] openjdk version "21.0.7" 2025-04-15
+
+[debug] [2025-07-26T01:52:13.337Z] OpenJDK Runtime Environment (build 21.0.7+6-nixos)
+OpenJDK 64-Bit Server VM (build 21.0.7+6-nixos, mixed mode, sharing)
+
+[debug] [2025-07-26T01:52:13.390Z] Parsed Java major version: 21
+[info] i  emulators: Starting emulators: firestore {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: firestore"}}
+[info] i  emulators: Detected demo project ID "demo-app", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail. {"metadata":{"emulator":{"name":"hub"},"message":"Detected demo project ID \"demo-app\", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail."}}
+[warn] ⚠  auth: Not starting the auth emulator, make sure you have run firebase init. {"metadata":{"emulator":{"name":"auth"},"message":"Not starting the auth emulator, make sure you have run firebase init."}}
+[warn] ⚠  hub: Error when trying to check port 4400 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:4400 {"metadata":{"emulator":{"name":"hub"},"message":"Error when trying to check port 4400 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:4400"}}
+[warn] ⚠  hub: Port 4400 is available on 127.0.0.1 but not ::1. This may cause issues with some clients. {"metadata":{"emulator":{"name":"hub"},"message":"Port 4400 is available on 127.0.0.1 but not ::1. This may cause issues with some clients."}}
+[warn] ⚠  hub: If you encounter connectivity issues, consider switching to a different port or explicitly specifying "host": "<ip address>" instead of hostname in firebase.json {"metadata":{"emulator":{"name":"hub"},"message":"If you encounter connectivity issues, consider switching to a different port or explicitly specifying \"host\": \"<ip address>\" instead of hostname in firebase.json"}}
+[warn] ⚠  ui: Error when trying to check port 4000 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:4000 {"metadata":{"emulator":{"name":"ui"},"message":"Error when trying to check port 4000 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:4000"}}
+[warn] ⚠  ui: Port 4000 is available on 127.0.0.1 but not ::1. This may cause issues with some clients. {"metadata":{"emulator":{"name":"ui"},"message":"Port 4000 is available on 127.0.0.1 but not ::1. This may cause issues with some clients."}}
+[warn] ⚠  ui: If you encounter connectivity issues, consider switching to a different port or explicitly specifying "host": "<ip address>" instead of hostname in firebase.json {"metadata":{"emulator":{"name":"ui"},"message":"If you encounter connectivity issues, consider switching to a different port or explicitly specifying \"host\": \"<ip address>\" instead of hostname in firebase.json"}}
+[warn] ⚠  logging: Error when trying to check port 4500 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:4500 {"metadata":{"emulator":{"name":"logging"},"message":"Error when trying to check port 4500 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:4500"}}
+[warn] ⚠  logging: Port 4500 is available on 127.0.0.1 but not ::1. This may cause issues with some clients. {"metadata":{"emulator":{"name":"logging"},"message":"Port 4500 is available on 127.0.0.1 but not ::1. This may cause issues with some clients."}}
+[warn] ⚠  logging: If you encounter connectivity issues, consider switching to a different port or explicitly specifying "host": "<ip address>" instead of hostname in firebase.json {"metadata":{"emulator":{"name":"logging"},"message":"If you encounter connectivity issues, consider switching to a different port or explicitly specifying \"host\": \"<ip address>\" instead of hostname in firebase.json"}}
+[warn] ⚠  firestore: Error when trying to check port 8080 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:8080 {"metadata":{"emulator":{"name":"firestore"},"message":"Error when trying to check port 8080 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:8080"}}
+[warn] ⚠  firestore: Port 8080 is available on 127.0.0.1 but not ::1. This may cause issues with some clients. {"metadata":{"emulator":{"name":"firestore"},"message":"Port 8080 is available on 127.0.0.1 but not ::1. This may cause issues with some clients."}}
+[warn] ⚠  firestore: If you encounter connectivity issues, consider switching to a different port or explicitly specifying "host": "<ip address>" instead of hostname in firebase.json {"metadata":{"emulator":{"name":"firestore"},"message":"If you encounter connectivity issues, consider switching to a different port or explicitly specifying \"host\": \"<ip address>\" instead of hostname in firebase.json"}}
+[warn] ⚠  firestore.websocket: Error when trying to check port 9150 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:9150 {"metadata":{"emulator":{"name":"firestore"},"message":"Error when trying to check port 9150 on ::1: Error: listen EADDRNOTAVAIL: address not available ::1:9150"}}
+[warn] ⚠  firestore: Port 9150 is available on 127.0.0.1 but not ::1. This may cause issues with some clients. {"metadata":{"emulator":{"name":"firestore"},"message":"Port 9150 is available on 127.0.0.1 but not ::1. This may cause issues with some clients."}}
+[warn] ⚠  firestore: If you encounter connectivity issues, consider switching to a different port or explicitly specifying "host": "<ip address>" instead of hostname in firebase.json {"metadata":{"emulator":{"name":"firestore"},"message":"If you encounter connectivity issues, consider switching to a different port or explicitly specifying \"host\": \"<ip address>\" instead of hostname in firebase.json"}}
+[debug] [2025-07-26T01:52:13.482Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2025-07-26T01:52:13.493Z] [hub] writing locator at /tmp/hub-demo-app.json
+[debug] [2025-07-26T01:52:13.576Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2025-07-26T01:52:13.580Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2025-07-26T01:52:13.581Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/nix/store/6630rdigdc1h6ay3q6zs9bnvj2zrs70g-emulators/cloud-firestore-emulator-v1.19.8.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","demo-app","--rules","/home/user/studio/firestore.rules","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false,"shell":false,"port":8080} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/nix/store/6630rdigdc1h6ay3q6zs9bnvj2zrs70g-emulators/cloud-firestore-emulator-v1.19.8.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"demo-app\",\"--rules\",\"/home/user/studio/firestore.rules\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false,\"port\":8080}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to firestore-debug.log"}}
+[debug] [2025-07-26T01:52:22.080Z] Jul 26, 2025 1:52:21 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://127.0.0.1:9150
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jul 26, 2025 1:52:21 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://127.0.0.1:9150\n"}}
+[debug] [2025-07-26T01:52:22.246Z] API endpoint: http://127.0.0.1:8080
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080
+
+If you are running a Firestore in Datastore Mode project, run:
+
+   export DATASTORE_EMULATOR_HOST=127.0.0.1:8080
+
+Note: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://127.0.0.1:8080\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=127.0.0.1:8080\n\nIf you are running a Firestore in Datastore Mode project, run:\n\n   export DATASTORE_EMULATOR_HOST=127.0.0.1:8080\n\nNote: Support for Datastore Mode is in preview. If you encounter any bugs please file at https://github.com/firebase/firebase-tools/issues.\nDev App Server is now running.\n\n"}}
+[info] ✔  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2025-07-26T01:52:22.406Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: connect ECONNREFUSED 127.0.0.1:40001. If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬────────────────┬─────────────────────────────────┐
+│ Emulator  │ Host:Port      │ View in Emulator UI             │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Firestore │ 127.0.0.1:8080 │ http://127.0.0.1:4000/firestore │
+└───────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500, 9150
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
