@@ -55,6 +55,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
   
+  // This is the main loading guard for the app.
+  // It waits until Firebase has confirmed the user's auth state.
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center">
