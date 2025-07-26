@@ -10,6 +10,9 @@ let auth: Auth;
 let db: Firestore;
 let storage: FirebaseStorage;
 
+// This robust pattern prevents race conditions in server-side and client-side rendering environments.
+// It tries to get an existing app instance first, and only initializes a new one if none exists.
+// This is the recommended approach for Next.js applications.
 if (getApps().length === 0) {
     app = initializeApp(firebaseConfig);
 } else {
