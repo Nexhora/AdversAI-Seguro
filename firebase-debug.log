@@ -1166,3 +1166,185 @@ Dev App Server is now running.
 
 Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
  
+[debug] [2025-07-26T05:03:07.399Z] Jul 26, 2025 5:03:07 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
+INFO: Connected to new websocket client
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jul 26, 2025 5:03:07 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
+[debug] [2025-07-26T05:03:07.758Z] Jul 26, 2025 5:03:07 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jul 26, 2025 5:03:07 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2025-07-26T05:03:08.918Z] Jul 26, 2025 5:03:08 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel
+INFO: Connected to new websocket client
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jul 26, 2025 5:03:08 AM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketChannelHandler initChannel\nINFO: Connected to new websocket client\n"}}
+[debug] [2025-07-26T05:03:09.362Z] Jul 26, 2025 5:03:09 AM io.grpc.netty.NettyServerTransport notifyTerminated
+INFO: Transport failed
+io.netty.handler.codec.http2.Http2Exception: Unexpected HTTP/1.x request: GET / 
+	at io.netty.handler.codec.http2.Http2Exception.connectionError(Http2Exception.java:107)
+	at io.netty.handler.codec.http2.Http2ConnectionHandler$PrefaceDecoder.readClientPrefaceString(Http2ConnectionHandler.java:315)
+	at io.netty.handler.codec.http2.Http2ConnectionHandler$PrefaceDecoder.decode(Http2ConnectionHandler.java:245)
+	at io.netty.handler.codec.http2.Http2ConnectionHandler.decode(Http2ConnectionHandler.java:451)
+	at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530)
+	at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1407)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jul 26, 2025 5:03:09 AM io.grpc.netty.NettyServerTransport notifyTerminated\nINFO: Transport failed\nio.netty.handler.codec.http2.Http2Exception: Unexpected HTTP/1.x request: GET / \n\tat io.netty.handler.codec.http2.Http2Exception.connectionError(Http2Exception.java:107)\n\tat io.netty.handler.codec.http2.Http2ConnectionHandler$PrefaceDecoder.readClientPrefaceString(Http2ConnectionHandler.java:315)\n\tat io.netty.handler.codec.http2.Http2ConnectionHandler$PrefaceDecoder.decode(Http2ConnectionHandler.java:245)\n\tat io.netty.handler.codec.http2.Http2ConnectionHandler.decode(Http2ConnectionHandler.java:451)\n\tat io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530)\n\tat io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469)\n\tat io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290)\n\tat io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)\n\tat io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)\n\tat io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)\n\tat io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1407)\n\tat io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)\n\tat io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)\n\tat io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918)\n\tat io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)\n\tat io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)\n\tat io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)\n\tat io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)\n\tat io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)\n\tat java.base/java.lang.Thread.run(Thread.java:1583)\n\n"}}
+[debug] [2025-07-26T05:03:09.756Z] Jul 26, 2025 5:03:09 AM io.grpc.netty.NettyServerTransport notifyTerminated
+INFO: Transport failed
+io.netty.handler.codec.http2.Http2Exception: HTTP/2 client preface string missing or corrupt. Hex dump for received bytes: 16030105a8010005a4030385b88b3d9a9d3064694e2f2da9
+	at io.netty.handler.codec.http2.Http2Exception.connectionError(Http2Exception.java:107)
+	at io.netty.handler.codec.http2.Http2ConnectionHandler$PrefaceDecoder.readClientPrefaceString(Http2ConnectionHandler.java:319)
+	at io.netty.handler.codec.http2.Http2ConnectionHandler$PrefaceDecoder.decode(Http2ConnectionHandler.java:245)
+	at io.netty.handler.codec.http2.Http2ConnectionHandler.decode(Http2ConnectionHandler.java:451)
+	at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530)
+	at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1407)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jul 26, 2025 5:03:09 AM io.grpc.netty.NettyServerTransport notifyTerminated\nINFO: Transport failed\nio.netty.handler.codec.http2.Http2Exception: HTTP/2 client preface string missing or corrupt. Hex dump for received bytes: 16030105a8010005a4030385b88b3d9a9d3064694e2f2da9\n\tat io.netty.handler.codec.http2.Http2Exception.connectionError(Http2Exception.java:107)\n\tat io.netty.handler.codec.http2.Http2ConnectionHandler$PrefaceDecoder.readClientPrefaceString(Http2ConnectionHandler.java:319)\n\tat io.netty.handler.codec.http2.Http2ConnectionHandler$PrefaceDecoder.decode(Http2ConnectionHandler.java:245)\n\tat io.netty.handler.codec.http2.Http2ConnectionHandler.decode(Http2ConnectionHandler.java:451)\n\tat io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:530)\n\tat io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:469)\n\tat io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290)\n\tat io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)\n\tat io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)\n\tat io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)\n\tat io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1407)\n\tat io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)\n\tat io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)\n\tat io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:918)\n\tat io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)\n\tat io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)\n\tat io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)\n\tat io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:994)\n\tat io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)\n\tat io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)\n\tat java.base/java.lang.Thread.run(Thread.java:1583)\n\n"}}
+[debug] [2025-07-26T05:03:40.806Z] ----------------------------------------------------------------------
+[debug] [2025-07-26T05:03:40.809Z] Command:       /nix/store/ws50yvm6vzlzf7jzz6n7xh4szddrack1-nodejs-20.19.1/bin/node /nix/store/gv0i9ndcpzjpfi2yr06402kzy90q51ki-firebase-tools-14.10.1/lib/node_modules/firebase-tools/lib/bin/firebase.js deploy --only hosting
+[debug] [2025-07-26T05:03:40.810Z] CLI Version:   14.10.1
+[debug] [2025-07-26T05:03:40.811Z] Platform:      linux
+[debug] [2025-07-26T05:03:40.811Z] Node Version:  v20.19.1
+[debug] [2025-07-26T05:03:40.811Z] Time:          Sat Jul 26 2025 05:03:40 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-07-26T05:03:40.812Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-26T05:03:41.566Z] Object "/hosting" in "firebase.json" has unknown property: {"additionalProperty":"backend"}
+[debug] [2025-07-26T05:03:41.567Z] Field "/hosting" in "firebase.json" is possibly invalid: must be array
+[debug] [2025-07-26T05:03:41.567Z] Field "/hosting" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2025-07-26T05:03:41.575Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-26T05:03:41.576Z] > authorizing via signed-in user (ahssuarez@gmail.com)
+[debug] [2025-07-26T05:03:41.576Z] [iam] checking project adverseai-yw88y for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-07-26T05:03:41.578Z] Checked if tokens are valid: false, expires at: 1753489940246
+[debug] [2025-07-26T05:03:41.579Z] Checked if tokens are valid: false, expires at: 1753489940246
+[debug] [2025-07-26T05:03:41.579Z] > refreshing access token with scopes: []
+[debug] [2025-07-26T05:03:41.583Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-07-26T05:03:41.583Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-07-26T05:03:41.757Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-07-26T05:03:41.759Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-07-26T05:03:41.775Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions [none]
+[debug] [2025-07-26T05:03:41.776Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions x-goog-quota-user=projects/adverseai-yw88y
+[debug] [2025-07-26T05:03:41.776Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-26T05:03:41.967Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions 200
+[debug] [2025-07-26T05:03:41.969Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/adverseai-yw88y:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-26T05:03:41.970Z] Checked if tokens are valid: true, expires at: 1753509820759
+[debug] [2025-07-26T05:03:41.970Z] Checked if tokens are valid: true, expires at: 1753509820759
+[debug] [2025-07-26T05:03:41.971Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y [none]
+[debug] [2025-07-26T05:03:42.268Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y 200
+[debug] [2025-07-26T05:03:42.269Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y {"projectId":"adverseai-yw88y","projectNumber":"291201286336","displayName":"AdVerseAI","name":"projects/adverseai-yw88y","resources":{"hostingSite":"adverseai-yw88y"},"state":"ACTIVE","etag":"1_f501cb6e-c4f9-4e77-b146-cc67406d0967"}
+[debug] [2025-07-26T05:03:46.007Z] Checked if tokens are valid: true, expires at: 1753509820759
+[debug] [2025-07-26T05:03:46.007Z] Checked if tokens are valid: true, expires at: 1753509820759
+[debug] [2025-07-26T05:03:46.008Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites pageToken=&pageSize=10
+[debug] [2025-07-26T05:03:46.456Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 200
+[debug] [2025-07-26T05:03:46.456Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites {"sites":[{"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-07-26T05:03:46.458Z] Checked if tokens are valid: true, expires at: 1753509820759
+[debug] [2025-07-26T05:03:46.458Z] Checked if tokens are valid: true, expires at: 1753509820759
+[debug] [2025-07-26T05:03:46.458Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 
+[debug] [2025-07-26T05:03:46.852Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites 200
+[debug] [2025-07-26T05:03:46.852Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites {"sites":[{"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-07-26T05:03:46.855Z] Checked if tokens are valid: true, expires at: 1753509820759
+[debug] [2025-07-26T05:03:46.856Z] Checked if tokens are valid: true, expires at: 1753509820759
+[debug] [2025-07-26T05:03:46.856Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config [none]
+[debug] [2025-07-26T05:03:47.665Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config 200
+[debug] [2025-07-26T05:03:47.666Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/adverseai-yw88y/webApps/-/config {"projectId":"adverseai-yw88y","appId":"1:291201286336:web:7388bf9d0963f69e41ad25","storageBucket":"adverseai-yw88y.firebasestorage.app","apiKey":"AIzaSyDI7mUnIQkf2JjvdYA2x9KirLVy0ixvofE","authDomain":"adverseai-yw88y.firebaseapp.com","messagingSenderId":"291201286336"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2025-07-26T05:03:56.076Z] Checked if tokens are valid: true, expires at: 1753509820759
+[debug] [2025-07-26T05:03:56.080Z] Checked if tokens are valid: true, expires at: 1753509820759
+[debug] [2025-07-26T05:03:56.080Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y [none]
+[debug] [2025-07-26T05:03:57.112Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y 200
+[debug] [2025-07-26T05:03:57.114Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/adverseai-yw88y/sites/adverseai-yw88y {"name":"projects/adverseai-yw88y/sites/adverseai-yw88y","defaultUrl":"https://adverseai-yw88y.web.app","type":"DEFAULT_SITE"}
+[info]   ▲ Next.js 14.2.4
+  - Environments: .env
+
+
+[info]    Creating an optimized production build ...
+
+[info] Failed to compile.
+
+./src/ai/flows/analyze-url-flow.ts
+Module not found: Can't resolve 'genkit'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fanalyze-url-flow.ts%22%2C%5B%22analyzeUrlForCampaign%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fcreative-ideation.ts%22%2C%5B%22generateAdCreative%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fperformance-prediction.ts%22%2C%5B%22predictAdPerformance%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fethical-ad-creation.ts%22%2C%5B%22ethicalAdCreation%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Faudience-analysis.ts%22%2C%5B%22analyzeAudience%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fimage-generation-flow.ts%22%2C%5B%22generateImage%22%5D%5D%5D&__client_imported__=true!
+
+./src/ai/flows/audience-analysis.ts
+Module not found: Can't resolve 'genkit'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fanalyze-url-flow.ts%22%2C%5B%22analyzeUrlForCampaign%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fcreative-ideation.ts%22%2C%5B%22generateAdCreative%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fperformance-prediction.ts%22%2C%5B%22predictAdPerformance%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fethical-ad-creation.ts%22%2C%5B%22ethicalAdCreation%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Faudience-analysis.ts%22%2C%5B%22analyzeAudience%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fimage-generation-flow.ts%22%2C%5B%22generateImage%22%5D%5D%5D&__client_imported__=true!
+
+./src/ai/flows/creative-ideation.ts
+Module not found: Can't resolve 'genkit'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fanalyze-url-flow.ts%22%2C%5B%22analyzeUrlForCampaign%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fcreative-ideation.ts%22%2C%5B%22generateAdCreative%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fperformance-prediction.ts%22%2C%5B%22predictAdPerformance%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fethical-ad-creation.ts%22%2C%5B%22ethicalAdCreation%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Faudience-analysis.ts%22%2C%5B%22analyzeAudience%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fimage-generation-flow.ts%22%2C%5B%22generateImage%22%5D%5D%5D&__client_imported__=true!
+
+./src/ai/flows/ethical-ad-creation.ts
+Module not found: Can't resolve 'genkit'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fanalyze-url-flow.ts%22%2C%5B%22analyzeUrlForCampaign%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fcreative-ideation.ts%22%2C%5B%22generateAdCreative%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fperformance-prediction.ts%22%2C%5B%22predictAdPerformance%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fethical-ad-creation.ts%22%2C%5B%22ethicalAdCreation%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Faudience-analysis.ts%22%2C%5B%22analyzeAudience%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fimage-generation-flow.ts%22%2C%5B%22generateImage%22%5D%5D%5D&__client_imported__=true!
+
+./src/ai/flows/performance-prediction.ts
+Module not found: Can't resolve 'genkit'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fanalyze-url-flow.ts%22%2C%5B%22analyzeUrlForCampaign%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fcreative-ideation.ts%22%2C%5B%22generateAdCreative%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fperformance-prediction.ts%22%2C%5B%22predictAdPerformance%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fethical-ad-creation.ts%22%2C%5B%22ethicalAdCreation%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Faudience-analysis.ts%22%2C%5B%22analyzeAudience%22%5D%5D%2C%5B%22%2Fhome%2Fuser%2Fstudio%2Fsrc%2Fai%2Fflows%2Fimage-generation-flow.ts%22%2C%5B%22generateImage%22%5D%5D%5D&__client_imported__=true!
+
+
+[info] 
+
+[info] > Build failed because of webpack errors
+
+[debug] [2025-07-26T05:05:08.480Z] Error: ENOENT: no such file or directory, open '/home/user/studio/.next/server/middleware-manifest.json'
+[error] 
+[error] Error: An unexpected error has occurred.
