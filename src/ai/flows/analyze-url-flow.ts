@@ -11,7 +11,7 @@
 
 import {ai} from '@/ai/genkit';
 import {httpGet} from '@/ai/tools/http';
-import {z} from 'genkit';
+import { z } from 'zod';
 
 const AnalyzeUrlInputSchema = z.object({
   url: z.string().url().describe('The URL of the website to analyze.'),

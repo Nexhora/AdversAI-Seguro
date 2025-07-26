@@ -9,7 +9,7 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import { z } from 'zod';
 
 const EthicalAdCreationInputSchema = z.object({
   adText: z.string().describe('El contenido de texto del anuncio.'),

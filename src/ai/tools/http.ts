@@ -5,7 +5,7 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import { z } from 'zod';
 import {parse} from 'node-html-parser';
 
 // New output schema for the tool

@@ -9,7 +9,7 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import { z } from 'zod';
 
 const GenerateAdCreativeInputSchema = z.object({
   brandName: z.string().optional().describe('El nombre de la marca.'),
