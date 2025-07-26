@@ -3,7 +3,7 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
-import { auth, firebaseCredentialsExist } from '@/lib/firebase';
+import { auth } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 
@@ -33,11 +33,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // This check is now just a console warning and does not block the app.
-    if (!firebaseCredentialsExist) {
-        console.error("ALERTA: Las credenciales de Firebase en src/lib/firebase.ts están incompletas. La autenticación no funcionará.");
-    }
-
     const unsubscribe = onAuthStateChanged(auth, (user) => {
         setUser(user);
         setLoading(false);
