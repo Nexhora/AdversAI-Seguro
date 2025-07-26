@@ -3,11 +3,8 @@
 
 /**
  * @fileOverview A flow for ethical ad creation.
- * THIS FLOW IS TEMPORARILY DEACTIVATED.
  */
 
-// All logic is commented out to prevent build issues.
-/*
 import {ai} from '@/ai/genkit';
 import { z } from 'zod';
 
@@ -80,10 +77,3 @@ const ethicalAdCreationFlow = ai.defineFlow(
     return output;
   }
 );
-*/
-
-// Placeholder function
-export async function ethicalAdCreation(input: any): Promise<any> {
-    console.log("ethicalAdCreation is temporarily deactivated.");
-    throw new Error("La función de análisis ético está desactivada temporalmente.");
-}

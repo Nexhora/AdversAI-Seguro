@@ -2,11 +2,8 @@
 'use server';
 /**
  * @fileOverview A flow for generating a landing page structure.
- * THIS FLOW IS TEMPORARILY DEACTIVATED.
  */
 import { nanoid } from 'nanoid';
-// All logic is commented out to prevent build issues.
-/*
 import {ai} from '@/ai/genkit';
 import { GenerateLandingPageInput, GenerateLandingPageInputSchema, GenerateLandingPageOutput, GenerateLandingPageOutputFlowSchema, SectionSchema } from '@/ai/schemas/landing-page-generation';
 import { analyzeUrlForCampaign } from './analyze-url-flow';
@@ -202,10 +199,3 @@ const generateLandingPageFlow = ai.defineFlow(
     return pageData;
   }
 );
-*/
-
-// Placeholder function
-export async function generateLandingPage(input: any): Promise<any> {
-    console.log("generateLandingPage is temporarily deactivated.");
-    throw new Error("La función de generación de landing pages está desactivada temporalmente.");
-}

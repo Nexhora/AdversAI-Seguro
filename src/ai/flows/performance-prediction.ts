@@ -3,11 +3,8 @@
 
 /**
  * @fileOverview Predicts ad performance metrics.
- * THIS FLOW IS TEMPORARILY DEACTIVATED.
  */
 
-// All logic is commented out to prevent build issues.
-/*
 import {ai} from '@/ai/genkit';
 import { z } from 'zod';
 
@@ -71,10 +68,3 @@ const predictAdPerformanceFlow = ai.defineFlow(
     return output;
   }
 );
-*/
-
-// Placeholder function
-export async function predictAdPerformance(input: any): Promise<any> {
-    console.log("predictAdPerformance is temporarily deactivated.");
-    throw new Error("La función de predicción de rendimiento está desactivada temporalmente.");
-}

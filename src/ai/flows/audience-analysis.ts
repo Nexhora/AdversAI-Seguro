@@ -2,11 +2,8 @@
 'use server';
 /**
  * @fileOverview AI-powered audience analysis flow to refine ad campaigns.
- * THIS FLOW IS TEMPORARILY DEACTIVATED.
  */
 
-// All logic is commented out to prevent build issues.
-/*
 import {ai} from '@/ai/genkit';
 import { z } from 'zod';
 
@@ -82,10 +79,3 @@ const analyzeAudienceFlow = ai.defineFlow(
     return output;
   }
 );
-*/
-
-// Placeholder function
-export async function analyzeAudience(input: any): Promise<any> {
-    console.log("analyzeAudience is temporarily deactivated.");
-    throw new Error("La función de análisis de audiencia está desactivada temporalmente.");
-}

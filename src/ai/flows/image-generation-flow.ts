@@ -3,10 +3,7 @@
 
 /**
  * @fileOverview A reusable flow for generating an image from a text prompt.
- * THIS FLOW IS TEMPORARILY DEACTIVATED.
  */
-// All logic is commented out to prevent build issues.
-/*
 import { ai } from '@/ai/genkit';
 import { googleAI } from '@genkit-ai/googleai';
 import { z } from 'zod';
@@ -55,10 +52,3 @@ const generateImageFlow = ai.defineFlow(
     }
   }
 );
-*/
-
-// Placeholder function
-export async function generateImage(input: any): Promise<any> {
-    console.log("generateImage is temporarily deactivated.");
-    return { imageUrl: 'https://placehold.co/512x288.png' };
-}
