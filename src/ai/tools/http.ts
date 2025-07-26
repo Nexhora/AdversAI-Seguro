@@ -86,8 +86,8 @@ export const httpGet = ai.defineTool(
       if (error instanceof Error) {
         errorMessage = `Failed to fetch URL: ${error.message}`;
       }
-      // Return a valid empty structure on error to prevent flow failure
-      return { title: errorMessage, paragraphs: [], links: [] };
+      // Throw an error to stop the flow and provide clear feedback
+      throw new Error(errorMessage);
     }
   }
 );
