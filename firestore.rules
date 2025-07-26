@@ -1,12 +1,18 @@
-
 rules_version = '2';
+
 service cloud.firestore {
   match /databases/{database}/documents {
-    function isAuthenticated() {
-      return request.auth != null;
+    // Los usuarios solo pueden leer y escribir sus propios datos en su subcolección.
+    // Esto se verifica comparando el `request.auth.uid` (el ID del usuario que hace la petición)
+    // con el `userId` en la ruta del documento.
+    match /sitios/{userId}/{documents=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
     }
-    match /sitios/{userId}/{document=**} {
-      allow read, write: if isAuthenticated() && request.auth.uid == userId;
+
+    // Opcional: Permite que los usuarios creen su propio documento de usuario inicial.
+    match /usuarios/{userId} {
+      allow read, create: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null && request.auth.uid == userId;
     }
   }
 }
