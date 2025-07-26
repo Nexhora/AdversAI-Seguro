@@ -1,7 +1,7 @@
 
 'use server';
 
-import { db, firebaseCredentialsExist } from '@/lib/firebase';
+import { db } from '@/lib/firebase';
 import { doc, setDoc, serverTimestamp, collection, addDoc, getDocs, query, orderBy, deleteDoc, Timestamp, getDoc, updateDoc } from 'firebase/firestore';
 import type { BuilderState } from '@/types';
 import { format } from 'date-fns';
@@ -37,10 +37,6 @@ interface FirestorePageData {
  * @returns Un objeto con el ID de la página guardada y un mensaje de éxito.
  */
 export async function savePageData(data: PageData) {
-    if (!firebaseCredentialsExist) {
-        throw new Error('Las credenciales de Firebase no están configuradas en el servidor.');
-    }
-
     const { userId, pageId, pageName, siteContent } = data;
 
     if (!userId || !pageName || !siteContent) {
@@ -89,10 +85,6 @@ export async function savePageData(data: PageData) {
  * @returns Un objeto con el ID y nombre de la página guardada.
  */
 export async function saveGeneratedPage(data: GeneratedPageData) {
-    if (!firebaseCredentialsExist) {
-        throw new Error('Las credenciales de Firebase no están configuradas en el servidor.');
-    }
-
     const { userId, siteContent } = data;
 
     if (!userId || !siteContent) {
@@ -137,7 +129,7 @@ export async function saveGeneratedPage(data: GeneratedPageData) {
  * @returns Una lista de las páginas del usuario, o null si no se encuentra.
  */
 export async function getUserPages(userId: string): Promise<{ id: string; name: string; content: string; updatedAt: string; createdAt: string; }[] | null> {
-    if (!firebaseCredentialsExist || !userId) {
+    if (!userId) {
         return null;
     }
 
@@ -179,9 +171,6 @@ export async function getUserPages(userId: string): Promise<{ id: string; name: 
  * @returns Un objeto indicando el éxito de la operación.
  */
 export async function deletePageData(userId: string, pageId: string) {
-    if (!firebaseCredentialsExist) {
-        throw new Error('Las credenciales de Firebase no están configuradas en el servidor.');
-    }
      if (!userId || !pageId) {
         throw new Error('Faltan el ID de usuario o el ID de la página.');
     }
@@ -210,7 +199,7 @@ export async function deletePageData(userId: string, pageId: string) {
  * @returns Los datos de la página, o null si no se encuentra.
  */
 export async function getPageData(userId: string, pageId: string): Promise<FirestorePageData | null> {
-    if (!firebaseCredentialsExist || !userId || !pageId) {
+    if (!userId || !pageId) {
         return null;
     }
     try {
