@@ -4,8 +4,6 @@ runConfig:
   minInstances: 0
   maxInstances: 10
   env:
-    # This secret is for Genkit on the server-side.
-    # It does NOT need the NEXT_PUBLIC_ prefix.
     - secret: NEXT_PUBLIC_GOOGLE_API_KEY
       key: GOOGLE_API_KEY
 
