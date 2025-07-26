@@ -32,7 +32,7 @@ const AnalyzeUrlOutputSchema = z.object({
   painPoints: z.string().optional().describe('Los puntos de dolor que el producto resuelve, inferidos del texto (separados por comas).'),
   features: z.string().optional().describe('Las características clave del producto, inferidas del texto (separadas por comas).'),
   benefits: z.string().optional().describe('Los beneficios clave para el cliente, inferidos de las características (separados por comas).'),
-  bonuses: z.string().optional().describe('Cualquier bono o extra ofrecido, inferido del texto (separado por comas).'),
+  bonuses: z.string().optional().describe('Cualquier bono o extra ofrecido, inferido del texto (separados por comas).'),
   socialProof: z.string().optional().describe('Descripción de cualquier prueba social encontrada (testimonios, reseñas, logos de clientes).'),
   guarantee: z.string().optional().describe('Descripción de cualquier garantía encontrada (ej. "garantía de devolución de dinero de 7 días").'),
 });
