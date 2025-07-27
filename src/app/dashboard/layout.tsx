@@ -70,18 +70,20 @@ export default function DashboardLayout({
                 <DropdownMenuLabel>{user?.displayName || user?.email}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem disabled>
-                  <UserIcon className="mr-2" />
+                  <UserIcon className="mr-2 h-4 w-4" />
                   <span>Perfil</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={logout}>
-                  <LogOut className="mr-2" />
+                  <LogOut className="mr-2 h-4 w-4" />
                   <span>Cerrar Sesión</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
         </header>
-        <main className="p-4 sm:p-6">{children}</main>
+        <main className="h-[calc(100vh-theme(spacing.14))] overflow-auto">
+            {children}
+        </main>
       </SidebarInset>
     </SidebarProvider>
   );

@@ -448,7 +448,7 @@ const BuilderPageContent = () => {
   }
 
   return (
-    <div className="flex h-[calc(100vh-theme(spacing.14)-2*theme(spacing.4))] w-full bg-muted/40">
+    <div className="flex h-full w-full bg-muted/40">
         <aside className="w-80 flex-shrink-0 border-r bg-background overflow-y-auto">
             <div className="p-4">
                 <Card>
