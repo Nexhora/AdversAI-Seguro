@@ -17,4 +17,8 @@ export default function HomePage() {
   // Show a loading spinner while the auth state is being determined.
   // The AuthContext will handle the redirection once loading is complete.
   return (
-    <div className="flex h-screen items-center justify-
+    <div className="flex h-screen items-center justify-center bg-background">
+      <Loader2 className="h-16 w-16 animate-spin text-primary" />
+    </div>
+  );
+}
