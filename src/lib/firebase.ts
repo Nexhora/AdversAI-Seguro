@@ -2,17 +2,18 @@
 import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import "dotenv/config";
 
-// Your web app's Firebase configuration
-// This is a public configuration and is safe to be exposed.
+// Your web app's Firebase configuration is now loaded from environment variables
+// This is a more secure and standard practice.
 const firebaseConfig = {
-  apiKey: "AIzaSyDI7mUnIQkf2JjvdYA2x9KirLVy0ixvofE",
-  authDomain: "adverseai-yw88y.firebaseapp.com",
-  projectId: "adverseai-yw88y",
-  storageBucket: "adverseai-yw88y.appspot.com",
-  messagingSenderId: "931215166296",
-  appId: "1:931215166296:web:65a6f81e3a73c9f3d532a2",
-  measurementId: "G-SS875S254B"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
