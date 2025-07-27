@@ -8,7 +8,7 @@ runConfig:
 # The GOOGLE_API_KEY secret is made available to the app as the google_api_key env var.
 # Firebase config keys are passed by referencing their corresponding secret managed by App Hosting.
 environmentVariables:
-  google_api_key: ${secret:GOOGLE_API_KEY}
+  GOOGLE_API_KEY: ${secret:GOOGLE_API_KEY}
   NEXT_PUBLIC_FIREBASE_API_KEY: ${secret:NEXT_PUBLIC_FIREBASE_API_KEY}
   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${secret:NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}
   NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${secret:NEXT_PUBLIC_FIREBASE_PROJECT_ID}

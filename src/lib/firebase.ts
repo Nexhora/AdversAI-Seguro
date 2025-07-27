@@ -1,14 +1,17 @@
 
 // src/lib/firebase.ts
-// Este archivo se encarga de inicializar Firebase, usando el mecanismo
-// nativo de Next.js para cargar las variables de entorno.
+// This file initializes Firebase using environment variables.
+// It's designed to work seamlessly in both local (studio) and production environments
+// by relying on the variables provided by the Next.js runtime, which are populated
+// by App Hosting's secret management.
 
 import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// Next.js carga automáticamente las variables de entorno que comienzan con NEXT_PUBLIC_
-// en el objeto process.env, tanto en el servidor como en el cliente.
+// These variables are loaded by Next.js from process.env.
+// In production, they are injected by the apphosting.yaml configuration.
+// In the local studio, they are also injected by the App Hosting emulation.
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -19,41 +22,21 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Validación robusta para asegurar que todas las claves necesarias están presentes.
-const allKeysPresent =
-  firebaseConfig.apiKey &&
-  firebaseConfig.authDomain &&
-  firebaseConfig.projectId &&
-  firebaseConfig.storageBucket &&
-  firebaseConfig.messagingSenderId &&
-  firebaseConfig.appId;
+// Robust validation to ensure all necessary keys are present at runtime.
+const allKeysPresent = Object.values(firebaseConfig).every(Boolean);
 
 let app: FirebaseApp;
-let auth;
-let db;
+let auth: any;
+let db: any;
 
 if (!allKeysPresent) {
   console.error(
-    "Error de Configuración de Firebase: Faltan una o más claves en tu archivo .env. Por favor, revisa que todas las variables de entorno NEXT_PUBLIC_FIREBASE_* estén definidas."
+    "Firebase Config Error: One or more Firebase environment variables are missing. Ensure secrets are correctly set in App Hosting."
   );
-
-  // Mostramos un error visual si estamos en el navegador
-  if (typeof window !== "undefined") {
-    const body = document.querySelector("body");
-    if (body) {
-      body.innerHTML = `
-        <div style="font-family: sans-serif; padding: 2rem; text-align: center; background-color: #fff3f3; color: #b71c1c; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <h1 style="font-size: 1.5rem; margin-bottom: 1rem;">Error de Configuración de Firebase</h1>
-            <p>Las credenciales de Firebase no están configuradas correctamente en el archivo <strong>.env</strong>.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Por favor, contacta al soporte o revisa la configuración de tu proyecto.</p>
-            <p style="margin-top: 1rem; font-size: 0.8rem; color: #666;">La aplicación no puede continuar sin una conexión válida a Firebase.</p>
-        </div>
-      `;
-    }
-  }
+  // In a real app, you might throw an error or handle this state more gracefully.
+  // For now, we log the error, and dependent parts of the app will fail.
 } else {
-  // Inicializa Firebase solo si todas las claves están presentes.
-  // Esto previene errores si la app ya está inicializada (HMR).
+  // Initialize Firebase only if it hasn't been initialized yet.
   app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
   auth = getAuth(app);
   db = getFirestore(app);
