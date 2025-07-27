@@ -23,7 +23,3 @@ buildEnvironmentVariables:
   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${secret:NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID}
   NEXT_PUBLIC_FIREBASE_APP_ID: ${secret:NEXT_PUBLIC_FIREBASE_APP_ID}
   NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: ${secret:NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID}
-
-# Agregamos el indicador --is-studio=true al comando de desarrollo
-dev:
-  command: next dev --is-studio=true
