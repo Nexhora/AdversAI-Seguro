@@ -6,10 +6,12 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import { FlaskConical, Briefcase } from "lucide-react";
+import { FlaskConical, Briefcase, BotMessageSquare, LayoutTemplate } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const navItems = [
+  { href: "/dashboard/ad-generator", label: "Generador de Anuncios", icon: BotMessageSquare },
+  { href: "/dashboard/landing-generator", label: "Generador de Landing Pages", icon: LayoutTemplate },
   { href: "/dashboard/builder", label: "Laboratorio", icon: FlaskConical },
   { href: "/dashboard/my-sites", label: "Mis Sitios", icon: Briefcase },
 ];

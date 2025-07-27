@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 
 
 export const metadata: Metadata = {
-  title: 'Nexhora',
+  title: 'AdverseAI',
   description: 'Herramienta Avanzada de Generación de Anuncios con IA',
 };
 

@@ -37,9 +37,11 @@ export default function DashboardLayout({
     <SidebarProvider>
       <Sidebar>
         <SidebarHeader>
-          <div className="flex h-12 items-center gap-2 px-2">
-            <Logo className="size-7 text-primary" />
-            <span className="text-lg font-bold font-headline">Nexhora</span>
+          <div className="flex h-14 items-center gap-2 px-2">
+            <Logo className="size-8 text-primary" />
+            <div className="flex flex-col">
+                <span className="text-lg font-bold font-headline">AdverseAI</span>
+            </div>
           </div>
         </SidebarHeader>
         <SidebarContent>
