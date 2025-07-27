@@ -41,7 +41,6 @@ export default function DashboardLayout({
             <Logo className="size-8 text-primary" />
             <div className="flex flex-col">
                 <span className="text-lg font-bold font-headline leading-none">AdVerseAI</span>
-                <span className="text-xs text-muted-foreground">by NEXHORA</span>
             </div>
           </div>
         </SidebarHeader>
