@@ -10,8 +10,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 // These variables are loaded by Next.js from process.env.
-// In production, they are injected by the apphosting.yaml configuration.
-// In the local studio, they are also injected by the App Hosting emulation.
+// In production and in the studio, they are injected by the apphosting.yaml configuration.
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -31,10 +30,10 @@ let db: any;
 
 if (!allKeysPresent) {
   console.error(
-    "Firebase Config Error: One or more Firebase environment variables are missing. Ensure secrets are correctly set in App Hosting."
+    "Error de Configuración de Firebase: Una o más variables de entorno de Firebase no se encontraron. Asegúrate de que los secretos estén configurados correctamente en App Hosting y que el backend se esté ejecutando."
   );
-  // In a real app, you might throw an error or handle this state more gracefully.
-  // For now, we log the error, and dependent parts of the app will fail.
+  // This will prevent the app from crashing but functionality will be degraded.
+  // Dependent parts of the app should handle the uninitialized services gracefully.
 } else {
   // Initialize Firebase only if it hasn't been initialized yet.
   app = !getApps().length ? initializeApp(firebaseConfig) : getApp();

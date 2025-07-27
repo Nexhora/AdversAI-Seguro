@@ -12,7 +12,8 @@ import {genkit} from 'genkit';
 import {googleAI} from '@genkit-ai/googleai';
 
 // Initialize Genkit with the Google AI plugin.
-// The API key is provided as an environment variable by App Hosting.
+// The API key is provided as an environment variable by App Hosting,
+// which is sourced from the GOOGLE_API_KEY secret.
 export const ai = genkit({
   plugins: [
     googleAI({
