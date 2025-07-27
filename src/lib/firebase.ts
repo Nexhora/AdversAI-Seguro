@@ -1,4 +1,6 @@
-// src/lib/firebase.ts
+
+'use client';
+
 import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
 import { getAuth, Auth } from "firebase/auth";
 import { getFirestore, Firestore } from "firebase/firestore";
@@ -13,14 +15,21 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
+// Initialize Firebase for client-side usage
 let app: FirebaseApp;
-if (getApps().length === 0) {
-  app = initializeApp(firebaseConfig);
-} else {
-  app = getApp();
+let auth: Auth;
+let db: Firestore;
+
+// This ensures Firebase is only initialized on the client side.
+if (typeof window !== 'undefined' && !getApps().length) {
+    app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
+} else if (typeof window !== 'undefined') {
+    app = getApp();
+    auth = getAuth(app);
+    db = getFirestore(app);
 }
 
-const auth = getAuth(app);
-const db = getFirestore(app);
-
+// Export the instances for use in your application's client components
 export { app, auth, db };
