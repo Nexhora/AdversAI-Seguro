@@ -1,8 +1,7 @@
 // src/lib/firebase.ts
 // This file initializes Firebase using environment variables.
 // It's designed to work seamlessly in both local (studio) and production environments
-// by relying on the variables provided by the Next.js runtime, which are populated
-// by App Hosting's secret management.
+// by relying on the variables provided by the Next.js runtime.
 
 import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
 import { getAuth, Auth } from "firebase/auth";
@@ -25,26 +24,24 @@ let app: FirebaseApp;
 let auth: Auth;
 let db: Firestore;
 
-// Robust validation to ensure all necessary keys are present at runtime.
-const allKeysPresent = Object.values(firebaseConfig).every(Boolean);
-
-if (allKeysPresent) {
-  // Initialize Firebase only if it hasn't been initialized yet.
-  app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-  auth = getAuth(app);
-  db = getFirestore(app);
-} else {
-  // If keys are missing, we log an error and do not initialize Firebase.
-  // This helps identify the configuration problem immediately.
-  console.error(
-    "Error de Configuración de Firebase: Una o más variables de entorno de Firebase no se encontraron. Revisa tu archivo .env (para el estudio) o la configuración de secretos en App Hosting (para producción)."
-  );
+// Robust validation to ensure all necessary keys are present.
+if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
   // We throw an error during development/build time to catch this early.
   if (process.env.NODE_ENV !== 'production') {
       throw new Error(
-        "La configuración de Firebase es inválida. Faltan variables de entorno. Revisa tu archivo .env."
+        "La configuración de Firebase es inválida. Revisa tu archivo .env y asegúrate de que todas las variables NEXT_PUBLIC_FIREBASE_... están presentes."
       );
   }
 }
+
+// Initialize Firebase only if it hasn't been initialized yet.
+if (!getApps().length) {
+    app = initializeApp(firebaseConfig);
+} else {
+    app = getApp();
+}
+
+auth = getAuth(app);
+db = getFirestore(app);
 
 export { app, auth, db };
