@@ -26,6 +26,7 @@ let auth: Auth;
 let db: Firestore;
 
 // Initialize Firebase only if it hasn't been initialized yet.
+// This is the recommended pattern for Next.js to prevent re-initialization on hot reloads.
 if (!getApps().length) {
     app = initializeApp(firebaseConfig);
 } else {
