@@ -17,10 +17,9 @@ const firebaseConfig = {
   appId: "1:291201286336:web:7388bf9d0963f69e41ad25"
 };
 
-
 // This robust pattern prevents issues in Next.js environments by ensuring the app is only initialized once.
 // It's the recommended approach for this kind of setup.
-const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig);
+const app: FirebaseApp = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 const auth: Auth = getAuth(app);
 const db: Firestore = getFirestore(app);

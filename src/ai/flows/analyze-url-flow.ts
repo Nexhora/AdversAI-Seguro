@@ -44,8 +44,8 @@ export async function analyzeUrlForCampaign(
 const analyzeUrlPrompt = ai.definePrompt({
   name: 'analyzeUrlPrompt',
   tools: [httpGet],
-  input: {schema: AnalyzeUrlInputSchema},
-  output: {schema: AnalyzeUrlOutputSchema},
+  inputSchema: AnalyzeUrlInputSchema,
+  outputSchema: AnalyzeUrlOutputSchema,
   model: 'googleai/gemini-1.5-pro-latest',
   prompt: `Eres un estratega de marketing y copywriter de élite. Tu misión es analizar el CONTENIDO TEXTUAL ESTRUCTURADO de una página web para extraer información estratégica y precisa que se usará para crear una landing page de alta conversión. Se te ha proporcionado una URL. Tu tarea es utilizar la herramienta 'httpGet' para obtener un RESUMEN de la página y luego analizar ese resumen para identificar la siguiente información. La respuesta DEBE ser en español.
 
@@ -75,7 +75,7 @@ const analyzeUrlFlow = ai.defineFlow(
     outputSchema: AnalyzeUrlOutputSchema,
   },
   async (input) => {
-    const {output} = await analyzeUrlPrompt(input);
+    const {output} = await analyzeUrlPrompt.generate({input});
     if (!output) {
       // This provides a much clearer error message to the user.
       throw new Error(
