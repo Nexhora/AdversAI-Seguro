@@ -1,3 +1,4 @@
+
 // @ts-check
 
 // This file is not intended to be executed directly. It's used by the Next.js CLI.

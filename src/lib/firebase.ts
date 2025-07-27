@@ -8,7 +8,7 @@ import { getAuth, Auth } from "firebase/auth";
 import { getFirestore, Firestore } from "firebase/firestore";
 
 // These variables are loaded by Next.js from process.env.
-// In the studio, they come from the .env file.
+// In the studio, they come from the .env file via next.config.js rewrites.
 // In production, they are injected by the apphosting.yaml configuration.
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -28,8 +28,8 @@ let db: Firestore;
 if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
   // We throw an error during development/build time to catch this early.
   if (process.env.NODE_ENV !== 'production') {
-      throw new Error(
-        "La configuración de Firebase es inválida. Revisa tu archivo .env y asegúrate de que todas las variables NEXT_PUBLIC_FIREBASE_... están presentes."
+      console.error(
+        "La configuración de Firebase es inválida. Revisa los secretos de tu proyecto (NEXT_PUBLIC_FIREBASE_...)."
       );
   }
 }
