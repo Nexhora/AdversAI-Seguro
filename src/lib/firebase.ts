@@ -2,7 +2,6 @@
 import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import "dotenv/config";
 
 // Your web app's Firebase configuration is now loaded from environment variables
 // This is a more secure and standard practice.
