@@ -5,7 +5,6 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { useRouter, usePathname } from 'next/navigation';
-import { Loader2 } from 'lucide-react';
 
 interface AuthContextType {
   user: User | null;
@@ -24,6 +23,7 @@ export const useAuth = () => {
 };
 
 const protectedPaths = ['/dashboard'];
+const publicOnlyPaths = ['/login', '/register'];
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -32,25 +32,40 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
       setLoading(false);
     });
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
-    if (loading) return;
-    
-    const isProtected = protectedPaths.some(path => pathname.startsWith(path));
+    // No hacer nada hasta que la autenticación se resuelva
+    if (loading) return; 
 
-    if (!user && isProtected) {
-      router.replace('/login');
+    const isProtected = protectedPaths.some(path => pathname.startsWith(path));
+    const isPublicOnly = publicOnlyPaths.includes(pathname);
+    const isRoot = pathname === '/';
+
+    if (!user) {
+      // Si el usuario no está autenticado, cualquier ruta que no sea pública
+      // (o la raíz, que se gestionará después) debe redirigir a /login.
+      if (isProtected || isRoot) {
+        router.replace('/login');
+      }
+    } else {
+      // Si el usuario está autenticado, redirigir desde rutas públicas
+      // y desde la raíz al constructor del dashboard.
+      if (isPublicOnly || isRoot) {
+        router.replace('/dashboard/builder');
+      }
     }
+
   }, [user, loading, router, pathname]);
 
   const logout = async () => {
     await signOut(auth);
+    // Después de cerrar sesión, redirigir a la página de login.
     router.replace('/login');
   };
 
