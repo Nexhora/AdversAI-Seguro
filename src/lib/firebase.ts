@@ -8,7 +8,7 @@ import { getAuth, Auth } from "firebase/auth";
 import { getFirestore, Firestore } from "firebase/firestore";
 
 // These variables are loaded by Next.js from process.env.
-// In the studio, they come from the .env file via next.config.js rewrites.
+// In the studio, they come from the .env file.
 // In production, they are injected by the apphosting.yaml configuration.
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -27,11 +27,7 @@ let db: Firestore;
 // Robust validation to ensure all necessary keys are present.
 if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
   // We throw an error during development/build time to catch this early.
-  if (process.env.NODE_ENV !== 'production') {
-      console.error(
-        "La configuración de Firebase es inválida. Revisa los secretos de tu proyecto (NEXT_PUBLIC_FIREBASE_...)."
-      );
-  }
+  throw new Error("Las credenciales de Firebase no están configuradas correctamente. Revisa tus variables de entorno (NEXT_PUBLIC_FIREBASE_...).");
 }
 
 // Initialize Firebase only if it hasn't been initialized yet.
@@ -40,8 +36,3 @@ if (!getApps().length) {
 } else {
     app = getApp();
 }
-
-auth = getAuth(app);
-db = getFirestore(app);
-
-export { app, auth, db };
