@@ -1,59 +1,67 @@
 // @ts-check
-import {getSecret} from '@google-cloud/secret-manager';
+import sm from '@google-cloud/secret-manager';
 
-async function getGoogleSecret(secretName) {
-  if (!process.env.GOOGLE_CLOUD_PROJECT) {
-    console.error('La variable de entorno GOOGLE_CLOUD_PROJECT no está configurada.');
-    return undefined;
+/**
+ * Retrieves secrets from Google Secret Manager and sets them as environment variables.
+ * This function is designed to run only in the Firebase Studio environment.
+ * @param {string[]} secretNames
+ * @returns {Promise<Record<string, string>>}
+ */
+async function getSecrets(secretNames) {
+  const secrets = {};
+  if (process.env.STUDIO_ENVIRONMENT !== 'true') {
+    return secrets;
   }
-  const name = `projects/${process.env.GOOGLE_CLOUD_PROJECT}/secrets/${secretName}/versions/latest`;
+
   try {
-    const [version] = await getSecret({name});
-    const payload = version.payload?.data?.toString();
-    if (!payload) {
-      console.warn(`El secreto '${secretName}' está vacío.`);
+    const client = new sm.SecretManagerServiceClient();
+    const projectId = process.env.PROJECT_ID || process.env.GCLOUD_PROJECT || 'adverseai-yw88y';
+    if (!projectId) {
+      console.warn('Project ID not found, skipping secret loading.');
+      return secrets;
     }
-    return payload;
+
+    for (const name of secretNames) {
+      const [version] = await client.accessSecretVersion({
+        name: `projects/${projectId}/secrets/${name}/versions/latest`,
+      });
+      const payload = version.payload?.data?.toString();
+      if (payload) {
+        secrets[name] = payload;
+      }
+    }
   } catch (error) {
-    console.error(`Error al obtener el secreto '${secretName}':`, error);
-    return undefined;
+    console.error('Error fetching secrets for studio environment:', error);
   }
+  return secrets;
 }
+
+const secrets = await getSecrets([
+    'GOOGLE_API_KEY',
+    'NEXT_PUBLIC_FIREBASE_API_KEY',
+    'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN',
+    'NEXT_PUBLIC_FIREBASE_PROJECT_ID',
+    'NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET',
+    'NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID',
+    'NEXT_PUBLIC_FIREBASE_APP_ID',
+    'NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID',
+]);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Configuración base de Next.js
+  // Inject the secrets into the build process and runtime environment.
+  env: {
+    ...secrets,
+  },
+  experimental: {
+    // This is required for App Hosting to support server actions.
+    serverActions: {
+      allowedOrigins: [
+        'adverseai-yw88y.web.app',
+        'adverseai-yw88y.firebaseapp.com',
+      ],
+    },
+  },
 };
 
-// Esta función se ejecuta al iniciar el servidor de Next.js
-async function loadSecretsIntoEnv() {
-  // Solo cargamos secretos si estamos en el entorno del estudio
-  if (process.argv.includes('--is-studio=true')) {
-    console.log('Entorno de estudio detectado, cargando secretos...');
-    const secretsToFetch = {
-      'GOOGLE_API_KEY': 'GOOGLE_API_KEY',
-      'NEXT_PUBLIC_FIREBASE_API_KEY': 'NEXT_PUBLIC_FIREBASE_API_KEY',
-      'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN': 'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN',
-      'NEXT_PUBLIC_FIREBASE_PROJECT_ID': 'NEXT_PUBLIC_FIREBASE_PROJECT_ID',
-      'NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET': 'NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET',
-      'NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID': 'NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID',
-      'NEXT_PUBLIC_FIREBASE_APP_ID': 'NEXT_PUBLIC_FIREBASE_APP_ID',
-      'NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID': 'NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID',
-    };
-
-    const secretPromises = Object.entries(secretsToFetch).map(async ([envVar, secretName]) => {
-      const secretValue = await getGoogleSecret(secretName);
-      if (secretValue) {
-        process.env[envVar] = secretValue;
-      }
-    });
-
-    await Promise.all(secretPromises);
-    console.log('Secretos cargados en process.env.');
-  }
-}
-
-export default async function() {
-  await loadSecretsIntoEnv();
-  return nextConfig;
-}
+export default nextConfig;
