@@ -40,8 +40,8 @@ export default function DashboardLayout({
           <div className="flex h-14 items-center gap-2 px-2">
             <Logo className="size-8 text-primary" />
             <div className="flex flex-col">
-                <span className="text-lg font-bold font-headline leading-none">NEXHORA</span>
-                <span className="text-xs text-muted-foreground">AdverseAI</span>
+                <span className="text-lg font-bold font-headline leading-none">AdVerseAI</span>
+                <span className="text-xs text-muted-foreground">by NEXHORA</span>
             </div>
           </div>
         </SidebarHeader>
