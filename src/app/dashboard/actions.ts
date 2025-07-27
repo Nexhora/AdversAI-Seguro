@@ -13,12 +13,6 @@ interface PageData {
     siteContent: string; 
 }
 
-interface GeneratedPageData {
-    userId: string;
-    siteContent: string; // This is expected to be a JSON string of BuilderState
-}
-
-
 interface FirestorePageData {
     name: string;
     content: string; // Content is a JSON string
@@ -43,8 +37,6 @@ export async function savePageData(data: PageData) {
         throw new Error('Faltan datos requeridos para guardar la página.');
     }
     
-    // El contenido del sitio ya es una cadena JSON desde el cliente.
-    // No se necesita `JSON.stringify` aquí.
     const dataToSave = {
         name: pageName,
         content: siteContent, 
@@ -74,49 +66,6 @@ export async function savePageData(data: PageData) {
         throw new Error('No se pudo guardar la página debido a un error inesperado.');
     }
 }
-
-
-/**
- * Server Action: saveGeneratedPage
- * 
- * Guarda una página generada por IA directamente, con un nombre automático.
- * 
- * @param data - Un objeto que contiene el ID del usuario y el contenido del sitio como string JSON.
- * @returns Un objeto con el ID y nombre de la página guardada.
- */
-export async function saveGeneratedPage(data: GeneratedPageData) {
-    const { userId, siteContent } = data;
-
-    if (!userId || !siteContent) {
-        throw new Error('Faltan datos requeridos para guardar la página generada.');
-    }
-    
-    try {
-        const pageName = `Página IA - ${format(Date.now(), 'dd/MM/yyyy HH:mm')}`;
-
-        // FIX: siteContent ya es una cadena JSON, se guarda directamente.
-        // No se necesita `JSON.stringify` aquí.
-        const dataToSave = {
-            name: pageName,
-            content: siteContent, 
-            createdAt: serverTimestamp(),
-            updatedAt: serverTimestamp(),
-        };
-
-        const userPagesColRef = collection(db, 'sitios', userId, 'paginas');
-        const docRef = await addDoc(userPagesColRef, dataToSave);
-
-        return { success: true, pageId: docRef.id, pageName: pageName };
-
-    } catch (error) {
-        console.error('Error al guardar la página generada en Firestore:', error);
-        if (error instanceof Error) {
-            throw new Error(`Error de base de datos: ${error.message}`);
-        }
-        throw new Error('No se pudo guardar la página generada debido a un error inesperado.');
-    }
-}
-
 
 
 /**

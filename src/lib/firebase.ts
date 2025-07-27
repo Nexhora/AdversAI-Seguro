@@ -18,7 +18,6 @@ const firebaseConfig = {
 };
 
 // This robust pattern prevents issues in Next.js environments by ensuring the app is only initialized once.
-// It's the recommended approach for this kind of setup.
 const app: FirebaseApp = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 const auth: Auth = getAuth(app);

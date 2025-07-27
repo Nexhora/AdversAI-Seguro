@@ -1,9 +1,16 @@
+
 'use client';
 
-// Esta es ahora la página principal del dashboard.
-// Simplemente renderiza el generador de campañas.
-import CampaignGenerator from './campaign-generator/page';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
+// Esta página redirige al constructor de páginas, que es ahora la funcionalidad principal.
 export default function DashboardRedirectPage() {
-  return <CampaignGenerator />;
+    const router = useRouter();
+
+    useEffect(() => {
+        router.replace('/dashboard/builder');
+    }, [router]);
+
+  return null; // No renderizar nada mientras redirige
 }

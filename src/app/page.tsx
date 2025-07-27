@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Logo } from '@/components/icons';
@@ -31,7 +32,7 @@ export default function HomePage() {
              <Link href="/login" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Login</Link>
           </nav>
           <Button asChild className="hidden md:block bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold hover:from-orange-600 hover:to-amber-600">
-            <Link href="/login?tab=register">Probar Gratis</Link>
+            <Link href="/login?tab=register">Empezar Gratis</Link>
           </Button>
            <Button asChild className="md:hidden bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold hover:from-orange-600 hover:to-amber-600">
             <Link href="/login">Acceder</Link>
@@ -46,10 +47,10 @@ export default function HomePage() {
              <div className="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse"></div>
              <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
                 <h1 className="text-4xl md:text-6xl font-bold font-headline tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
-                    Construye Activos de Marketing con IA en Minutos
+                    Construye Páginas de Venta Espectaculares
                 </h1>
                 <p className="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-300">
-                    Crea anuncios, landing pages, y más. Sin necesidad de experiencia técnica. Empieza a construir tu futuro hoy.
+                    Crea y personaliza landing pages de alta conversión en minutos. Sin necesidad de experiencia técnica. Empieza a construir tu futuro hoy.
                 </p>
                 
                 <div className="mt-10 max-w-xl mx-auto">
@@ -72,21 +73,21 @@ export default function HomePage() {
                             <Zap className="w-6 h-6 text-orange-400"/>
                         </div>
                         <h3 className="text-xl font-bold font-headline">Velocidad Exponencial</h3>
-                        <p className="mt-2 text-gray-400">Genera campañas y páginas completas en una fracción del tiempo que te llevaría manualmente.</p>
+                        <p className="mt-2 text-gray-400">Lanza páginas completas en una fracción del tiempo que te llevaría con otras herramientas.</p>
                     </div>
                     <div className="text-center">
                         <div className="inline-flex items-center justify-center w-12 h-12 mb-4 bg-orange-900/50 border border-orange-500/30 rounded-lg">
                             <BookOpen className="w-6 h-6 text-orange-400"/>
                         </div>
-                        <h3 className="text-xl font-bold font-headline">Creatividad Ilimitada</h3>
-                        <p className="mt-2 text-gray-400">Supera el bloqueo creativo con ideas de anuncios y copys que convierten, generados por IA.</p>
+                        <h3 className="text-xl font-bold font-headline">Control Creativo Total</h3>
+                        <p className="mt-2 text-gray-400">Ajusta cada detalle, desde los colores hasta la disposición, para que coincida con tu visión.</p>
                     </div>
                     <div className="text-center">
                          <div className="inline-flex items-center justify-center w-12 h-12 mb-4 bg-orange-900/50 border border-orange-500/30 rounded-lg">
                            <MousePointerClick className="w-6 h-6 text-orange-400"/>
                         </div>
                         <h3 className="text-xl font-bold font-headline">Resultados Medibles</h3>
-                        <p className="mt-2 text-gray-400">No solo crees, también predice el rendimiento y optimiza tus estrategias con datos.</p>
+                        <p className="mt-2 text-gray-400">Crea páginas optimizadas para convertir visitantes en clientes de manera efectiva.</p>
                     </div>
                 </div>
             </div>
@@ -96,23 +97,22 @@ export default function HomePage() {
         <section id="herramientas" className="py-20 md:py-32">
              <div className="container mx-auto px-4 md:px-6">
                  <div className="text-center max-w-3xl mx-auto">
-                    <h2 className="text-3xl md:text-4xl font-bold font-headline">Un Ecosistema de Herramientas a tu Disposición</h2>
-                    <p className="mt-4 text-lg text-gray-400">Desde la idea hasta el cliente, Nexhora te acompaña en cada paso con herramientas diseñadas para una sola cosa: hacerte crecer.</p>
+                    <h2 className="text-3xl md:text-4xl font-bold font-headline">Tu Laboratorio Creativo</h2>
+                    <p className="mt-4 text-lg text-gray-400">Desde la idea hasta la publicación, nuestra plataforma te da las herramientas para triunfar.</p>
                 </div>
-                <div className="mt-16 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                    {[
-                        { title: 'Generador de Anuncios', img: 'https://placehold.co/400x500.png', hint: 'digital marketing' },
-                        { title: 'Generador de Landing Pages', img: 'https://placehold.co/400x500.png', hint: 'website builder' },
-                        { title: 'Laboratorio IA', img: 'https://placehold.co/400x500.png', hint: 'abstract tech' },
-                        { title: 'Creador de Mockups', img: 'https://placehold.co/400x500.png', hint: 'product mockup' },
-                        { title: 'Creador de eBooks', img: 'https://placehold.co/400x500.png', hint: 'digital book' },
-                    ].map(tool => (
-                        <div key={tool.title} className="group relative rounded-lg overflow-hidden border border-white/10 transition-all hover:border-orange-500/50 hover:shadow-2xl hover:shadow-orange-500/10">
-                            <Image src={tool.img} alt={tool.title} width={400} height={500} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-ai-hint={tool.hint}/>
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                            <h3 className="absolute bottom-4 left-4 text-lg font-bold">{tool.title}</h3>
-                        </div>
-                    ))}
+                <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div className="group relative rounded-lg overflow-hidden border border-white/10 transition-all hover:border-orange-500/50 hover:shadow-2xl hover:shadow-orange-500/10">
+                        <Image src="https://placehold.co/600x400.png" alt="Constructor Visual" width={600} height={400} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-ai-hint="website builder interface" />
+                    </div>
+                    <div className='text-left'>
+                        <h3 className='text-2xl font-bold font-headline'>Constructor Visual Intuitivo</h3>
+                        <p className='mt-2 text-gray-400'>Arrastra, suelta y edita. Construir páginas nunca ha sido tan fácil. Olvídate del código y enfócate en tu mensaje.</p>
+                        <ul className='mt-4 space-y-2 text-gray-300'>
+                            <li className='flex items-center gap-2'><Zap className='text-orange-400 size-4'/> Edición en tiempo real</li>
+                            <li className='flex items-center gap-2'><Zap className='text-orange-400 size-4'/> Componentes pre-diseñados</li>
+                            <li className='flex items-center gap-2'><Zap className='text-orange-400 size-4'/> Vistas previas instantáneas</li>
+                        </ul>
+                    </div>
                 </div>
              </div>
         </section>
@@ -125,9 +125,9 @@ export default function HomePage() {
                 </div>
                  <div className="mt-16 grid md:grid-cols-3 gap-8">
                     {[
-                        { name: 'Carlos Gomez', role: 'Dueño de eCommerce', text: '"Desde que uso Nexhora, mi CPA ha bajado un 40%. La capacidad de testear ángulos tan rápido no tiene precio."', img: 'https://placehold.co/100x100.png', hint: 'male portrait' },
-                        { name: 'Laura Fernandez', role: 'Consultora de Marketing', text: '"Puedo entregar a mis clientes estrategias completas, con anuncios y landings, en días en lugar de semanas. Ha cambiado mi negocio por completo."', img: 'https://placehold.co/100x100.png', hint: 'female portrait' },
-                        { name: 'Javier Rios', role: 'Emprendedor Solitario', text: '"No soy diseñador ni copywriter. Nexhora es mi equipo de marketing completo. Finalmente puedo competir con los grandes."', img: 'https://placehold.co/100x100.png', hint: 'man smiling' },
+                        { name: 'Carlos Gomez', role: 'Dueño de eCommerce', text: '"Lancé una nueva landing para un producto en dos horas. Convirtió un 25% más que la anterior. Increíble."', img: 'https://placehold.co/100x100.png', hint: 'male portrait' },
+                        { name: 'Laura Fernandez', role: 'Consultora de Marketing', text: '"Puedo crear páginas para mis clientes a una velocidad récord, permitiéndome gestionar más proyectos y aumentar mis ingresos."', img: 'https://placehold.co/100x100.png', hint: 'female portrait' },
+                        { name: 'Javier Rios', role: 'Emprendedor Solitario', text: '"No soy diseñador. Nexhora me da la confianza para crear páginas que se ven profesionales y que realmente funcionan."', img: 'https://placehold.co/100x100.png', hint: 'man smiling' },
                     ].map(testimonial => (
                          <div key={testimonial.name} className="bg-gray-800 p-6 rounded-lg border border-gray-700">
                              <div className="flex items-center gap-4 mb-4">
@@ -152,9 +152,9 @@ export default function HomePage() {
                 </div>
                 <div className="mt-12 space-y-4">
                      {[
-                        { q: '¿Necesito conocimientos técnicos para usar Nexhora?', a: '¡Para nada! Nexhora está diseñado para ser intuitivo. Si sabes escribir un email, puedes crear activos de marketing de alta calidad. La IA se encarga del trabajo pesado.' },
-                        { q: '¿Las páginas y anuncios son personalizables?', a: 'Sí. La IA te da un punto de partida increíble, pero tienes control total en nuestro "Laboratorio IA" para ajustar cada detalle, desde textos y colores hasta la disposición de los elementos.' },
-                        { q: '¿Qué tan buenos son los textos que genera la IA?', a: 'Nuestra IA está entrenada con modelos de copywriting de respuesta directa probados (AIDA, PAS). No solo escribe bien, escribe para vender y convertir.' },
+                        { q: '¿Necesito conocimientos técnicos para usar Nexhora?', a: '¡Para nada! Nexhora está diseñado para ser 100% visual. Si sabes usar un procesador de texto, puedes crear páginas espectaculares.' },
+                        { q: '¿Puedo usar mi propio dominio?', a: 'Sí, una vez que despliegas tu aplicación en Firebase, puedes conectar fácilmente tu propio dominio desde la consola de Firebase Hosting.' },
+                        { q: '¿Las páginas son rápidas y están optimizadas?', a: 'Absolutamente. Construimos sobre Next.js, lo que garantiza que tus páginas sean ultrarrápidas y estén optimizadas para los motores de búsqueda (SEO) desde el principio.' },
                         { q: '¿Hay algún tipo de soporte si me quedo atascado?', a: 'Sí, ofrecemos soporte completo a través de nuestra comunidad y tutoriales detallados. Nunca estarás solo en tu camino al éxito.' },
                     ].map(faq => (
                         <details key={faq.q} className="bg-gray-800/50 p-4 rounded-lg border border-gray-700 cursor-pointer group">
@@ -172,13 +172,13 @@ export default function HomePage() {
         {/* Final CTA Section */}
         <section className="py-20">
             <div className="container mx-auto px-4 md:px-6 text-center">
-                 <h2 className="text-3xl md:text-4xl font-bold font-headline tracking-tight">Tu retiro está a unos clics de distancia.</h2>
+                 <h2 className="text-3xl md:text-4xl font-bold font-headline tracking-tight">Tu próxima gran idea está a unos clics de distancia.</h2>
                  <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-300">
-                    Deja de cambiar tiempo por dinero. Empieza a construir activos que trabajen para ti, 24/7. El riesgo es no intentarlo.
+                    Deja de esperar. Empieza a construir los activos digitales que trabajarán para ti, 24/7. El riesgo es no intentarlo.
                  </p>
                  <div className="mt-8">
                      <Button asChild size="lg" className="bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold hover:from-orange-600 hover:to-amber-600 shadow-lg shadow-orange-500/20">
-                        <Link href="/login?tab=register">Probar Gratis y Empezar a Construir</Link>
+                        <Link href="/login?tab=register">Empezar a Construir Gratis</Link>
                     </Button>
                  </div>
             </div>

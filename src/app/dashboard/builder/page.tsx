@@ -28,7 +28,7 @@ import {
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Label } from '@/components/ui/label';
-import { Save, Loader2, FolderDown, Eye, Wand2, FlaskConical, AlertTriangle, Trash2, Copy, ArrowUp, ArrowDown, LayoutTemplate } from 'lucide-react';
+import { Save, Loader2, FolderDown, Eye, FlaskConical, AlertTriangle, Trash2, Copy, ArrowUp, ArrowDown, LayoutTemplate } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { savePageData, getUserPages, getPageData, deletePageData } from '../actions';
@@ -52,9 +52,9 @@ const HOME_PAGE_TEMPLATE: BuilderState = {
       id: nanoid(),
       type: "Hero",
       props: {
-        title: "Construí activos de marketing con IA en minutos",
-        subtitle: "Crea anuncios, landing pages, y más. Sin necesidad de experiencia técnica. Empieza a construir tu futuro hoy.",
-        buttonText: "Empezar Prueba Gratis",
+        title: "Construye tu Próxima Gran Idea",
+        subtitle: "Arrastra, suelta y edita componentes para crear una página increíble en minutos. Sin necesidad de código.",
+        buttonText: "Empezar a Construir",
         bgColor: "bg-gray-900",
         textColor: "text-white",
         textAlign: "center"
@@ -64,23 +64,23 @@ const HOME_PAGE_TEMPLATE: BuilderState = {
       id: nanoid(),
       type: "Features",
       props: {
-        title: "Un Ecosistema de Herramientas a tu Disposición",
-        subtitle: "Desde la idea hasta el cliente, Nexhora te acompaña en cada paso con herramientas diseñadas para una sola cosa: hacerte crecer.",
+        title: "Todo lo que Necesitas",
+        subtitle: "Componentes flexibles y potentes para dar vida a tu visión.",
         features: [
           {
             icon: "Zap",
-            title: "Velocidad Exponencial",
-            description: "Genera campañas y páginas completas en una fracción del tiempo que te llevaría manualmente."
+            title: "Rápido e Intuitivo",
+            description: "Nuestra interfaz está diseñada para que te muevas a la velocidad de la luz."
           },
           {
             icon: "BookOpen",
-            title: "Creatividad Ilimitada",
-            description: "Supera el bloqueo creativo con ideas de anuncios y copys que convierten, generados por IA."
+            title: "Componentes Flexibles",
+            description: "Personaliza cada sección para que se ajuste perfectamente a tu marca y mensaje."
           },
           {
             icon: "MousePointerClick",
-            title: "Resultados Medibles",
-            description: "No solo crees, también predice el rendimiento y optimiza tus estrategias con datos."
+            title: "Vista Previa Instantánea",
+            description: "Mira exactamente cómo se verá tu página antes de publicarla."
           }
         ],
         bgColor: "bg-background",
@@ -270,38 +270,14 @@ const BuilderPageContent = () => {
     const pageIdToLoad = searchParams.get('pageId');
     if (pageIdToLoad) {
         loadPageFromUrl(pageIdToLoad);
-        return;
-    }
-
-    // This logic now only runs on the client after the initial check for pageId
-    // It's safe because it's guarded by the isLoading state.
-    const generatedPageData = localStorage.getItem('generatedLandingPage');
-    if (generatedPageData) {
-        const contentToLoad = parseAndValidateState(generatedPageData);
-        if (contentToLoad) {
-            setState(contentToLoad);
-            setActivePage(null);
-            setPageName('Nueva Página Generada por IA');
-            toast({ title: 'Plantilla Cargada', description: 'Tu plantilla generada por IA está lista para editar.' });
-        } else {
-            toast({ variant: 'destructive', title: 'Error', description: 'No se pudo cargar la página generada. El formato era inválido.' });
-            setState(EMPTY_STATE);
-        }
-        // Always clean up after attempting to load
-        try {
-            localStorage.removeItem('generatedLandingPage');
-        } catch (e) {
-            console.error("Could not remove item from localstorage", e)
-        }
     } else {
-        // Only set to empty if no pageId is being loaded and no localStorage data is found
         setState(EMPTY_STATE);
         setActivePage(null);
         setPageName('');
+        setIsLoading(false);
     }
-    setIsLoading(false);
     
-  }, [searchParams, user, authLoading, loadPageFromUrl, toast]);
+  }, [searchParams, user, authLoading, loadPageFromUrl]);
 
 
   if (authLoading || isLoading) {
@@ -309,7 +285,6 @@ const BuilderPageContent = () => {
   }
   
   if (!user) {
-    // No redirigir aquí, dejar que el layout lo maneje
     return null;
   }
   
@@ -486,7 +461,6 @@ const BuilderPageContent = () => {
                     <Button variant="outline" size="sm" onClick={handleSave} disabled={state.page.length === 0}><Save className="mr-2 h-4 w-4" /> Guardar</Button>
                     <Button variant="outline" size="sm" onClick={handleLoad}><FolderDown className="mr-2 h-4 w-4" /> Cargar</Button>
                     <Button variant="outline" size="sm" onClick={handlePreview} disabled={!activePage?.id}><Eye className="mr-2 h-4 w-4" /> Vista Previa</Button>
-                        <Button variant="outline" size="sm" onClick={() => router.push('/dashboard/landing-generator')}><Wand2 className="mr-2 h-4 w-4" /> Generar</Button>
                 </div>
             </div>
             <Separator />
@@ -521,7 +495,7 @@ const BuilderPageContent = () => {
                     <div className="flex flex-col items-center justify-center p-10 min-h-[300px] border-2 border-dashed rounded-lg bg-background h-full">
                         <FlaskConical className="w-16 h-16 text-muted-foreground/50 mb-4"/>
                         <h3 className='text-xl font-semibold'>El lienzo está en blanco</h3>
-                        <p className="text-muted-foreground mb-4 text-center max-w-sm">Carga una página, usa el generador de IA, o empieza con una plantilla.</p>
+                        <p className="text-muted-foreground mb-4 text-center max-w-sm">Carga una página guardada o empieza con una plantilla.</p>
                         <div className='flex flex-wrap justify-center gap-4'>
                             <Button onClick={handleLoad}>
                                 <FolderDown className="mr-2 h-4 w-4" />
@@ -530,10 +504,6 @@ const BuilderPageContent = () => {
                              <Button variant="outline" onClick={handleLoadTemplate}>
                                 <LayoutTemplate className="mr-2 h-4 w-4" />
                                 Usar Plantilla de Inicio
-                            </Button>
-                            <Button variant="secondary" onClick={() => router.push('/dashboard/landing-generator')}>
-                                <Wand2 className="mr-2 h-4 w-4" />
-                                Ir al Generador de IA
                             </Button>
                         </div>
                     </div>
@@ -637,5 +607,3 @@ export default function BuilderPage() {
         </React.Suspense>
     )
 }
-
-    

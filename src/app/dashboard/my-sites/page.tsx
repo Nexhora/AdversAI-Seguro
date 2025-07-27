@@ -4,7 +4,7 @@
 import { useEffect, useState, useTransition } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
-import { Briefcase, Loader2, AlertTriangle, ExternalLink, Plus, Trash2, Pencil, Wand2 } from "lucide-react";
+import { Briefcase, Loader2, AlertTriangle, ExternalLink, Plus, Trash2, Pencil } from "lucide-react";
 import { useAuth } from '@/context/AuthContext';
 import { getUserPages, deletePageData } from '../actions';
 import Link from 'next/link';
@@ -162,7 +162,7 @@ export default function MySitesPage() {
                         <div className="text-center py-10 border-2 border-dashed rounded-lg">
                             <Briefcase className="mx-auto h-12 w-12 text-muted-foreground" />
                             <h3 className="mt-4 text-lg font-semibold">No tienes páginas guardadas</h3>
-                            <p className="mt-1 text-sm text-muted-foreground">Empieza a construir una página en el laboratorio o usa el generador de IA.</p>
+                            <p className="mt-1 text-sm text-muted-foreground">Empieza a construir una página en el laboratorio.</p>
                         </div>
                     )}
                 </CardContent>
@@ -171,13 +171,7 @@ export default function MySitesPage() {
                     <Button asChild>
                         <Link href="/dashboard/builder">
                             <Plus className="mr-2 h-4 w-4" />
-                            Crear Página en Blanco
-                        </Link>
-                    </Button>
-                     <Button asChild variant="secondary">
-                        <Link href="/dashboard/landing-generator">
-                            <Wand2 className="mr-2 h-4 w-4" />
-                            Usar Generador IA
+                            Crear Nueva Página
                         </Link>
                     </Button>
                 </CardFooter>

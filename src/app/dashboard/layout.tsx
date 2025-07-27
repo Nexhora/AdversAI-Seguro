@@ -28,9 +28,7 @@ import {
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const pageTitles: { [key: string]: string } = {
-    '/dashboard': 'Generación de Anuncios con IA',
-    '/dashboard/campaign-generator': 'Generación de Anuncios con IA',
-    '/dashboard/landing-generator': 'Generador de Landing Pages con IA',
+    '/dashboard': 'Panel de Control',
     '/dashboard/builder': 'Laboratorio de Páginas',
     '/dashboard/my-sites': 'Mis Sitios Guardados',
 };
