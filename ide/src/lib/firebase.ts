@@ -3,8 +3,6 @@ import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
 import { getAuth, Auth } from "firebase/auth";
 import { getFirestore, Firestore } from "firebase/firestore";
 
-// This is the only place where the config is defined.
-// It reads directly from the environment variables.
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -19,7 +17,6 @@ let app: FirebaseApp;
 let auth: Auth;
 let db: Firestore;
 
-// Standard singleton pattern for Firebase initialization
 if (getApps().length === 0) {
   app = initializeApp(firebaseConfig);
 } else {

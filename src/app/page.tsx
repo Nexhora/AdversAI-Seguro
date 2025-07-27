@@ -3,17 +3,18 @@
 
 import React from 'react';
 import { Loader2 } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 
 /**
- * Esta es la página de entrada principal de la aplicación.
- * Su única responsabilidad es mostrar un indicador de carga.
- * Toda la lógica de redirección se maneja en AuthContext
- * para evitar bucles de renderizado y condiciones de carrera.
+ * This is the main entry page for the application.
+ * Its only responsibility is to show a loading indicator.
+ * All redirection logic is handled in AuthContext
+ * to prevent rendering loops and race conditions.
  */
 export default function HomePage() {
+  const { loading } = useAuth();
+  
+  // Show a loading spinner while the auth state is being determined.
+  // The AuthContext will handle the redirection once loading is complete.
   return (
-    <div className="flex h-screen items-center justify-center">
-      <Loader2 className="h-16 w-16 animate-spin text-primary" />
-    </div>
-  );
-}
+    <div className="flex h-screen items-center justify-

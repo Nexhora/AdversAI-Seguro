@@ -22,8 +22,9 @@ export const useAuth = () => {
   return context;
 };
 
-const protectedPaths = ['/dashboard'];
-const publicOnlyPaths = ['/login', '/register'];
+// Define public and protected routes
+const protectedRoutes = ['/dashboard'];
+const publicRoutes = ['/login', '/register'];
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -40,32 +41,35 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    // No hacer nada hasta que la autenticación se resuelva
-    if (loading) return; 
+    if (loading) return;
 
-    const isProtected = protectedPaths.some(path => pathname.startsWith(path));
-    const isPublicOnly = publicOnlyPaths.includes(pathname);
-    const isRoot = pathname === '/';
+    const pathIsProtected = protectedRoutes.some(path => pathname.startsWith(path));
+    const pathIsPublic = publicRoutes.includes(pathname);
 
-    if (!user) {
-      // Si el usuario no está autenticado, cualquier ruta que no sea pública
-      // (o la raíz, que se gestionará después) debe redirigir a /login.
-      if (isProtected || isRoot) {
+    // If not authenticated and trying to access a protected route, redirect to login
+    if (!user && pathIsProtected) {
+      router.replace('/login');
+    }
+
+    // If authenticated and trying to access a public-only route (like login), redirect to dashboard
+    if (user && pathIsPublic) {
+      router.replace('/dashboard/builder');
+    }
+
+    // If authenticated and on the root page, redirect to dashboard
+    if (user && pathname === '/') {
+       router.replace('/dashboard/builder');
+    }
+
+    // If not authenticated and on the root page, redirect to login
+    if (!user && pathname === '/') {
         router.replace('/login');
-      }
-    } else {
-      // Si el usuario está autenticado, redirigir desde rutas públicas
-      // y desde la raíz al constructor del dashboard.
-      if (isPublicOnly || isRoot) {
-        router.replace('/dashboard/builder');
-      }
     }
 
   }, [user, loading, router, pathname]);
 
   const logout = async () => {
     await signOut(auth);
-    // Después de cerrar sesión, redirigir a la página de login.
     router.replace('/login');
   };
 
