@@ -7,7 +7,7 @@ runConfig:
 # The GOOGLE_API_KEY is made available by linking the secret in the Firebase console.
 # The Firebase config keys are passed directly here for the build process.
 buildEnvironmentVariables:
-  GOOGLE_API_KEY: ${secret:GOOGLE_API_KEY}
+  google_api_key: ${secret:GOOGLE_API_KEY}
   NEXT_PUBLIC_FIREBASE_API_KEY: ${env:NEXT_PUBLIC_FIREBASE_API_KEY}
   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${env:NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}
   NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${env:NEXT_PUBLIC_FIREBASE_PROJECT_ID}
@@ -16,4 +16,4 @@ buildEnvironmentVariables:
   NEXT_PUBLIC_FIREBASE_APP_ID: ${env:NEXT_PUBLIC_FIREBASE_APP_ID}
   NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: ${env:NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID}
 environmentVariables:
-  GOOGLE_API_KEY: ${secret:GOOGLE_API_KEY}
+  google_api_key: ${secret:GOOGLE_API_KEY}
