@@ -4,20 +4,21 @@
  * @fileOverview Initializes the Genkit AI instance.
  *
  * This file sets up the Genkit library with the necessary plugins and configuration.
- * It retrieves the Google API key from the environment variables provided by
- * Firebase App Hosting.
+ * It retrieves the Google API key from the environment variables. In the studio,
+ * this comes from the .env file. In production, it's provided by
+ * Firebase App Hosting's secret management.
  */
 
 import {genkit} from 'genkit';
 import {googleAI} from '@genkit-ai/googleai';
 
 // Initialize Genkit with the Google AI plugin.
-// The API key is provided as an environment variable by App Hosting,
-// which is sourced from the GOOGLE_API_KEY secret.
+// The API key is provided as an environment variable by the .env file (local)
+// or by App Hosting's secret management (production).
 export const ai = genkit({
   plugins: [
     googleAI({
-      apiKey: process.env.google_api_key,
+      apiKey: process.env.GOOGLE_API_KEY,
     }),
   ],
   // Disabling telemetry and logging for a cleaner setup.
