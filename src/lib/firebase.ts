@@ -20,13 +20,17 @@ let auth: Auth;
 let db: Firestore;
 
 // Standard singleton pattern for Firebase initialization
-if (getApps().length === 0) {
-  app = initializeApp(firebaseConfig);
-} else {
-  app = getApp();
+// Check if the code is running in a browser environment before initializing
+if (typeof window !== 'undefined') {
+  if (getApps().length === 0) {
+    app = initializeApp(firebaseConfig);
+  } else {
+    app = getApp();
+  }
+  auth = getAuth(app);
+  db = getFirestore(app);
 }
 
-auth = getAuth(app);
-db = getFirestore(app);
-
+// Export auth and db, which might be uninitialized on the server-side,
+// but will be initialized on the client-side.
 export { app, auth, db };
