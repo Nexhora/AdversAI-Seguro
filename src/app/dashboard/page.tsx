@@ -1,16 +1,16 @@
 
-'use client';
+"use client";
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-// Esta página redirige al constructor de páginas, que es ahora la funcionalidad principal.
-export default function DashboardRedirectPage() {
+// Redirige a la página principal que ahora es la de mantenimiento.
+export default function DashboardRedirect() {
     const router = useRouter();
 
     useEffect(() => {
-        router.replace('/dashboard/builder');
+        router.replace('/');
     }, [router]);
 
-  return null; // No renderizar nada mientras redirige
+  return null;
 }
