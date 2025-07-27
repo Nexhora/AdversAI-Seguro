@@ -17,22 +17,12 @@ const firebaseConfig = {
 };
 
 
-let app: FirebaseApp;
-let auth: Auth;
-let db: Firestore;
-let storage: FirebaseStorage;
+// This robust pattern prevents issues in Next.js environments.
+// It initializes the app only if it hasn't been initialized yet.
+const app: FirebaseApp = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-// This robust pattern prevents race conditions in server-side and client-side rendering environments.
-// It tries to get an existing app instance first, and only initializes a new one if none exists.
-// This is the recommended approach for Next.js applications.
-if (getApps().length === 0) {
-    app = initializeApp(firebaseConfig);
-} else {
-    app = getApp();
-}
-
-auth = getAuth(app);
-db = getFirestore(app);
-storage = getStorage(app);
+const auth: Auth = getAuth(app);
+const db: Firestore = getFirestore(app);
+const storage: FirebaseStorage = getStorage(app);
 
 export { app, auth, db, storage };
