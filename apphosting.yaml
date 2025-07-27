@@ -3,8 +3,23 @@
 runConfig:
   minInstances: 0
   maxInstances: 10
-# Pass secrets as environment variables to the Next.js app.
+
+# Pass secrets and environment variables to the Next.js app.
 # The GOOGLE_API_KEY secret is made available to the app as the google_api_key env var.
-# Firebase config keys are now handled via the .env file and are not needed here.
+# Firebase config keys are passed as explicit environment variables.
 environmentVariables:
   google_api_key: ${secret:GOOGLE_API_KEY}
+  NEXT_PUBLIC_FIREBASE_API_KEY: ${env:NEXT_PUBLIC_FIREBASE_API_KEY}
+  NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${env:NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}
+  NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${env:NEXT_PUBLIC_FIREBASE_PROJECT_ID}
+  NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${env:NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}
+  NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${env:NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID}
+  NEXT_PUBLIC_FIREBASE_APP_ID: ${env:NEXT_PUBLIC_FIREBASE_APP_ID}
+  NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: ${env:NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID}
+buildEnvironmentVariables:
+  NEXT_PUBLIC_FIREBASE_API_KEY: ${env:NEXT_PUBLIC_FIREBASE_API_KEY}
+  NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${env:NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}
+  NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${env:NEXT_PUBLIC_FIREBASE_PROJECT_ID}
+  NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${env:NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}
+  NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${env:NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID}
+  NEXT_PUBLIC_FIREBASE_APP_ID: ${env:
