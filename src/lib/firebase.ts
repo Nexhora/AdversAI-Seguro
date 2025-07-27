@@ -1,3 +1,8 @@
+// Importa dotenv y lo configura para cargar las variables de entorno desde .env
+// Esto es crucial para el entorno de desarrollo local.
+import dotenv from 'dotenv';
+dotenv.config();
+
 import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
@@ -14,7 +19,8 @@ type FirebaseConfig = {
 };
 
 // Lee la configuración directamente de las variables de entorno del proceso.
-// Next.js se encarga de exponer las variables con prefijo NEXT_PUBLIC_ al cliente.
+// En producción (App Hosting), estas variables son inyectadas por apphosting.yaml.
+// En desarrollo (Estudio), dotenv se encarga de cargarlas desde el archivo .env.
 const firebaseConfig: FirebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "",
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "",
@@ -28,7 +34,7 @@ const firebaseConfig: FirebaseConfig = {
 // Validación: Comprueba si alguna de las claves de Firebase falta en el entorno
 // Esto proporciona un mensaje de error claro si las variables de entorno no están configuradas.
 if (Object.values(firebaseConfig).some(value => !value)) {
-    console.error("Las credenciales de Firebase no están configuradas correctamente en las variables de entorno.");
+    console.error("Las credenciales de Firebase no están configuradas correctamente en las variables de entorno o el archivo .env.");
     
     // En un entorno de cliente (navegador), podrías querer mostrar un mensaje al usuario.
     if (typeof window !== 'undefined') {
@@ -37,14 +43,14 @@ if (Object.values(firebaseConfig).some(value => !value)) {
             body.innerHTML = `
                 <div style="font-family: sans-serif; padding: 2rem; text-align: center; background-color: #fff3f3; color: #b71c1c; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                     <h1 style="font-size: 1.5rem; margin-bottom: 1rem;">Error Crítico de Configuración</h1>
-                    <p>Las credenciales de Firebase no están configuradas correctamente. La aplicación no puede conectarse a los servicios de Firebase.</p>
-                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">Esto suele deberse a que las variables de entorno de Firebase no se han configurado en el backend de App Hosting.</p>
+                    <p>Las credenciales de Firebase no están configuradas correctamente.</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">En el entorno local, asegúrate de que el archivo .env esté completo. En producción, verifica las variables de entorno en App Hosting.</p>
                 </div>
             `;
         }
     }
     // Detiene la ejecución del script para evitar más errores.
-    throw new Error("Configuración de Firebase incompleta. Revisa las variables de entorno en App Hosting.");
+    throw new Error("Configuración de Firebase incompleta. Revisa las variables de entorno o el archivo .env.");
 }
 
 
