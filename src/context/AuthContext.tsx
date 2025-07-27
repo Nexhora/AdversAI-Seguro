@@ -23,7 +23,7 @@ export const useAuth = () => {
   return context;
 };
 
-const publicPaths = ['/login', '/register', '/'];
+const protectedPaths = ['/dashboard'];
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -42,18 +42,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (loading) return;
     
-    const isPublicPath = publicPaths.includes(pathname);
+    const isProtected = protectedPaths.some(path => pathname.startsWith(path));
 
-    if (!user && !isPublicPath) {
-      router.push('/login');
-    } else if (user && (pathname === '/login' || pathname === '/register' || pathname === '/')) {
-      router.push('/dashboard/builder');
+    if (!user && isProtected) {
+      router.replace('/login');
     }
   }, [user, loading, router, pathname]);
 
   const logout = async () => {
     await signOut(auth);
-    router.push('/login');
+    router.replace('/login');
   };
 
   const value = {
@@ -62,27 +60,5 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     logout,
   };
 
-  if (loading) {
-    return (
-        <div className="flex h-screen w-full items-center justify-center bg-background">
-            <Loader2 className="h-8 w-8 animate-spin" />
-        </div>
-    )
-  }
-
-  // Si estamos en una ruta pública y no hemos iniciado sesión, o
-  // si hemos iniciado sesión y no estamos en una ruta pública, renderizamos los hijos.
-  // Esto evita un parpadeo del contenido protegido antes de la redirección.
-  const isPublicPath = publicPaths.includes(pathname);
-  if ((!user && isPublicPath) || (user && !isPublicPath)) {
-      return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-  }
-
-  // En cualquier otro caso (p. ej., usuario no logueado intentando acceder a ruta protegida),
-  // mostramos un loader mientras se completa la redirección del efecto.
-  return (
-      <div className="flex h-screen w-full items-center justify-center bg-background">
-          <Loader2 className="h-8 w-8 animate-spin" />
-      </div>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

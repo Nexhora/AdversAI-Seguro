@@ -13,12 +13,34 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AlertCircle, Mail, KeyRound } from 'lucide-react';
 import Link from 'next/link';
 import { Logo } from '@/components/icons';
+import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
+import { Loader2 } from 'lucide-react';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <Loader2 className="h-16 w-16 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (user) {
+    router.replace('/dashboard/builder');
+    return (
+       <div className="flex h-screen items-center justify-center">
+         <Loader2 className="h-16 w-16 animate-spin text-primary" />
+       </div>
+    );
+  }
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,7 +51,7 @@ export default function LoginPage() {
         title: '¡Bienvenido de nuevo!',
         description: 'Has iniciado sesión correctamente.',
       });
-      // La redirección se gestionará en el AuthProvider
+      router.push('/dashboard/builder');
     } catch (err: any) {
       console.error(err);
       if (err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found') {
@@ -48,6 +70,7 @@ export default function LoginPage() {
         title: '¡Bienvenido!',
         description: 'Has iniciado sesión con Google correctamente.',
       });
+       router.push('/dashboard/builder');
     } catch (err) {
       console.error(err);
       setError('No se pudo iniciar sesión con Google.');
@@ -133,4 +156,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
