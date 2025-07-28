@@ -2,8 +2,26 @@
 
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { Button } from "@/components/ui/button";
+import { auth } from "@/lib/firebase";
+import { signOut } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 function AuthenticatedView({ user }) {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      // The onAuthStateChanged listener in AuthContext will handle the user state change.
+      // We can optionally redirect here if needed, but the view will update automatically.
+      router.push('/');
+    } catch (error) {
+      console.error("Error signing out: ", error);
+      // Optionally, show an error message to the user
+    }
+  };
+
   return (
     <div className="text-center space-y-4">
       <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
@@ -13,7 +31,7 @@ function AuthenticatedView({ user }) {
         Sesión iniciada como {user.email}.
       </p>
       <div className="flex justify-center gap-4">
-        {/* Aquí irían los botones para ir al dashboard, etc. */}
+        <Button onClick={handleLogout} variant="secondary">Cerrar Sesión</Button>
       </div>
     </div>
   );
@@ -26,15 +44,15 @@ function UnauthenticatedView() {
         AdVerseAI - Reconstrucción
       </h1>
       <p className="text-lg leading-8 text-muted-foreground">
-        El sistema de autenticación funciona. Por favor, inicia sesión o regístrate.
+        Por favor, inicia sesión o regístrate para continuar.
       </p>
       <div className="flex justify-center gap-4">
-        <Link href="/login" className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
-          Iniciar Sesión
-        </Link>
-        <Link href="/register" className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2">
-          Registrarse
-        </Link>
+        <Button asChild>
+           <Link href="/login">Iniciar Sesión</Link>
+        </Button>
+        <Button asChild variant="secondary">
+          <Link href="/register">Registrarse</Link>
+        </Button>
       </div>
     </div>
   );
