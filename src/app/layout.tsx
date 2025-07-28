@@ -1,9 +1,23 @@
 import type { Metadata } from "next";
+import { Poppins, PT_Sans } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const fontBody = Poppins({
+  subsets: ["latin"],
+  variable: "--font-body",
+  weight: ["400", "500", "600", "700"],
+});
+
+const fontHeadline = PT_Sans({
+  subsets: ["latin"],
+  variable: "--font-headline",
+  weight: ["400", "700"],
+});
 
 export const metadata: Metadata = {
-  title: "AdVerseAI - Base Funcional",
-  description: "Proyecto listo para reconstruir.",
+  title: "AdVerseAI",
+  description: "Reclama el control de tu privacidad.",
 };
 
 export default function RootLayout({
@@ -13,7 +27,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-body antialiased",
+          fontBody.variable,
+          fontHeadline.variable
+        )}
+      >
         {children}
       </body>
     </html>
