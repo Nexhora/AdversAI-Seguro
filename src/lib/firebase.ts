@@ -22,21 +22,24 @@ let db: Firestore;
 
 // This check prevents re-initializing the app on every render in the browser.
 // It also ensures that Firebase is only initialized on the client-side.
-if (typeof window !== 'undefined' && !getApps().length) {
-    if (firebaseConfig.apiKey && firebaseConfig.projectId) {
-        app = initializeApp(firebaseConfig);
+if (typeof window !== 'undefined') {
+    if (!getApps().length) {
+        // Only initialize if all the necessary config variables are present
+        if (firebaseConfig.apiKey && firebaseConfig.projectId) {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+        } else {
+            console.error("Firebase configuration variables are missing. Firebase cannot be initialized.");
+        }
+    } else {
+        // If the app is already initialized, just get the existing instances.
+        app = getApp();
         auth = getAuth(app);
         db = getFirestore(app);
-    } else {
-        // This error will be visible in the browser console if the environment variables are not set.
-        console.error("Firebase configuration variables are missing. App cannot be initialized.");
     }
-} else if (getApps().length > 0) {
-    // If the app is already initialized, just get the existing instances.
-    app = getApp();
-    auth = getAuth(app);
-    db = getFirestore(app);
 }
+
 
 // Export the initialized services.
 // The "as Auth" and "as Firestore" are necessary because they could be undefined if initialization fails.
