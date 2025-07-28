@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const { user, loading } = useAuth();
@@ -22,6 +23,7 @@ export default function Home() {
             No has iniciado sesión. El sistema de autenticación funciona.
           </p>
         )}
+        <Button>Soy un Botón</Button>
       </div>
     </main>
   );
