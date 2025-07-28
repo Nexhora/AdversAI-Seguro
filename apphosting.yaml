@@ -7,14 +7,14 @@ runConfig:
 # The `secret:${SECRET_NAME}` syntax references a secret managed by App Hosting.
 # The secret will be passed to the backend as an environment variable with the
 # name `SECRET_NAME`.
-# secretEnvironmentVariables:
-#   - key: GOOGLE_API_KEY
-#     secret: GOOGLE_API_KEY
-# environmentVariables:
-#   NEXT_PUBLIC_FIREBASE_API_KEY: AIzaSyDI7mUnIQkf2JjvdYA2x9KirLVy0ixvofE
-#   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: adverseai-yw88y.firebaseapp.com
-#   NEXT_PUBLIC_FIREBASE_PROJECT_ID: adverseai-yw88y
-#   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: adverseai-yw88y.firebasestorage.app
-#   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: "291201286336"
-#   NEXT_PUBLIC_FIREBASE_APP_ID: 1:291201286336:web:7388bf9d0963f69e41ad25
-#   NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: ""
+secretEnvironmentVariables:
+  - key: GOOGLE_API_KEY
+    secret: GOOGLE_API_KEY
+environmentVariables:
+  NEXT_PUBLIC_FIREBASE_API_KEY: AIzaSyDI7mUnIQkf2JjvdYA2x9KirLVy0ixvofE
+  NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: adverseai-yw88y.firebaseapp.com
+  NEXT_PUBLIC_FIREBASE_PROJECT_ID: adverseai-yw88y
+  NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: adverseai-yw88y.firebasestorage.app
+  NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: "291201286336"
+  NEXT_PUBLIC_FIREBASE_APP_ID: 1:291201286336:web:7388bf9d0963f69e41ad25
+  NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: ""
