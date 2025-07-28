@@ -14,23 +14,26 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Helper function to initialize Firebase and return app, auth, and db
-function initializeFirebase() {
-    if (firebaseConfig.apiKey && firebaseConfig.projectId) {
-        const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        return { app, auth, db };
-    }
-    // This should not happen in a correctly configured environment
-    console.error("Firebase configuration variables are missing.");
-    // Return nulls or throw an error if configuration is missing
-    return { app: null, auth: null, db: null };
+let app: FirebaseApp;
+let auth: Auth;
+let db: Firestore;
+
+if (typeof window !== "undefined" && !getApps().length) {
+    // Running on the client, initialize
+    app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
+} else if (getApps().length > 0) {
+    // App already initialized, get instances
+    app = getApp();
+    auth = getAuth(app);
+    db = getFirestore(app);
+} else {
+    // Running on the server, initialize
+    app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
 }
 
-const { app, auth, db } = initializeFirebase();
 
-// Export the initialized services.
-// The "as Auth" and "as Firestore" are necessary because they could be undefined if initialization fails.
-// Components using these should handle the possibility of them being uninitialized.
 export { app, auth, db };
