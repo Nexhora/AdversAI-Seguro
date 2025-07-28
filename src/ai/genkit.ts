@@ -17,9 +17,7 @@ import {googleAI} from '@genkit-ai/googleai';
 // We only initialize the plugin if the key is actually present.
 const plugins = [];
 if (process.env.GOOGLE_API_KEY) {
-  plugins.push(googleAI({
-    apiKey: process.env.GOOGLE_API_KEY,
-  }));
+  plugins.push(googleAI());
 }
 
 export const ai = genkit({

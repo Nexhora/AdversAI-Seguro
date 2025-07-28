@@ -7,6 +7,9 @@ runConfig:
 # The `secret:${SECRET_NAME}` syntax references a secret managed by App Hosting.
 # The secret will be passed to the backend as an environment variable with the
 # name `SECRET_NAME`.
+secretEnvironmentVariables:
+  - key: GOOGLE_API_KEY
+    secret: GOOGLE_API_KEY
 environmentVariables:
   NEXT_PUBLIC_FIREBASE_API_KEY: AIzaSyDI7mUnIQkf2JjvdYA2x9KirLVy0ixvofE
   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: adverseai-yw88y.firebaseapp.com
