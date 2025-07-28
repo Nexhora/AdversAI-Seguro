@@ -16,6 +16,7 @@ export default function DashboardPage() {
   const router = useRouter();
 
   useEffect(() => {
+    // Redirect if loading is finished and there's no user
     if (!loading && !user) {
       router.push('/login');
     }
@@ -35,6 +36,7 @@ export default function DashboardPage() {
     return <div className="flex min-h-screen items-center justify-center">Cargando...</div>;
   }
 
+  // Do not render the dashboard if there is no user. The useEffect above will handle redirection.
   if (!user) {
     return null;
   }

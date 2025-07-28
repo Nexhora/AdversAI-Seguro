@@ -13,13 +13,17 @@ function AuthenticatedView({ user }) {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      // Force a reload to ensure context is cleared and user is redirected properly
       router.push('/');
       router.refresh(); 
     } catch (error) {
       console.error("Error signing out: ", error);
     }
   };
+
+  // Defensive check: Do not render this component if user is not available.
+  if (!user) {
+    return null;
+  }
 
   return (
     <div className="text-center space-y-4">
