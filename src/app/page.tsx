@@ -1,41 +1,54 @@
 
 'use client';
 
-import React, { useEffect } from 'react';
-import { Loader2 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { onAuthStateChanged, User } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
+import React from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Logo } from '@/components/icons';
+import { ArrowRight } from 'lucide-react';
 
-/**
- * This is the main entry page for the application.
- * Its only responsibility is to check the auth state and redirect.
- * It shows a loading indicator while this check is happening.
- */
 export default function HomePage() {
-  const router = useRouter();
-
-  useEffect(() => {
-    // onAuthStateChanged is the most reliable way to get the current user
-    // on the client-side, and it handles the case where Firebase is still initializing.
-    const unsubscribe = onAuthStateChanged(auth, (user: User | null) => {
-      if (user) {
-        // If user is logged in, redirect to the main dashboard page.
-        router.replace('/dashboard/builder');
-      } else {
-        // If user is not logged in, redirect to the login page.
-        router.replace('/login');
-      }
-    });
-
-    // Clean up the subscription when the component unmounts
-    return () => unsubscribe();
-  }, [router]);
-  
-  // Show a loading spinner while the auth state is being determined.
   return (
-    <div className="flex h-screen items-center justify-center bg-background">
-      <Loader2 className="h-16 w-16 animate-spin text-primary" />
+    <div className="flex flex-col min-h-screen bg-background">
+      <header className="p-4 flex justify-between items-center">
+        <div className="flex items-center gap-2">
+            <Logo className="size-8 text-primary" />
+            <span className="text-xl font-bold font-headline">NEXHORA</span>
+        </div>
+        <div>
+          <Button asChild variant="ghost">
+            <Link href="/auth/login">Iniciar Sesión</Link>
+          </Button>
+          <Button asChild>
+            <Link href="/auth/register">Registrarse <ArrowRight className="ml-2 h-4 w-4" /></Link>
+          </Button>
+        </div>
+      </header>
+      <main className="flex-1 flex flex-col items-center justify-center text-center p-4">
+        <div className="max-w-3xl">
+           <h1 className="text-5xl md:text-7xl font-bold font-headline bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary-foreground">
+             Crea Anuncios y Landing Pages con el Poder de la IA
+          </h1>
+          <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+            Bienvenido a NEXHORA, tu centro de control para lanzar campañas de marketing exitosas. Utiliza nuestras herramientas de IA para generar anuncios, crear páginas de aterrizaje y llevar tus ideas al siguiente nivel, sin necesidad de código.
+          </p>
+          <div className="mt-8 flex justify-center gap-4">
+            <Button asChild size="lg">
+              <Link href="/auth/register">
+                Comenzar Gratis
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link href="/dashboard/builder">
+                Ir al Laboratorio
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </main>
+       <footer className="p-4 text-center text-sm text-muted-foreground">
+        © {new Date().getFullYear()} NEXHORA by AdVerseAI. Todos los derechos reservados.
+      </footer>
     </div>
   );
 }

@@ -4,7 +4,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 
 interface AuthContextType {
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     // Dado que este proveedor ahora solo vive dentro de las rutas del dashboard,
     // la lógica es más simple: si no hay usuario, redirige a login.
     if (!user) {
-      router.replace('/login');
+      router.replace('/auth/login');
     }
 
   }, [user, loading, router]);
@@ -60,13 +60,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // Mientras se carga, no mostramos nada para evitar parpadeos.
   // La redirección se encargará si no hay sesión.
-   if (loading || !user) {
+   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center bg-background">
         <Loader2 className="h-16 w-16 animate-spin text-primary" />
       </div>
     );
   }
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  
+  // Si no hay usuario, el useEffect de arriba ya habrá iniciado la redirección.
+  // Renderizar children solo si hay un usuario evita mostrar brevemente el dashboard
+  // antes de redirigir.
+  return <AuthContext.Provider value={value}>{user ? children : null}</AuthContext.Provider>;
 };
