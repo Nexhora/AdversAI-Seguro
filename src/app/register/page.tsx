@@ -46,7 +46,7 @@ export default function RegisterPage() {
           <CardTitle className="text-2xl">Crear una Cuenta</CardTitle>
           <CardDescription>
             Ingresa tus datos para registrarte.
-          </CardDescription>
+          </Description>
         </CardHeader>
         <form onSubmit={handleRegister}>
           <CardContent className="grid gap-4">
