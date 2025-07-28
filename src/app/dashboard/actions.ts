@@ -2,7 +2,7 @@
 'use server';
 
 import { doc, setDoc, serverTimestamp, collection, addDoc, getDocs, query, orderBy, deleteDoc, Timestamp, getDoc, updateDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase'; // Importa la instancia DB correcta y segura
+import { db } from '@/lib/firebase';
 import type { BuilderState } from '@/types';
 import { format } from 'date-fns';
 
@@ -37,9 +37,9 @@ export async function savePageData(data: PageData) {
         throw new Error('Faltan datos requeridos para guardar la página.');
     }
     
-    // Ensure db is initialized
+    // El objeto db se importa directamente desde @/lib/firebase y ya está inicializado.
     if (!db) {
-        throw new Error("La conexión con la base de datos no está disponible.");
+        throw new Error("La conexión con la base de datos no está disponible. Revisa la configuración de Firebase.");
     }
 
     const dataToSave = {
@@ -101,20 +101,19 @@ export async function getUserPages(userId: string): Promise<{ id: string; name: 
 
         return querySnapshot.docs.map(doc => {
             const data = doc.data();
-            const updatedAt = data.updatedAt as Timestamp;
-            const createdAt = data.createdAt as Timestamp;
+            const updatedAt = data.updatedAt instanceof Timestamp ? data.updatedAt.toDate().toISOString() : new Date().toISOString();
+            const createdAt = data.createdAt instanceof Timestamp ? data.createdAt.toDate().toISOString() : new Date().toISOString();
             
             return {
                 id: doc.id,
                 name: data.name,
                 content: data.content, // Devolver como string
-                updatedAt: updatedAt ? updatedAt.toDate().toISOString() : new Date().toISOString(),
-                createdAt: createdAt ? createdAt.toDate().toISOString() : new Date().toISOString(),
+                updatedAt: updatedAt,
+                createdAt: createdAt,
             };
         });
     } catch (error) {
         console.error('Error al obtener las páginas del usuario desde Firestore:', error);
-        // Devuelve null para indicar un error en la obtención de datos
         return null;
     }
 }
@@ -171,14 +170,14 @@ export async function getPageData(userId: string, pageId: string): Promise<Fires
         const docSnap = await getDoc(pageDocRef);
         if (docSnap.exists()) {
             const data = docSnap.data();
-            const updatedAt = data.updatedAt as Timestamp;
-            const createdAt = data.createdAt as Timestamp;
+            const updatedAt = data.updatedAt instanceof Timestamp ? data.updatedAt.toDate().toISOString() : new Date().toISOString();
+            const createdAt = data.createdAt instanceof Timestamp ? data.createdAt.toDate().toISOString() : new Date().toISOString();
 
             return {
                 name: data.name,
                 content: data.content, // Devolver como string
-                updatedAt: updatedAt ? updatedAt.toDate().toISOString() : new Date().toISOString(),
-                createdAt: createdAt ? createdAt.toDate().toISOString() : new Date().toISOString(),
+                updatedAt: updatedAt,
+                createdAt: createdAt,
             };
         }
         return null;
