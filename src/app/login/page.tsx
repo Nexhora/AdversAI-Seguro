@@ -1,8 +1,8 @@
 
 'use client';
 
-import { useState } from 'react';
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { useState, useEffect } from 'react';
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,7 +13,6 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AlertCircle, Mail, KeyRound } from 'lucide-react';
 import Link from 'next/link';
 import { Logo } from '@/components/icons';
-import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 
@@ -22,23 +21,29 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
-  const { user, loading } = useAuth();
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user: User | null) => {
+      if (user) {
+        // If user is logged in, redirect to the dashboard.
+        router.replace('/dashboard/builder');
+      } else {
+        // If user is not logged in, stop loading.
+        setLoading(false);
+      }
+    });
+
+    // Clean up the subscription when the component unmounts
+    return () => unsubscribe();
+  }, [router]);
 
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <Loader2 className="h-16 w-16 animate-spin text-primary" />
       </div>
-    );
-  }
-
-  if (user) {
-    router.replace('/dashboard/builder');
-    return (
-       <div className="flex h-screen items-center justify-center">
-         <Loader2 className="h-16 w-16 animate-spin text-primary" />
-       </div>
     );
   }
 
@@ -51,7 +56,7 @@ export default function LoginPage() {
         title: '¡Bienvenido de nuevo!',
         description: 'Has iniciado sesión correctamente.',
       });
-      router.push('/dashboard/builder');
+      // The useEffect will handle the redirection
     } catch (err: any) {
       console.error(err);
       if (err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found') {
@@ -70,7 +75,7 @@ export default function LoginPage() {
         title: '¡Bienvenido!',
         description: 'Has iniciado sesión con Google correctamente.',
       });
-       router.push('/dashboard/builder');
+       // The useEffect will handle the redirection
     } catch (err) {
       console.error(err);
       setError('No se pudo iniciar sesión con Google.');
