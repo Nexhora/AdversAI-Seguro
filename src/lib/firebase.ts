@@ -5,18 +5,7 @@ import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
 import { getAuth, Auth } from "firebase/auth";
 import { getFirestore, Firestore } from "firebase/firestore";
 
-// Validar que las variables de entorno existan del lado del cliente
-if (
-  !process.env.NEXT_PUBLIC_FIREBASE_API_KEY ||
-  !process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN ||
-  !process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
-) {
-    // En el lado del cliente, no podemos mostrar un error fatal en el servidor.
-    // En su lugar, podemos registrarlo en la consola y la interfaz de usuario mostrará un error.
-    console.error("Firebase config environment variables are not set.");
-}
-
-
+// These variables are populated by App Hosting.
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -27,27 +16,29 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-
 let app: FirebaseApp;
 let auth: Auth;
 let db: Firestore;
 
-
+// This check prevents re-initializing the app on every render in the browser.
+// It also ensures that Firebase is only initialized on the client-side.
 if (typeof window !== 'undefined' && !getApps().length) {
     if (firebaseConfig.apiKey && firebaseConfig.projectId) {
         app = initializeApp(firebaseConfig);
         auth = getAuth(app);
         db = getFirestore(app);
     } else {
-        // En el cliente, si la configuración no está, no podemos inicializar.
-        // Los componentes que usen `useAuth` o `db` fallarán y mostrarán un estado de error.
-        console.error("Cannot initialize Firebase: Missing API Key or Project ID.");
+        // This error will be visible in the browser console if the environment variables are not set.
+        console.error("Firebase configuration variables are missing. App cannot be initialized.");
     }
-} else if (typeof window !== 'undefined' && getApps().length > 0) {
+} else if (getApps().length > 0) {
+    // If the app is already initialized, just get the existing instances.
     app = getApp();
     auth = getAuth(app);
     db = getFirestore(app);
 }
 
-// @ts-ignore
+// Export the initialized services.
+// The "as Auth" and "as Firestore" are necessary because they could be undefined if initialization fails.
+// Components using these should handle the possibility of them being uninitialized.
 export { app, auth, db };
