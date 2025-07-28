@@ -25,14 +25,37 @@ import {
 import { LogOut, User as UserIcon } from "lucide-react";
 import { SidebarNav } from "@/components/layout/sidebar-nav";
 
-function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
-  const { user, logout } = useAuth();
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const { user, loading, logout } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Loader2 className="h-16 w-16 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!user) {
+    // AuthProvider will handle the redirection.
+    // We can return a loader or null.
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Loader2 className="h-16 w-16 animate-spin text-primary" />
+      </div>
+    );
+  }
+  
   const userInitials =
-    user?.displayName
+    user.displayName
       ?.split(" ")
       .map((n) => n[0])
       .join("") ||
-    user?.email?.charAt(0).toUpperCase() ||
+    user.email?.charAt(0).toUpperCase() ||
     "U";
 
   return (
@@ -69,8 +92,8 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
                   <button>
                     <Avatar className="h-8 w-8">
                       <AvatarImage
-                        src={user?.photoURL || undefined}
-                        alt={user?.displayName || "User"}
+                        src={user.photoURL || undefined}
+                        alt={user.displayName || "User"}
                       />
                       <AvatarFallback>{userInitials}</AvatarFallback>
                     </Avatar>
@@ -78,7 +101,7 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>
-                    {user?.displayName || user?.email}
+                    {user.displayName || user.email}
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem disabled>
@@ -98,23 +121,4 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
       </div>
     </SidebarProvider>
   );
-}
-
-
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const { user, loading } = useAuth();
-
-  if (loading || !user) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <Loader2 className="h-16 w-16 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-  return <DashboardLayoutContent>{children}</DashboardLayoutContent>
 }

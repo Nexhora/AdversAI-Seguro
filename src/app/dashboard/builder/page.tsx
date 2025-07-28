@@ -174,7 +174,7 @@ const BuilderPageContent = () => {
   const searchParams = useSearchParams();
 
   const [isSaving, startSavingTransition] = useTransition();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false); // Simplified initial loading
   const [activePage, setActivePage] = useState<{ id: string, name: string } | null>(null);
     
   const [state, setState] = useState<BuilderState>(EMPTY_STATE);
@@ -189,58 +189,59 @@ const BuilderPageContent = () => {
   const [isDeleting, startDeletingTransition] = useTransition();
 
   
-  const loadPageFromUrl = useCallback(async (pageId: string) => {
-      if (!user) return;
-      setIsLoading(true);
-      try {
-          const pageData = await getPageData(user.uid, pageId);
-          if (pageData && pageData.content) {
-              const contentToLoad = JSON.parse(pageData.content);
-              if (contentToLoad) {
-                  setState(contentToLoad);
-                  setPageName(pageData.name);
-                  setActivePage({ id: pageId, name: pageData.name });
-                  toast({ title: "¡Página Cargada!", description: `Editando "${pageData.name}".` });
-              } else {
-                  toast({ variant: 'destructive', title: 'Error de Contenido', description: 'El formato de la página guardada está dañado. Se cargará un lienzo en blanco.' });
-                  router.replace('/dashboard/builder', { scroll: false });
-                  setState(EMPTY_STATE);
-              }
-          } else {
-              toast({ variant: 'destructive', title: 'Error', description: 'No se pudo encontrar la página para editar. Se cargará un lienzo en blanco.' });
-              router.replace('/dashboard/builder', { scroll: false });
-              setState(EMPTY_STATE);
-          }
-      } catch (error) {
-          console.error("Error al cargar datos de la página: ", error);
-          toast({ variant: 'destructive', title: 'Error al Cargar', description: 'No se pudieron obtener los datos de la página. Se cargará un lienzo en blanco.' });
-          setState(EMPTY_STATE);
-          router.replace('/dashboard/builder', { scroll: false });
-      } finally {
-          setIsLoading(false);
-      }
-  }, [user, router, toast]);
+  // // Temporarily disable page loading from URL to simplify the component
+  // const loadPageFromUrl = useCallback(async (pageId: string) => {
+  //     if (!user) return;
+  //     setIsLoading(true);
+  //     try {
+  //         const pageData = await getPageData(user.uid, pageId);
+  //         if (pageData && pageData.content) {
+  //             const contentToLoad = JSON.parse(pageData.content);
+  //             if (contentToLoad) {
+  //                 setState(contentToLoad);
+  //                 setPageName(pageData.name);
+  //                 setActivePage({ id: pageId, name: pageData.name });
+  //                 toast({ title: "¡Página Cargada!", description: `Editando "${pageData.name}".` });
+  //             } else {
+  //                 toast({ variant: 'destructive', title: 'Error de Contenido', description: 'El formato de la página guardada está dañado. Se cargará un lienzo en blanco.' });
+  //                 router.replace('/dashboard/builder', { scroll: false });
+  //                 setState(EMPTY_STATE);
+  //             }
+  //         } else {
+  //             toast({ variant: 'destructive', title: 'Error', description: 'No se pudo encontrar la página para editar. Se cargará un lienzo en blanco.' });
+  //             router.replace('/dashboard/builder', { scroll: false });
+  //             setState(EMPTY_STATE);
+  //         }
+  //     } catch (error) {
+  //         console.error("Error al cargar datos de la página: ", error);
+  //         toast({ variant: 'destructive', title: 'Error al Cargar', description: 'No se pudieron obtener los datos de la página. Se cargará un lienzo en blanco.' });
+  //         setState(EMPTY_STATE);
+  //         router.replace('/dashboard/builder', { scroll: false });
+  //     } finally {
+  //         setIsLoading(false);
+  //     }
+  // }, [user, router, toast]);
   
 
-  useEffect(() => {
-    if (authLoading) return;
-    if (!user) {
-        // Auth context will handle redirect
-        setIsLoading(false);
-        return;
-    }
+  // useEffect(() => {
+  //   if (authLoading) return;
+  //   if (!user) {
+  //       // Auth context will handle redirect
+  //       setIsLoading(false);
+  //       return;
+  //   }
     
-    const pageIdToLoad = searchParams.get('pageId');
-    if (pageIdToLoad) {
-        loadPageFromUrl(pageIdToLoad);
-    } else {
-        setState(EMPTY_STATE);
-        setActivePage(null);
-        setPageName('');
-        setIsLoading(false);
-    }
+  //   const pageIdToLoad = searchParams.get('pageId');
+  //   if (pageIdToLoad) {
+  //       // loadPageFromUrl(pageIdToLoad);
+  //   } else {
+  //       setState(EMPTY_STATE);
+  //       setActivePage(null);
+  //       setPageName('');
+  //       setIsLoading(false);
+  //   }
     
-  }, [searchParams, user, authLoading, loadPageFromUrl]);
+  // }, [searchParams, user, authLoading]);
 
 
   if (authLoading || isLoading) {
