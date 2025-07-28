@@ -1,7 +1,7 @@
 
 'use server';
 
-import { getFirestore, doc, setDoc, serverTimestamp, collection, addDoc, getDocs, query, orderBy, deleteDoc, Timestamp, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, setDoc, serverTimestamp, collection, addDoc, getDocs, query, orderBy, deleteDoc, Timestamp, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase'; // Importa la instancia DB correcta y segura
 import type { BuilderState } from '@/types';
 import { format } from 'date-fns';
@@ -37,6 +37,11 @@ export async function savePageData(data: PageData) {
         throw new Error('Faltan datos requeridos para guardar la página.');
     }
     
+    // Ensure db is initialized
+    if (!db) {
+        throw new Error("La conexión con la base de datos no está disponible.");
+    }
+
     const dataToSave = {
         name: pageName,
         content: siteContent, 
@@ -82,6 +87,10 @@ export async function getUserPages(userId: string): Promise<{ id: string; name: 
         return null;
     }
 
+    if (!db) {
+        throw new Error("La conexión con la base de datos no está disponible.");
+    }
+
     try {
         const pagesQuery = query(collection(db, 'sitios', userId, 'paginas'), orderBy('updatedAt', 'desc'));
         const querySnapshot = await getDocs(pagesQuery);
@@ -123,6 +132,9 @@ export async function deletePageData(userId: string, pageId: string) {
      if (!userId || !pageId) {
         throw new Error('Faltan el ID de usuario o el ID de la página.');
     }
+    if (!db) {
+        throw new Error("La conexión con la base de datos no está disponible.");
+    }
     try {
         const pageDocRef = doc(db, 'sitios', userId, 'paginas', pageId);
         await deleteDoc(pageDocRef);
@@ -150,6 +162,9 @@ export async function deletePageData(userId: string, pageId: string) {
 export async function getPageData(userId: string, pageId: string): Promise<FirestorePageData | null> {
     if (!userId || !pageId) {
         return null;
+    }
+    if (!db) {
+        throw new Error("La conexión con la base de datos no está disponible.");
     }
     try {
         const pageDocRef = doc(db, 'sitios', userId, 'paginas', pageId);
