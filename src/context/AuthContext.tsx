@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
@@ -61,7 +60,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     logout,
   };
 
-   if (loading && !publicRoutes.some(route => pathname.startsWith(route))) {
+  const isAuthRoute = pathname.startsWith('/auth');
+  const isProtectedRoute = !publicRoutes.some(route => pathname.startsWith(route));
+
+   if (loading && (isProtectedRoute || isAuthRoute)) {
     return (
       <div className="flex h-screen items-center justify-center bg-background">
         <Loader2 className="h-16 w-16 animate-spin text-primary" />
