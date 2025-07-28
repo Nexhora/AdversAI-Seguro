@@ -14,12 +14,16 @@ import {googleAI} from '@genkit-ai/googleai';
 
 // Initialize Genkit with the Google AI plugin.
 // The API key is provided as an environment variable by App Hosting.
+// We only initialize the plugin if the key is actually present.
+const plugins = [];
+if (process.env.GOOGLE_API_KEY) {
+  plugins.push(googleAI({
+    apiKey: process.env.GOOGLE_API_KEY,
+  }));
+}
+
 export const ai = genkit({
-  plugins: [
-    googleAI({
-      apiKey: process.env.GOOGLE_API_KEY,
-    }),
-  ],
+  plugins,
   // Disabling telemetry and logging for a cleaner setup.
   enableV1Telemetry: false,
   logLevel: 'silent',
