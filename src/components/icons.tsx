@@ -14,7 +14,7 @@ export function Logo(props: SVGProps<SVGSVGElement>) {
       className={cn("size-6", props.className)}
       {...props}
     >
-      <path d="M12 2L2 7l10 5 10-5-10-5z" fill="hsl(25 95% 53%)" />
+      <path d="M12 2L2 7l10 5 10-5-10-5z" fill="hsl(var(--primary))" />
       <path d="M2 17l10 5 10-5" />
       <path d="M2 12l10 5 10-5" />
     </svg>
