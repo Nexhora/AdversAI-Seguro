@@ -167,43 +167,6 @@ const EditPanel = ({ selectedSection, onChange, onMove, onDelete, onDuplicate, s
   );
 };
 
-
-/**
- * Helper function to safely parse and validate the structure of the page content.
- * @param content Stringified JSON content.
- * @returns A valid BuilderState or null if parsing/validation fails.
- */
-const parseAndValidateState = (content: string | null): BuilderState | null => {
-    if (!content) return null;
-    try {
-        const parsed = JSON.parse(content);
-        // Robust validation: Check for the { page: [...] } structure.
-        if (parsed && typeof parsed === 'object' && Array.isArray(parsed.page)) {
-            // Further validation to ensure sections are objects with type and props
-            const isValid = parsed.page.every((section: any) => 
-                typeof section === 'object' &&
-                section !== null &&
-                'type' in section &&
-                'props' in section
-            );
-            if (isValid) {
-                // Ensure all sections have an ID for the builder
-                const pageWithIds = parsed.page.map((section: Section) => ({
-                    ...section,
-                    id: section.id || nanoid(),
-                }));
-                return { ...parsed, page: pageWithIds };
-            }
-        }
-        console.error("Invalid page structure after parsing:", parsed);
-        return null;
-    } catch (error) {
-        console.error("Error parsing page content JSON:", error);
-        return null;
-    }
-};
-
-
 const BuilderPageContent = () => {
   const { user, loading: authLoading } = useAuth();
   const { toast } = useToast();
@@ -232,7 +195,7 @@ const BuilderPageContent = () => {
       try {
           const pageData = await getPageData(user.uid, pageId);
           if (pageData && pageData.content) {
-              const contentToLoad = parseAndValidateState(pageData.content);
+              const contentToLoad = JSON.parse(pageData.content);
               if (contentToLoad) {
                   setState(contentToLoad);
                   setPageName(pageData.name);
@@ -607,3 +570,5 @@ export default function BuilderPage() {
         </React.Suspense>
     )
 }
+
+    
