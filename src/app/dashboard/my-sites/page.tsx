@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Button } from '@/components/ui/button';
 import { Briefcase, Loader2, AlertTriangle, ExternalLink, Plus, Trash2, Pencil } from "lucide-react";
 import { useAuth } from '@/context/AuthContext';
-import { getUserPages, deletePageData } from '../actions';
+// import { getUserPages, deletePageData } from '../actions';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {
@@ -45,21 +45,23 @@ export default function MySitesPage() {
         if (!user) return;
         setLoading(true);
         setError(null);
-        try {
-            const pages = await getUserPages(user.uid);
-            if (pages === null) {
-                 setError("No se pudieron cargar las páginas. Puede que haya un problema con la conexión.");
-                 setSavedPages([]);
-            } else {
-                setSavedPages(pages as SavedPage[]);
-            }
-        } catch (e) {
-            console.error(e);
-            setError(e instanceof Error ? e.message : "No se pudieron cargar los datos de tus páginas.");
-            setSavedPages([]);
-        } finally {
-            setLoading(false);
-        }
+        toast({ variant: 'destructive', title: 'Funcionalidad Desactivada', description: 'La carga de páginas guardadas está temporalmente desactivada.' });
+        setLoading(false);
+        // try {
+        //     const pages = await getUserPages(user.uid);
+        //     if (pages === null) {
+        //          setError("No se pudieron cargar las páginas. Puede que haya un problema con la conexión.");
+        //          setSavedPages([]);
+        //     } else {
+        //         setSavedPages(pages as SavedPage[]);
+        //     }
+        // } catch (e) {
+        //     console.error(e);
+        //     setError(e instanceof Error ? e.message : "No se pudieron cargar los datos de tus páginas.");
+        //     setSavedPages([]);
+        // } finally {
+        //     setLoading(false);
+        // }
     };
 
     useEffect(() => {
@@ -74,21 +76,23 @@ export default function MySitesPage() {
 
     const handleDelete = async () => {
         if (!pageToDelete || !user) return;
-
+        
         startDeletingTransition(async () => {
-            try {
-                await deletePageData(user.uid, pageToDelete.id);
-                toast({ title: '¡Éxito!', description: `La página "${pageToDelete.name}" ha sido eliminada.` });
-                setSavedPages(prev => prev.filter(p => p.id !== pageToDelete.id));
-            } catch (error) {
-                 toast({
-                    variant: 'destructive',
-                    title: 'Error al eliminar',
-                    description: error instanceof Error ? error.message : 'No se pudo eliminar la página.',
-                });
-            } finally {
-                setPageToDelete(null);
-            }
+            toast({ variant: 'destructive', title: 'Funcionalidad Desactivada', description: 'La eliminación de páginas está temporalmente desactivada.' });
+            setPageToDelete(null);
+            // try {
+            //     await deletePageData(user.uid, pageToDelete.id);
+            //     toast({ title: '¡Éxito!', description: `La página "${pageToDelete.name}" ha sido eliminada.` });
+            //     setSavedPages(prev => prev.filter(p => p.id !== pageToDelete.id));
+            // } catch (error) {
+            //      toast({
+            //         variant: 'destructive',
+            //         title: 'Error al eliminar',
+            //         description: error instanceof Error ? error.message : 'No se pudo eliminar la página.',
+            //     });
+            // } finally {
+            //     setPageToDelete(null);
+            // }
         });
     };
     
@@ -111,7 +115,7 @@ export default function MySitesPage() {
                         <Briefcase /> Mis Páginas Guardadas
                     </CardTitle>
                     <CardDescription>
-                        Aquí puedes ver la lista de todas tus páginas creadas. Puedes previsualizarlas, editarlas o eliminarlas.
+                        Aquí puedes ver la lista de todas tus páginas creadas. (Funcionalidad de carga desactivada temporalmente)
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -138,13 +142,13 @@ export default function MySitesPage() {
                                             </p>
                                         </div>
                                         <div className="flex items-center gap-2 flex-shrink-0">
-                                            <Button asChild variant="outline" size="sm">
+                                            <Button asChild variant="outline" size="sm" disabled>
                                                 <a href={`/preview/${user?.uid}/${page.id}`} target="_blank" rel="noopener noreferrer">
                                                     <ExternalLink className="mr-2 h-4 w-4"/>
                                                     Vista Previa
                                                 </a>
                                             </Button>
-                                            <Button asChild variant="secondary" size="sm">
+                                            <Button asChild variant="secondary" size="sm" disabled>
                                                 <Link href={`/dashboard/builder?pageId=${page.id}`}>
                                                     <Pencil className="mr-2 h-4 w-4"/>
                                                     Editar
@@ -162,7 +166,7 @@ export default function MySitesPage() {
                         <div className="text-center py-10 border-2 border-dashed rounded-lg">
                             <Briefcase className="mx-auto h-12 w-12 text-muted-foreground" />
                             <h3 className="mt-4 text-lg font-semibold">No tienes páginas guardadas</h3>
-                            <p className="mt-1 text-sm text-muted-foreground">Empieza a construir una página en el laboratorio.</p>
+                            <p className="mt-1 text-sm text-muted-foreground">La carga de páginas está temporalmente desactivada.</p>
                         </div>
                     )}
                 </CardContent>
