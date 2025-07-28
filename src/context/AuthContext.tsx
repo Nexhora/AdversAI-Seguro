@@ -5,6 +5,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { useRouter, usePathname } from 'next/navigation';
+import { Loader2 } from 'lucide-react';
 
 interface AuthContextType {
   user: User | null;
@@ -22,15 +23,10 @@ export const useAuth = () => {
   return context;
 };
 
-// Define public and protected routes
-const protectedRoutes = ['/dashboard'];
-const publicRoutes = ['/login', '/register'];
-
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const pathname = usePathname();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -43,30 +39,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (loading) return;
 
-    const pathIsProtected = protectedRoutes.some(path => pathname.startsWith(path));
-    const pathIsPublic = publicRoutes.includes(pathname);
-
-    // If not authenticated and trying to access a protected route, redirect to login
-    if (!user && pathIsProtected) {
+    // Dado que este proveedor ahora solo vive dentro de las rutas del dashboard,
+    // la lógica es más simple: si no hay usuario, redirige a login.
+    if (!user) {
       router.replace('/login');
     }
 
-    // If authenticated and trying to access a public-only route (like login), redirect to dashboard
-    if (user && pathIsPublic) {
-      router.replace('/dashboard/builder');
-    }
-
-    // If authenticated and on the root page, redirect to dashboard
-    if (user && pathname === '/') {
-       router.replace('/dashboard/builder');
-    }
-
-    // If not authenticated and on the root page, redirect to login
-    if (!user && pathname === '/') {
-        router.replace('/login');
-    }
-
-  }, [user, loading, router, pathname]);
+  }, [user, loading, router]);
 
   const logout = async () => {
     await signOut(auth);
@@ -78,6 +57,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     loading,
     logout,
   };
+
+  // Mientras se carga, no mostramos nada para evitar parpadeos.
+  // La redirección se encargará si no hay sesión.
+   if (loading || !user) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-background">
+        <Loader2 className="h-16 w-16 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

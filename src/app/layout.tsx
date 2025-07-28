@@ -2,7 +2,6 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
-import { AuthProvider } from '@/context/AuthContext';
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from '@/lib/utils';
 
@@ -31,9 +30,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AuthProvider>
             {children}
-          </AuthProvider>
           <Toaster />
         </ThemeProvider>
       </body>
