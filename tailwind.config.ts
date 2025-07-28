@@ -18,10 +18,6 @@ const config = {
       },
     },
     extend: {
-      fontFamily: {
-        sans: ["var(--font-pt-sans)"],
-        heading: ["var(--font-poppins)"],
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
