@@ -1,31 +1,27 @@
+
 'use client';
 
 import { useEffect } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 import { Loader2 } from 'lucide-react';
 
-// This component acts as a router. It checks the auth state and redirects
-// to the appropriate page. It is never intended to be visible to the user.
-export default function RootPage() {
+export default function Home() {
+  const { user, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (!loading) {
       if (user) {
         router.replace('/dashboard/builder');
       } else {
-        router.replace('/auth/login');
+        router.replace('/landing');
       }
-    });
-
-    // Cleanup subscription on unmount
-    return () => unsubscribe();
-  }, [router]);
+    }
+  }, [user, loading, router]);
 
   return (
-    <div className="flex h-screen w-full items-center justify-center">
+    <div className="flex h-screen items-center justify-center bg-background">
       <Loader2 className="h-16 w-16 animate-spin text-primary" />
     </div>
   );

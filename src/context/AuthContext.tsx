@@ -1,9 +1,10 @@
-"use client";
+
+'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 
 interface AuthContextType {
@@ -22,10 +23,13 @@ export const useAuth = () => {
   return context;
 };
 
+const publicRoutes = ['/landing', '/auth/login', '/auth/register'];
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -38,17 +42,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (loading) return;
 
-    // Dado que este proveedor ahora solo vive dentro de las rutas del dashboard,
-    // la lógica es más simple: si no hay usuario, redirige a login.
-    if (!user) {
-      router.replace('/auth/login');
-    }
+    const isPublicRoute = publicRoutes.some(route => pathname.startsWith(route));
 
-  }, [user, loading, router]);
+    // Si no hay usuario y está intentando acceder a una ruta protegida
+    if (!user && !isPublicRoute) {
+      router.replace('/landing');
+    }
+  }, [user, loading, router, pathname]);
 
   const logout = async () => {
     await signOut(auth);
-    router.replace('/');
+    router.replace('/landing');
   };
 
   const value = {
@@ -57,8 +61,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     logout,
   };
 
-  // Mientras se carga, no mostramos nada para evitar parpadeos.
-  // La redirección se encargará si no hay sesión.
    if (loading) {
     return (
       <div className="flex h-screen items-center justify-center bg-background">
@@ -67,8 +69,5 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     );
   }
   
-  // Si no hay usuario, el useEffect de arriba ya habrá iniciado la redirección.
-  // Renderizar children solo si hay un usuario evita mostrar brevemente el dashboard
-  // antes de redirigir.
-  return <AuthContext.Provider value={value}>{user ? children : null}</AuthContext.Provider>;
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
