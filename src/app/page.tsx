@@ -13,7 +13,9 @@ function AuthenticatedView({ user }) {
   const handleLogout = async () => {
     try {
       await signOut(auth);
+      // Force a reload to ensure context is cleared and user is redirected properly
       router.push('/');
+      router.refresh(); 
     } catch (error) {
       console.error("Error signing out: ", error);
     }
