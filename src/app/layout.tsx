@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, PT_Sans } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
+import { cn } from "@/lib/utils";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -26,8 +27,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${poppins.variable} ${ptSans.variable}`}>
-      <body>
+    <html lang="es" suppressHydrationWarning>
+      <body className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          poppins.variable, 
+          ptSans.variable
+        )}>
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
