@@ -1,6 +1,4 @@
 
-'use client';
-
 import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
 import { getAuth, Auth } from "firebase/auth";
 import { getFirestore, Firestore } from "firebase/firestore";
@@ -16,30 +14,21 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-let app: FirebaseApp;
-let auth: Auth;
-let db: Firestore;
-
-// This check prevents re-initializing the app on every render in the browser.
-// It also ensures that Firebase is only initialized on the client-side.
-if (typeof window !== 'undefined') {
-    if (!getApps().length) {
-        // Only initialize if all the necessary config variables are present
-        if (firebaseConfig.apiKey && firebaseConfig.projectId) {
-            app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-        } else {
-            console.error("Firebase configuration variables are missing. Firebase cannot be initialized.");
-        }
-    } else {
-        // If the app is already initialized, just get the existing instances.
-        app = getApp();
-        auth = getAuth(app);
-        db = getFirestore(app);
+// Helper function to initialize Firebase and return app, auth, and db
+function initializeFirebase() {
+    if (firebaseConfig.apiKey && firebaseConfig.projectId) {
+        const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        return { app, auth, db };
     }
+    // This should not happen in a correctly configured environment
+    console.error("Firebase configuration variables are missing.");
+    // Return nulls or throw an error if configuration is missing
+    return { app: null, auth: null, db: null };
 }
 
+const { app, auth, db } = initializeFirebase();
 
 // Export the initialized services.
 // The "as Auth" and "as Firestore" are necessary because they could be undefined if initialization fails.
