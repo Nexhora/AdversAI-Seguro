@@ -1,5 +1,9 @@
+
 "use client";
 
+import React from "react";
+import { useAuth } from "@/context/AuthContext";
+import { Loader2 } from "lucide-react";
 import { Logo } from "@/components/icons";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -15,31 +19,14 @@ import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
-  SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { useAuth } from "@/context/AuthContext";
 import { LogOut, User as UserIcon } from "lucide-react";
 import { SidebarNav } from "@/components/layout/sidebar-nav";
-import React from "react";
-import { Loader2 } from "lucide-react";
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const { user, loading, logout } = useAuth();
-
-  if (loading || !user) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <Loader2 className="h-16 w-16 animate-spin text-primary" />
-      </div>
-    );
-  }
-
+function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
+  const { user, logout } = useAuth();
   const userInitials =
     user?.displayName
       ?.split(" ")
@@ -111,4 +98,23 @@ export default function DashboardLayout({
       </div>
     </SidebarProvider>
   );
+}
+
+
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const { user, loading } = useAuth();
+
+  if (loading || !user) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Loader2 className="h-16 w-16 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  return <DashboardLayoutContent>{children}</DashboardLayoutContent>
 }

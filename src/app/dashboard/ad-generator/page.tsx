@@ -13,13 +13,13 @@ export default function AdGeneratorPage() {
                         <BotMessageSquare /> Generador de Anuncios
                     </CardTitle>
                     <CardDescription>
-                        Esta sección está en construcción. Aquí podrás generar creatividades para tus campañas publicitarias utilizando IA.
+                        Crea anuncios efectivos describiendo tu producto o servicio.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <div className="text-center py-10 border-2 border-dashed rounded-lg">
-                        <h3 className="mt-4 text-lg font-semibold">Próximamente</h3>
-                        <p className="mt-1 text-sm text-muted-foreground">Estamos trabajando para traer esta funcionalidad lo antes posible.</p>
+                        <h3 className="mt-4 text-lg font-semibold">Funcionalidad en Desarrollo</h3>
+                        <p className="mt-1 text-sm text-muted-foreground">Esta área se encuentra en construcción activa.</p>
                     </div>
                 </CardContent>
             </Card>

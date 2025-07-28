@@ -20,7 +20,6 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { useToast } from '@/hooks/use-toast';
-import type { BuilderState } from '@/types';
 
 
 interface SavedPage {
@@ -66,7 +65,6 @@ export default function MySitesPage() {
         if (!authLoading && user) {
             fetchUserPages();
         } else if (!authLoading && !user) {
-            // El layout se encargará de la redirección
             setLoading(false);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -181,7 +179,7 @@ export default function MySitesPage() {
             <AlertDialog open={!!pageToDelete} onOpenChange={(open) => !open && setPageToDelete(null)}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                    <AlertDialogTitle>¿Estás absolutely seguro?</AlertDialogTitle>
+                    <AlertDialogTitle>¿Estás absolutamente seguro?</AlertDialogTitle>
                     <AlertDialogDescription>
                         Esta acción no se puede deshacer. Esto eliminará permanentemente la página
                         <span className="font-semibold"> {pageToDelete?.name} </span>
