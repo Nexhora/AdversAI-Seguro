@@ -1,10 +1,23 @@
 import type { Metadata } from "next";
+import { Poppins, PT_Sans } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-poppins",
+});
+
+const ptSans = PT_Sans({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-pt-sans",
+});
+
 export const metadata: Metadata = {
-  title: "AdVerseAI - Reconstruyendo",
-  description: "Base funcional para la reconstrucción.",
+  title: "AdVerseAI",
+  description: "Plataforma de IA para la creación y optimización de campañas publicitarias.",
 };
 
 export default function RootLayout({
@@ -13,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" className={`${poppins.variable} ${ptSans.variable}`}>
       <body>
         <AuthProvider>{children}</AuthProvider>
       </body>
