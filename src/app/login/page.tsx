@@ -20,7 +20,7 @@ export default function LoginPage() {
       <div className="mb-8">
         <Link href="/" className="flex items-center gap-3 text-white">
           <Logo className="size-8" />
-          <span className="text-2xl font-bold font-headline">Nexhora</span>
+          <span className="text-2xl font-bold font-headline">AdVerseAI</span>
         </Link>
       </div>
       <Tabs defaultValue="login" className="w-full max-w-md">
