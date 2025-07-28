@@ -13,12 +13,9 @@ function AuthenticatedView({ user }) {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      // The onAuthStateChanged listener in AuthContext will handle the user state change.
-      // We can optionally redirect here if needed, but the view will update automatically.
       router.push('/');
     } catch (error) {
       console.error("Error signing out: ", error);
-      // Optionally, show an error message to the user
     }
   };
 
@@ -31,6 +28,9 @@ function AuthenticatedView({ user }) {
         Sesión iniciada como {user.email}.
       </p>
       <div className="flex justify-center gap-4">
+         <Button asChild>
+           <Link href="/dashboard">Ir al Panel</Link>
+        </Button>
         <Button onClick={handleLogout} variant="secondary">Cerrar Sesión</Button>
       </div>
     </div>
@@ -41,16 +41,16 @@ function UnauthenticatedView() {
   return (
     <div className="text-center space-y-4">
       <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
-        AdVerseAI - Reconstrucción
+        AdVerseAI
       </h1>
-      <p className="text-lg leading-8 text-muted-foreground">
-        Por favor, inicia sesión o regístrate para continuar.
+       <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-muted-foreground">
+        La plataforma de IA para la creación y optimización de campañas publicitarias que convierte ideas en resultados.
       </p>
       <div className="flex justify-center gap-4">
-        <Button asChild>
+        <Button asChild size="lg">
            <Link href="/login">Iniciar Sesión</Link>
         </Button>
-        <Button asChild variant="secondary">
+        <Button asChild variant="secondary" size="lg">
           <Link href="/register">Registrarse</Link>
         </Button>
       </div>

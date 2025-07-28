@@ -28,7 +28,7 @@ export default function RegisterPage() {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      router.push("/");
+      router.push("/dashboard");
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
         setError("Este correo electrónico ya está en uso.");
