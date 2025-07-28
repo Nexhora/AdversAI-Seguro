@@ -26,7 +26,7 @@ import { SidebarNav } from "@/components/layout/sidebar-nav";
 import React from "react";
 import { Loader2 } from "lucide-react";
 
-function DashboardLayoutContent({
+export default function DashboardLayout({
     children,
 }: {
     children: React.ReactNode;
@@ -98,14 +98,4 @@ function DashboardLayoutContent({
         </SidebarInset>
         </SidebarProvider>
     );
-}
-
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <DashboardLayoutContent>{children}</DashboardLayoutContent>
-  );
 }
