@@ -20,16 +20,27 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { useAuth, AuthProvider } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 import { LogOut, User as UserIcon } from "lucide-react";
 import { SidebarNav } from "@/components/layout/sidebar-nav";
+import React from "react";
+import { Loader2 } from "lucide-react";
 
 function DashboardLayoutContent({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    const { user, logout } = useAuth();
+    const { user, loading, logout } = useAuth();
+    
+    // Mientras carga o si no hay usuario (y se está redirigiendo), muestra un loader
+    if (loading || !user) {
+        return (
+            <div className="flex h-screen items-center justify-center">
+                <Loader2 className="h-16 w-16 animate-spin text-primary" />
+            </div>
+        );
+    }
     
     const userInitials = user?.displayName?.split(' ').map(n => n[0]).join('') || user?.email?.charAt(0).toUpperCase() || 'U';
 
@@ -95,8 +106,6 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <AuthProvider>
-        <DashboardLayoutContent>{children}</DashboardLayoutContent>
-    </AuthProvider>
+    <DashboardLayoutContent>{children}</DashboardLayoutContent>
   );
 }

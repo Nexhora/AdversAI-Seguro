@@ -23,7 +23,7 @@ export const useAuth = () => {
   return context;
 };
 
-const publicRoutes = ['/landing', '/auth/login', '/auth/register'];
+const publicRoutes = ['/landing', '/auth/login', '/auth/register', '/preview'];
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (loading) return;
 
     const isPublicRoute = publicRoutes.some(route => pathname.startsWith(route));
-
+    
     // Si no hay usuario y está intentando acceder a una ruta protegida
     if (!user && !isPublicRoute) {
       router.replace('/landing');
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     logout,
   };
 
-   if (loading) {
+   if (loading && !publicRoutes.some(route => pathname.startsWith(route))) {
     return (
       <div className="flex h-screen items-center justify-center bg-background">
         <Loader2 className="h-16 w-16 animate-spin text-primary" />
