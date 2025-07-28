@@ -3,7 +3,6 @@
 
 import React, { useEffect } from 'react';
 import { Loader2 } from 'lucide-react';
-import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
