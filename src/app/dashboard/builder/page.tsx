@@ -31,7 +31,7 @@ import { Label } from '@/components/ui/label';
 import { Save, Loader2, FolderDown, Eye, FlaskConical, AlertTriangle, Trash2, Copy, ArrowUp, ArrowDown, LayoutTemplate } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-// import { savePageData, getUserPages, getPageData, deletePageData } from '../actions';
+import { savePageData, getUserPages, getPageData, deletePageData } from '../actions';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { nanoid } from 'nanoid';
 import type { BuilderState, Section } from '@/types';
@@ -192,37 +192,33 @@ const BuilderPageContent = () => {
   const loadPageFromUrl = useCallback(async (pageId: string) => {
       if (!user) return;
       setIsLoading(true);
-      toast({ variant: 'destructive', title: 'Funcionalidad Desactivada', description: 'La carga de páginas está temporalmente desactivada.' });
-      router.replace('/dashboard/builder', { scroll: false });
-      setState(EMPTY_STATE);
-      setIsLoading(false);
-      // try {
-      //     const pageData = await getPageData(user.uid, pageId);
-      //     if (pageData && pageData.content) {
-      //         const contentToLoad = JSON.parse(pageData.content);
-      //         if (contentToLoad) {
-      //             setState(contentToLoad);
-      //             setPageName(pageData.name);
-      //             setActivePage({ id: pageId, name: pageData.name });
-      //             toast({ title: "¡Página Cargada!", description: `Editando "${pageData.name}".` });
-      //         } else {
-      //             toast({ variant: 'destructive', title: 'Error de Contenido', description: 'El formato de la página guardada está dañado. Se cargará un lienzo en blanco.' });
-      //             router.replace('/dashboard/builder', { scroll: false });
-      //             setState(EMPTY_STATE);
-      //         }
-      //     } else {
-      //         toast({ variant: 'destructive', title: 'Error', description: 'No se pudo encontrar la página para editar. Se cargará un lienzo en blanco.' });
-      //         router.replace('/dashboard/builder', { scroll: false });
-      //         setState(EMPTY_STATE);
-      //     }
-      // } catch (error) {
-      //     console.error("Error al cargar datos de la página: ", error);
-      //     toast({ variant: 'destructive', title: 'Error al Cargar', description: 'No se pudieron obtener los datos de la página. Se cargará un lienzo en blanco.' });
-      //     setState(EMPTY_STATE);
-      //     router.replace('/dashboard/builder', { scroll: false });
-      // } finally {
-      //     setIsLoading(false);
-      // }
+      try {
+          const pageData = await getPageData(user.uid, pageId);
+          if (pageData && pageData.content) {
+              const contentToLoad = JSON.parse(pageData.content);
+              if (contentToLoad) {
+                  setState(contentToLoad);
+                  setPageName(pageData.name);
+                  setActivePage({ id: pageId, name: pageData.name });
+                  toast({ title: "¡Página Cargada!", description: `Editando "${pageData.name}".` });
+              } else {
+                  toast({ variant: 'destructive', title: 'Error de Contenido', description: 'El formato de la página guardada está dañado. Se cargará un lienzo en blanco.' });
+                  router.replace('/dashboard/builder', { scroll: false });
+                  setState(EMPTY_STATE);
+              }
+          } else {
+              toast({ variant: 'destructive', title: 'Error', description: 'No se pudo encontrar la página para editar. Se cargará un lienzo en blanco.' });
+              router.replace('/dashboard/builder', { scroll: false });
+              setState(EMPTY_STATE);
+          }
+      } catch (error) {
+          console.error("Error al cargar datos de la página: ", error);
+          toast({ variant: 'destructive', title: 'Error al Cargar', description: 'No se pudieron obtener los datos de la página. Se cargará un lienzo en blanco.' });
+          setState(EMPTY_STATE);
+          router.replace('/dashboard/builder', { scroll: false });
+      } finally {
+          setIsLoading(false);
+      }
   }, [user, router, toast]);
   
 
@@ -300,9 +296,8 @@ const BuilderPageContent = () => {
   }
 
   const handleSave = () => {
-    toast({ variant: "destructive", title: "Funcionalidad Desactivada", description: "El guardado está temporalmente desactivado para solucionar un problema." });
-    // setPageName(activePage?.name || pageName || 'Mi Nueva Página');
-    // setSaveDialogOpen(true);
+    setPageName(activePage?.name || pageName || 'Mi Nueva Página');
+    setSaveDialogOpen(true);
   };
 
   const handleConfirmSave = () => {
@@ -312,51 +307,50 @@ const BuilderPageContent = () => {
     }
 
     startSavingTransition(async () => {
-      toast({ variant: "destructive", title: "Funcionalidad Desactivada", description: "El guardado está temporalmente desactivado." });
-      // try {
-      //   const result = await savePageData({
-      //       userId: user.uid,
-      //       pageId: activePage?.id,
-      //       pageName: pageName,
-      //       siteContent: JSON.stringify(state),
-      //   });
+      try {
+        const result = await savePageData({
+            userId: user.uid,
+            pageId: activePage?.id,
+            pageName: pageName,
+            siteContent: JSON.stringify(state),
+        });
 
-      //   if (result.pageId) {
-      //       setActivePage({ id: result.pageId, name: pageName });
-      //       if (!activePage?.id || activePage?.id !== result.pageId) {
-      //           router.replace(`/dashboard/builder?pageId=${result.pageId}`, { scroll: false });
-      //       }
-      //   }
+        if (result.pageId) {
+            setActivePage({ id: result.pageId, name: pageName });
+            if (!activePage?.id || activePage?.id !== result.pageId) {
+                router.replace(`/dashboard/builder?pageId=${result.pageId}`, { scroll: false });
+            }
+        }
         
-      //   toast({ title: '¡Éxito!', description: result.message });
-      //   setSaveDialogOpen(false);
-      // } catch (error) {
-      //   console.error("Error saving page:", error);
-      //   toast({
-      //       variant: 'destructive',
-      //       title: 'Error al Guardar',
-      //       description: error instanceof Error ? error.message : 'No se pudo guardar la página.',
-      //   });
-      // }
+        toast({ title: '¡Éxito!', description: result.message });
+        setSaveDialogOpen(false);
+      } catch (error) {
+        console.error("Error saving page:", error);
+        toast({
+            variant: 'destructive',
+            title: 'Error al Guardar',
+            description: error instanceof Error ? error.message : 'No se pudo guardar la página.',
+        });
+      }
     });
   }
   
   const handleLoad = () => {
     setLoadDialogOpen(true);
-    // startLoadingPages(async () => {
-    //     try {
-    //         const pages = await getUserPages(user.uid);
-    //         if (pages) {
-    //             setSavedPages(pages as SavedPage[]);
-    //         } else {
-    //              toast({ variant: 'destructive', title: 'Error', description: 'No se pudieron cargar tus páginas.' });
-    //              setSavedPages([]);
-    //         }
-    //     } catch (error) {
-    //         toast({ variant: 'destructive', title: 'Error', description: 'Ocurrió un error al buscar tus páginas guardadas.' });
-    //         setSavedPages([]);
-    //     }
-    // });
+    startLoadingPages(async () => {
+        try {
+            const pages = await getUserPages(user.uid);
+            if (pages) {
+                setSavedPages(pages as SavedPage[]);
+            } else {
+                 toast({ variant: 'destructive', title: 'Error', description: 'No se pudieron cargar tus páginas.' });
+                 setSavedPages([]);
+            }
+        } catch (error) {
+            toast({ variant: 'destructive', title: 'Error', description: 'Ocurrió un error al buscar tus páginas guardadas.' });
+            setSavedPages([]);
+        }
+    });
   };
 
   const handleLoadPage = (pageId: string) => {
@@ -369,47 +363,40 @@ const BuilderPageContent = () => {
   };
 
   const handlePreview = () => {
-     toast({
-        title: 'Funcionalidad Desactivada',
-        description: 'Debes guardar la página para poder previsualizarla, y el guardado está desactivado.',
+    if (activePage?.id) {
+         window.open(`/preview/${user.uid}/${activePage.id}`, '_blank');
+         return;
+    }
+    toast({
+        title: 'Guarda primero',
+        description: 'Debes guardar la página para poder previsualizarla.',
         variant: 'destructive'
     });
-    // if (activePage?.id) {
-    //      window.open(`/preview/${user.uid}/${activePage.id}`, '_blank');
-    //      return;
-    // }
-    // toast({
-    //     title: 'Guarda primero',
-    //     description: 'Debes guardar la página para poder previsualizarla.',
-    //     variant: 'destructive'
-    // });
   };
 
   const confirmDeletePage = async () => {
     if (!pageToDelete || !user) return;
 
     startDeletingTransition(async () => {
-        toast({ variant: "destructive", title: "Funcionalidad Desactivada", description: "El borrado está temporalmente desactivado." });
-        setPageToDelete(null);
-        // try {
-        //     await deletePageData(user.uid, pageToDelete.id);
-        //     toast({ title: '¡Éxito!', description: `La página "${pageToDelete.name}" ha sido eliminada.` });
-        //     setSavedPages(prev => prev.filter(p => p.id !== pageToDelete.id));
-        //      if (activePage?.id === pageToDelete.id) {
-        //         router.replace('/dashboard/builder');
-        //         setState(EMPTY_STATE);
-        //         setActivePage(null);
-        //         setPageName('');
-        //     }
-        // } catch (error) {
-        //      toast({
-        //         variant: 'destructive',
-        //         title: 'Error al eliminar',
-        //         description: error instanceof Error ? error.message : 'No se pudo eliminar la página.',
-        //     });
-        // } finally {
-        //     setPageToDelete(null);
-        // }
+        try {
+            await deletePageData(user.uid, pageToDelete.id);
+            toast({ title: '¡Éxito!', description: `La página "${pageToDelete.name}" ha sido eliminada.` });
+            setSavedPages(prev => prev.filter(p => p.id !== pageToDelete.id));
+             if (activePage?.id === pageToDelete.id) {
+                router.replace('/dashboard/builder');
+                setState(EMPTY_STATE);
+                setActivePage(null);
+                setPageName('');
+            }
+        } catch (error) {
+             toast({
+                variant: 'destructive',
+                title: 'Error al eliminar',
+                description: error instanceof Error ? error.message : 'No se pudo eliminar la página.',
+            });
+        } finally {
+            setPageToDelete(null);
+        }
     });
   };
 
@@ -515,7 +502,7 @@ const BuilderPageContent = () => {
             <DialogContent className="sm:max-w-[625px]">
                 <DialogHeader>
                     <DialogTitle>Cargar Página Guardada</DialogTitle>
-                    <DialogDescription>Selecciona una de tus páginas para continuar editando. (Funcionalidad desactivada)</DialogDescription>
+                    <DialogDescription>Selecciona una de tus páginas para continuar editando.</DialogDescription>
                 </DialogHeader>
                  <ScrollArea className="h-72">
                     <div className="p-4">
@@ -530,7 +517,7 @@ const BuilderPageContent = () => {
                                             <p className="text-xs text-muted-foreground">Actualizado: {new Date(page.updatedAt).toLocaleString()}</p>
                                         </div>
                                         <div className='flex gap-2'>
-                                            <Button size="sm" variant="secondary" onClick={() => handleLoadPage(page.id)} disabled>Cargar</Button>
+                                            <Button size="sm" variant="secondary" onClick={() => handleLoadPage(page.id)} disabled={isLoading}>Cargar</Button>
                                             <Button size="sm" variant="destructive" onClick={() => setPageToDelete(page)} disabled={isDeleting}>
                                                 <Trash2 className="h-4 w-4" />
                                             </Button>
@@ -541,7 +528,7 @@ const BuilderPageContent = () => {
                         ) : (
                             <div className="text-center py-10 border-2 border-dashed rounded-lg">
                                 <AlertTriangle className="mx-auto h-8 w-8 text-muted-foreground mb-2" />
-                                <p className="text-muted-foreground">La carga de páginas está temporalmente desactivada.</p>
+                                <p className="text-muted-foreground">No has guardado ninguna página todavía.</p>
                             </div>
                         )}
                     </div>
@@ -560,7 +547,7 @@ const BuilderPageContent = () => {
                 <AlertDialogTitle>¿Estás absolutamente seguro?</AlertDialogTitle>
                 <AlertDialogDescription>
                     Esta acción no se puede deshacer. Esto eliminará permanentemente la página
-                    <span className="font-semibold"> {pageToDelete?.name} </span>. (Funcionalidad desactivada)
+                    <span className="font-semibold"> {pageToDelete?.name} </span>.
                 </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
