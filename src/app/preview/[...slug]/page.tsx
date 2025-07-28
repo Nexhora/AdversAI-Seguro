@@ -1,8 +1,7 @@
-
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { getPageData } from '@/app/dashboard/actions';
+// import { getPageData } from '@/app/dashboard/actions';
 import { Loader2, AlertTriangle } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import type { BuilderState } from '@/types';
@@ -28,37 +27,40 @@ export default function PreviewPage() {
         setLoading(false);
         return;
     }
-
-    const fetchPage = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const data = await getPageData(userId, pageId);
-        if (data && data.content) {
-          try {
-            const parsedContent: BuilderState = JSON.parse(data.content);
-             // Validar la estructura básica
-            if (parsedContent && Array.isArray(parsedContent.page)) {
-                 setPageData({ name: data.name, content: parsedContent });
-            } else {
-                 throw new Error("El contenido de la página no tiene el formato esperado (debe ser un objeto con una propiedad 'page' que es un array).");
-            }
-          } catch (e) {
-             console.error("Error al analizar JSON:", e);
-             throw new Error('El contenido de la página parece estar dañado y no se pudo analizar.');
-          }
-        } else {
-          setError('Página no encontrada. Asegúrate de que la URL es correcta y la página está guardada.');
-        }
-      } catch (e) {
-        console.error("Error al obtener la página:", e);
-        setError(e instanceof Error ? e.message : 'Ocurrió un error inesperado al cargar la página.');
-      } finally {
-        setLoading(false);
-      }
-    };
     
-    fetchPage();
+    setError('La funcionalidad de vista previa está temporalmente desactivada.');
+    setLoading(false);
+
+    // const fetchPage = async () => {
+    //   setLoading(true);
+    //   setError(null);
+    //   try {
+    //     const data = await getPageData(userId, pageId);
+    //     if (data && data.content) {
+    //       try {
+    //         const parsedContent: BuilderState = JSON.parse(data.content);
+    //          // Validar la estructura básica
+    //         if (parsedContent && Array.isArray(parsedContent.page)) {
+    //              setPageData({ name: data.name, content: parsedContent });
+    //         } else {
+    //              throw new Error("El contenido de la página no tiene el formato esperado (debe ser un objeto con una propiedad 'page' que es un array).");
+    //         }
+    //       } catch (e) {
+    //          console.error("Error al analizar JSON:", e);
+    //          throw new Error('El contenido de la página parece estar dañado y no se pudo analizar.');
+    //       }
+    //     } else {
+    //       setError('Página no encontrada. Asegúrate de que la URL es correcta y la página está guardada.');
+    //     }
+    //   } catch (e) {
+    //     console.error("Error al obtener la página:", e);
+    //     setError(e instanceof Error ? e.message : 'Ocurrió un error inesperado al cargar la página.');
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
+    
+    // fetchPage();
   }, [userId, pageId]);
 
   if (loading) {
