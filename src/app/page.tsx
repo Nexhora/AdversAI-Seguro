@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { BrainCircuit, Target, TestTube2, CheckShield } from "lucide-react";
+import { BrainCircuit, Target, TestTube2, ShieldCheck } from "lucide-react";
 import { Logo } from "@/components/icons";
 
 export default function HomePage() {
@@ -95,7 +95,7 @@ export default function HomePage() {
                 </p>
               </div>
                <div className="flex flex-col items-center text-center">
-                <CheckShield className="h-12 w-12 text-primary" />
+                <ShieldCheck className="h-12 w-12 text-primary" />
                 <h3 className="mt-4 text-xl font-bold">Creación Ética</h3>
                 <p className="mt-2 text-muted-foreground font-body">
                   Asegura la seguridad de marca y el cumplimiento legal con nuestros checks.
