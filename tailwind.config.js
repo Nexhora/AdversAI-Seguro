@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -40,6 +42,10 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        // Add the full color palette for the new design
+        gray: colors.gray,
+        orange: colors.orange,
+        amber: colors.amber,
       },
       borderRadius: {
         lg: `var(--radius)`,
@@ -47,10 +53,11 @@ module.exports = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
-        serif: ['PT Sans', 'sans-serif'],
+        headline: ['Poppins', 'sans-serif'],
+        body: ['PT Sans', 'sans-serif'],
       },
     },
   },
   plugins: [],
 };
+    
