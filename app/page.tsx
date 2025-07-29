@@ -6,23 +6,28 @@ import { Label } from "@/components/ui/label";
 import { BrainCircuit, Target, TestTube2, ShieldCheck } from "lucide-react";
 import { Logo } from "@/components/icons";
 import { useState, type FormEvent } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { useRouter } from "next/navigation";
 
 export default function HomePage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({
-      firstName,
-      lastName,
-      email,
-      password,
-    });
-    // Aquí se podría añadir la lógica para enviar los datos a un backend
-    alert("¡Cuenta creada (en la consola)!");
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      console.log("¡Cuenta creada exitosamente!");
+      // TODO: Guardar nombre y apellido en la base de datos de usuarios
+      router.push("/dashboard"); // Redirigir a una página de dashboard (a crear)
+    } catch (error) {
+      console.error("Error al crear la cuenta:", error);
+      alert("Error al crear la cuenta. Revisa la consola para más detalles.");
+    }
   };
 
   return (
