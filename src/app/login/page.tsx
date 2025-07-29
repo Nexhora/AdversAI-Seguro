@@ -41,7 +41,6 @@ export default function LoginPage() {
     try {
       await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
       console.log("¡Cuenta creada exitosamente!");
-      // TODO: Guardar nombre en la base de datos de usuarios
       router.push("/dashboard");
     } catch (error) {
       console.error("Error al crear la cuenta:", error);
