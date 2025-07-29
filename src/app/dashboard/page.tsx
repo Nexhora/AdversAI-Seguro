@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function DashboardPage() {
   return (
@@ -23,9 +24,11 @@ export default function DashboardPage() {
           <p className="max-w-md text-muted-foreground">
             Comienza a generar recursos publicitarios con el poder de la inteligencia artificial.
           </p>
-          <Button size="lg">
-            <PlusCircle className="mr-2 h-5 w-5" />
-            Crear Nueva Campaña
+          <Button size="lg" asChild>
+            <Link href="/dashboard/new-campaign">
+              <PlusCircle className="mr-2 h-5 w-5" />
+              Crear Nueva Campaña
+            </Link>
           </Button>
       </div>
     </div>
