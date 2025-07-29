@@ -5,8 +5,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { BrainCircuit, Target, TestTube2, ShieldCheck } from "lucide-react";
 import { Logo } from "@/components/icons";
+import { useState, type FormEvent } from "react";
 
 export default function HomePage() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log({
+      firstName,
+      lastName,
+      email,
+      password,
+    });
+    // Aquí se podría añadir la lógica para enviar los datos a un backend
+    alert("¡Cuenta creada (en la consola)!");
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground font-headline">
       <header className="px-4 lg:px-6 h-14 flex items-center">
@@ -42,29 +60,54 @@ export default function HomePage() {
                       Regístrate para empezar a crear tu primera campaña.
                     </p>
                   </div>
-                  <div className="space-y-4">
+                  <form className="space-y-4" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="first-name">Nombre</Label>
-                        <Input id="first-name" placeholder="Juan" />
+                        <Input
+                          id="first-name"
+                          placeholder="Juan"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                          required
+                        />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="last-name">Apellido</Label>
-                        <Input id="last-name" placeholder="Pérez" />
+                        <Input
+                          id="last-name"
+                          placeholder="Pérez"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          required
+                        />
                       </div>
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
-                      <Input id="email" type="email" placeholder="juan.perez@email.com" />
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="juan.perez@email.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                      />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="password">Contraseña</Label>
-                      <Input id="password" type="password" />
+                      <Input
+                        id="password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                      />
                     </div>
                     <Button type="submit" className="w-full">
                       Crear Cuenta
                     </Button>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
