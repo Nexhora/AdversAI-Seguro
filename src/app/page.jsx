@@ -3,7 +3,7 @@
 import { Logo } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { CheckCircle, Zap, BookOpen, MousePointerClick, Star } from 'lucide-react';
+import { BookOpen, MousePointerClick, Zap } from 'lucide-react';
 import Link from 'next/link';
 
 export default function HomePage() {
@@ -183,4 +183,5 @@ export default function HomePage() {
     </div>
   );
 }
+
     
