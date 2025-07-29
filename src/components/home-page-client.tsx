@@ -61,7 +61,7 @@ export default function HomePageClient() {
                             <Zap className="w-6 h-6 text-orange-400"/>
                         </div>
                         <h3 className="text-xl font-bold font-headline">Velocidad Exponencial</h3>
-                        <p className="mt-2 text-gray-400">Genera campañas y páginas completas en una fracción del tiempo que te llevaría manualmente.</p>
+                        <p className="mt-2 text-gray-400">Genera campañas y páginas completas en una fracción del tiempo que te llevaría manually.</p>
                     </div>
                     <div className="text-center">
                         <div className="inline-flex items-center justify-center w-12 h-12 mb-4 bg-orange-900/50 border border-orange-500/30 rounded-lg">
