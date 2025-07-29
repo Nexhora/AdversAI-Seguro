@@ -1,5 +1,5 @@
 /**
- * @fileoverview This file initializes and configures the Genkit AI library.
+ * @fileoverview This file initializes and aiconfigures the Genkit AI library.
  */
 import {genkit} from 'genkit';
 import {googleAI} from '@genkit-ai/googleai';
