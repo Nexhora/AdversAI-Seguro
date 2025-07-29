@@ -1,1 +1,1 @@
-# AdVerseAI Project
+# AdVerseAI: AI-Powered Advertising Campaigns
