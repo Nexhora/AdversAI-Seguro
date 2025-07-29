@@ -4,65 +4,35 @@
  
 @layer base {
   :root {
-    --background: 224 71.4% 4.1%;
-    --foreground: 210 20% 98%;
+    --background: 43 20% 94%;
+    --foreground: 224 71.4% 4.1%;
 
-    --card: 224 71.4% 4.1%;
-    --card-foreground: 210 20% 98%;
+    --card: 43 20% 98%;
+    --card-foreground: 224 71.4% 4.1%;
  
-    --popover: 224 71.4% 4.1%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 43 20% 98%;
+    --popover-foreground: 224 71.4% 4.1%;
  
-    --primary: 22.8 95.5% 53.1%;
-    --primary-foreground: 210 20% 98%;
+    --primary: 43 90% 50%;
+    --primary-foreground: 224 71.4% 4.1%;
  
-    --secondary: 215 27.9% 16.9%;
-    --secondary-foreground: 210 20% 98%;
+    --secondary: 43 20% 90%;
+    --secondary-foreground: 224 71.4% 4.1%;
  
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
+    --muted: 43 20% 85%;
+    --muted-foreground: 224 71.4% 25%;
  
-    --accent: 215 27.9% 16.9%;
+    --accent: 13 65% 50%;
     --accent-foreground: 210 20% 98%;
  
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 215 27.9% 16.9%;
-    --input: 215 27.9% 16.9%;
-    --ring: 22.8 95.5% 53.1%;
+    --border: 43 20% 80%;
+    --input: 43 20% 85%;
+    --ring: 43 90% 50%;
  
     --radius: 0.5rem;
-  }
- 
-  .dark {
-    --background: 224 71.4% 4.1%;
-    --foreground: 210 20% 98%;
-
-    --card: 224 71.4% 4.1%;
-    --card-foreground: 210 20% 98%;
- 
-    --popover: 224 71.4% 4.1%;
-    --popover-foreground: 210 20% 98%;
- 
-    --primary: 22.8 95.5% 53.1%;
-    --primary-foreground: 210 20% 98%;
- 
-    --secondary: 215 27.9% 16.9%;
-    --secondary-foreground: 210 20% 98%;
- 
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
- 
-    --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 20% 98%;
- 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 215 27.9% 16.9%;
-    --input: 215 27.9% 16.9%;
-    --ring: 22.8 95.5% 53.1%;
   }
 }
  
@@ -76,8 +46,8 @@
 }
 
 @layer components {
-    .bg-grid-white\/\[0\.05\] {
-        background-image: linear-gradient(white 1px, transparent 1px), linear-gradient(to right, white 1px, transparent 1px);
+    .bg-grid-black\/\[0\.05\] {
+        background-image: linear-gradient(black 1px, transparent 1px), linear-gradient(to right, black 1px, transparent 1px);
         background-size: 4rem 4rem;
         opacity: 0.05;
     }

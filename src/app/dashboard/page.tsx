@@ -15,7 +15,7 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      <div className="mt-12 flex flex-col items-center justify-center gap-6 rounded-xl border border-dashed border-border p-12 text-center bg-card">
+      <div className="mt-12 flex flex-col items-center justify-center gap-6 rounded-xl border-2 border-dashed border-border p-12 text-center bg-card">
           <div className="rounded-full bg-primary/10 p-3">
             <PlusCircle className="h-8 w-8 text-primary" />
           </div>
@@ -23,7 +23,7 @@ export default function DashboardPage() {
           <p className="max-w-md text-muted-foreground">
             Comienza a generar recursos publicitarios con el poder de la inteligencia artificial.
           </p>
-          <Button size="lg" className="bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold hover:from-orange-600 hover:to-amber-600 shadow-lg shadow-orange-500/20">
+          <Button size="lg">
             <PlusCircle className="mr-2 h-5 w-5" />
             Crear Nueva Campaña
           </Button>

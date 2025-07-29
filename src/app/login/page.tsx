@@ -50,7 +50,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-900 text-white font-body">
+    <div className="flex flex-col min-h-screen">
        <header className="px-4 lg:px-6 h-20 flex items-center">
         <Link href="/" className="flex items-center gap-3" prefetch={false}>
           <Logo className="size-8" />
@@ -59,13 +59,13 @@ export default function LoginPage() {
       </header>
       <main className="flex-1 flex items-center justify-center py-12">
         <div className="w-full max-w-md mx-auto">
-          <div className="rounded-lg border border-gray-700 bg-gray-800 text-white shadow-lg shadow-orange-500/10 p-6 space-y-4">
-             <div className="grid grid-cols-2 text-center border-b border-gray-700">
+          <div className="rounded-lg border bg-card text-card-foreground shadow-lg p-6 space-y-4">
+             <div className="grid grid-cols-2 text-center border-b">
                 <button 
                   onClick={() => setActiveTab('login')}
                   className={cn(
                     "p-3 font-bold transition-colors",
-                    activeTab === 'login' ? 'text-orange-500 border-b-2 border-orange-500' : 'text-gray-400 hover:text-white'
+                    activeTab === 'login' ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground hover:text-foreground'
                   )}
                 >
                   Login
@@ -74,7 +74,7 @@ export default function LoginPage() {
                   onClick={() => setActiveTab('register')}
                    className={cn(
                     "p-3 font-bold transition-colors",
-                    activeTab === 'register' ? 'text-orange-500 border-b-2 border-orange-500' : 'text-gray-400 hover:text-white'
+                    activeTab === 'register' ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground hover:text-foreground'
                   )}
                 >
                   Registro
@@ -92,7 +92,6 @@ export default function LoginPage() {
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
                     required
-                    className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-500 focus:ring-orange-500"
                   />
                 </div>
                 <div className="space-y-2">
@@ -103,10 +102,9 @@ export default function LoginPage() {
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     required
-                    className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-500 focus:ring-orange-500"
                   />
                 </div>
-                <Button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold hover:from-orange-600 hover:to-amber-600">
+                <Button type="submit" className="w-full">
                   Iniciar Sesión
                 </Button>
               </form>
@@ -122,7 +120,6 @@ export default function LoginPage() {
                     value={registerName}
                     onChange={(e) => setRegisterName(e.target.value)}
                     required
-                    className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-500 focus:ring-orange-500"
                   />
                 </div>
                 <div className="space-y-2">
@@ -134,7 +131,6 @@ export default function LoginPage() {
                     value={registerEmail}
                     onChange={(e) => setRegisterEmail(e.target.value)}
                     required
-                    className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-500 focus:ring-orange-500"
                   />
                 </div>
                 <div className="space-y-2">
@@ -145,10 +141,9 @@ export default function LoginPage() {
                     value={registerPassword}
                     onChange={(e) => setRegisterPassword(e.target.value)}
                     required
-                     className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-500 focus:ring-orange-500"
                   />
                 </div>
-                <Button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold hover:from-orange-600 hover:to-amber-600">
+                <Button type="submit" className="w-full">
                   Crear Cuenta Gratis
                 </Button>
               </form>
