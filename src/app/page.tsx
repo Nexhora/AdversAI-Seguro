@@ -1,12 +1,11 @@
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/icons";
 
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md">
+      <header className="sticky top-0 z-50">
         <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
           <Link href="/" className="flex items-center gap-3">
             <Logo className="size-8" />
@@ -21,7 +20,6 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="flex-1 flex items-center justify-center">
         <div className="container mx-auto px-4 md:px-6 text-center">
            <div className="relative z-10">
@@ -41,8 +39,7 @@ export default function HomePage() {
         </div>
       </main>
 
-       {/* Footer */}
-      <footer className="py-8 border-t">
+       <footer className="py-8 border-t">
         <div className="container mx-auto px-4 md:px-6 text-center text-muted-foreground">
             <p>&copy; {new Date().getFullYear()} AdVerseAI. Todos los derechos reservados.</p>
         </div>
