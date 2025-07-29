@@ -4,7 +4,7 @@
  
 @layer base {
   :root {
-    --background: 43 20% 94%;
+    --background: 43 20% 94%; /* Very Light Yellow */
     --foreground: 224 71.4% 4.1%;
 
     --card: 43 20% 98%;
@@ -13,7 +13,7 @@
     --popover: 43 20% 98%;
     --popover-foreground: 224 71.4% 4.1%;
  
-    --primary: 43 90% 50%;
+    --primary: 43 90% 50%; /* Golden Yellow */
     --primary-foreground: 224 71.4% 4.1%;
  
     --secondary: 43 20% 90%;
@@ -22,11 +22,11 @@
     --muted: 43 20% 85%;
     --muted-foreground: 224 71.4% 25%;
  
-    --accent: 13 65% 50%;
+    --accent: 13 65% 50%; /* Salmon */
     --accent-foreground: 210 20% 98%;
  
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
 
     --border: 43 20% 80%;
     --input: 43 20% 85%;
@@ -43,12 +43,4 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-
-@layer components {
-    .bg-grid-black\/\[0\.05\] {
-        background-image: linear-gradient(black 1px, transparent 1px), linear-gradient(to right, black 1px, transparent 1px);
-        background-size: 4rem 4rem;
-        opacity: 0.05;
-    }
 }
