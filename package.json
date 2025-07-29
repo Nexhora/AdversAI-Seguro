@@ -1,5 +1,5 @@
 {
-  "name": "nextn",
+  "name": "adverse-ai",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -20,19 +20,20 @@
     "firebase": "^10.12.2",
     "genkit": "^1.0.0",
     "lucide-react": "^0.395.0",
-    "next": "14.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "next": "14.2.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "tailwind-merge": "^2.3.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "tailwindcss-animate": "^1.0.0",
-    "typescript": "^5",
+    "@types/node": "^20.14.9",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.5.2",
     "vercel": "^34.2.0"
   }
 }
