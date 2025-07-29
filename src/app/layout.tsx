@@ -3,21 +3,21 @@ import { Poppins, PT_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const fontBody = Poppins({
+const fontBody = PT_Sans({
   subsets: ["latin"],
   variable: "--font-body",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "700"],
 });
 
-const fontHeadline = PT_Sans({
+const fontHeadline = Poppins({
   subsets: ["latin"],
   variable: "--font-headline",
-  weight: ["400", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
   title: "AdVerseAI",
-  description: "Reclama el control de tu privacidad.",
+  description: "Inteligencia Artificial para tus campañas de publicidad.",
 };
 
 export default function RootLayout({
