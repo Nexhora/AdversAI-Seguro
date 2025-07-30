@@ -2,7 +2,7 @@ import "./globals.css";
 
 export const metadata = {
   title: "AdVerseAI",
-  description: "AI-Powered Advertising Campaigns",
+  description: "Base Segura",
 };
 
 export default function RootLayout({ children }) {
