@@ -1,8 +1,8 @@
 export default function HomePage() {
   return (
-    <main>
-      <h1>Hola Mundo</h1>
-      <p>Si ves esto, el error 404 ha sido resuelto y podemos empezar a reconstruir.</p>
+    <main className="flex min-h-screen flex-col items-center justify-center">
+      <h1 className="text-4xl font-bold">Hola Mundo</h1>
+      <p className="mt-2">La base del proyecto está funcionando. Podemos reconstruir desde aquí.</p>
     </main>
   );
 }
