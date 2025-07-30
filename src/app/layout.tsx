@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "AdversAI - Base",
-  description: "Proyecto base funcional.",
+  title: "AdVerseAI",
+  description: "AI-Powered Advertising Campaigns",
 };
 
 export default function RootLayout({
@@ -16,11 +16,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="dark" suppressHydrationWarning>
-      <body className={cn(
-        "min-h-screen bg-background font-sans antialiased",
-        inter.variable
-      )}>
+    <html lang="es" suppressHydrationWarning>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          inter.variable
+        )}
+      >
         {children}
       </body>
     </html>
