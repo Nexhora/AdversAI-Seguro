@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import Logo from "@/components/Logo";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Copy } from "lucide-react";
 
 export default function HomePage() {
   return (
@@ -76,10 +78,37 @@ export default function HomePage() {
       </div>
 
       {/* Placeholder for AI results */}
-      <div id="results" className="w-full max-w-4xl mt-8">
-        {/* The generated audience analysis and ad concepts will appear here */}
-      </div>
+      <div id="results" className="w-full max-w-4xl mt-12 space-y-8">
+        {/* Audience Analysis Results */}
+        <Card className="bg-card/50 border-border/50">
+          <CardHeader>
+            <CardTitle className="text-2xl font-poppins">Análisis de Audiencia</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {/* Content will be rendered here */}
+          </CardContent>
+        </Card>
 
+        {/* Ad Concepts Results */}
+        <Card className="bg-card/50 border-border/50">
+          <CardHeader>
+            <CardTitle className="text-2xl font-poppins">Conceptos de Anuncios</CardTitle>
+          </CardHeader>
+          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* AIDA and PAS cards will be rendered here */}
+          </CardContent>
+        </Card>
+
+        {/* Image Prompt Generator Results */}
+        <Card className="bg-card/50 border-border/50">
+          <CardHeader>
+            <CardTitle className="text-2xl font-poppins">Generador de Prompts para Imágenes</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {/* Image prompt content will be rendered here */}
+          </CardContent>
+        </Card>
+      </div>
     </main>
   );
 }
