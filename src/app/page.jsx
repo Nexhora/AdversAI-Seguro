@@ -1,10 +1,12 @@
-
-export default function HomePage() {
+export default function Home() {
   return (
-    <div style={{ padding: '2rem', color: 'white', fontFamily: 'sans-serif' }}>
-      <h1>Hola Mundo</h1>
-      <p>Si puedes ver este mensaje, significa que el servidor y el enrutamiento de Next.js están funcionando correctamente.</p>
-      <p>El problema del error 404 está dentro del código del componente de la página principal que intentamos renderizar anteriormente.</p>
-    </div>
+    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold">Hola Mundo</h1>
+        <p className="mt-4 text-lg">
+          El proyecto ha sido reseteado a un estado inicial.
+        </p>
+      </div>
+    </main>
   );
 }
