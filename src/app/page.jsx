@@ -28,7 +28,17 @@ const BoldRenderer = ({ text }) => {
 };
 
 export default function HomePage() {
-  const [isLoading, setIsLoading] = useState(false);
+  // State for form inputs
+  const [url, setUrl] = useState("");
+  const [productName, setProductName] = useState("");
+  const [brandName, setBrandName] = useState("");
+  const [targetAudience, setTargetAudience] = useState("");
+  const [campaignObjective, setCampaignObjective] = useState("");
+  const [isRemarketing, setIsRemarketing] = useState(false);
+
+  // State for UI control
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [isAnalyzingUrl, setIsAnalyzingUrl] = useState(false);
   const [results, setResults] = useState(null);
   const [copied, setCopied] = useState({});
 
@@ -39,10 +49,22 @@ export default function HomePage() {
       setCopied(prev => ({ ...prev, [id]: false }));
     }, 2000);
   };
+  
+  const handleUrlAnalysis = () => {
+    setIsAnalyzingUrl(true);
+    // Simulate fetching and filling data
+    setTimeout(() => {
+        setProductName("Limpiador Multiuso Ecológico");
+        setBrandName("Nexhora");
+        setTargetAudience("Personas de 25-45 años, residentes en zonas urbanas, preocupadas por el medio ambiente y la salud de su familia. Buscan productos de limpieza efectivos pero sin químicos agresivos.");
+        setCampaignObjective("Generar ventas del nuevo limpiador y posicionar a Nexhora como la marca líder en limpieza sostenible en el mercado hispano.");
+        setIsAnalyzingUrl(false);
+    }, 1500);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    setIsGenerating(true);
     setResults(null);
 
     // Simulate AI response
@@ -76,7 +98,7 @@ export default function HomePage() {
           english: "A bright and modern image of a spotless kitchen. Sunlight streams through the window, reflecting on a marble countertop where an elegant bottle of Nexhora rests next to a fresh lemon and some eucalyptus leaves. The atmosphere conveys peace, cleanliness, and naturalness."
         }
       });
-      setIsLoading(false);
+      setIsGenerating(false);
     }, 2000);
   };
 
@@ -105,43 +127,46 @@ export default function HomePage() {
               <div className="space-y-2">
                 <Label htmlFor="url-input">Analizar sitio web (Opcional)</Label>
                 <div className="flex gap-2">
-                  <Input id="url-input" placeholder="Pega la URL de tu producto o servicio aquí..." className="bg-input" />
-                  <Button type="button" variant="outline" disabled={isLoading}>Analizar con IA</Button>
+                  <Input id="url-input" placeholder="Pega la URL de tu producto o servicio aquí..." className="bg-input" value={url} onChange={(e) => setUrl(e.target.value)} />
+                  <Button type="button" variant="outline" disabled={isAnalyzingUrl || isGenerating} onClick={handleUrlAnalysis}>
+                     {isAnalyzingUrl ? <LoaderCircle className="animate-spin mr-2" /> : null}
+                     {isAnalyzingUrl ? 'Analizando...' : 'Analizar con IA'}
+                  </Button>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="product-name">¿Qué vas a vender? (Producto/Servicio)</Label>
-                  <Input id="product-name" placeholder="Ej: Zapatillas deportivas ecológicas" className="bg-input" />
+                  <Input id="product-name" placeholder="Ej: Zapatillas deportivas ecológicas" className="bg-input" value={productName} onChange={(e) => setProductName(e.target.value)} />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="brand-name">Nombre de la Marca (Opcional)</Label>
-                  <Input id="brand-name" placeholder="Ej: EcoRun" className="bg-input" />
+                  <Input id="brand-name" placeholder="Ej: EcoRun" className="bg-input" value={brandName} onChange={(e) => setBrandName(e.target.value)} />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="target-audience">Público Objetivo</Label>
-                <Textarea id="target-audience" placeholder="Describe a tu cliente ideal. Ej: Jóvenes de 20-30 años, conscientes del medio ambiente, interesados en el running y la moda sostenible." className="bg-input" />
+                <Textarea id="target-audience" placeholder="Describe a tu cliente ideal. Ej: Jóvenes de 20-30 años, conscientes del medio ambiente, interesados en el running y la moda sostenible." className="bg-input" value={targetAudience} onChange={(e) => setTargetAudience(e.target.value)} />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="campaign-objective">Objetivo de la Campaña</Label>
-                <Textarea id="campaign-objective" placeholder="¿Qué quieres lograr? Ej: Aumentar las ventas online un 20% en el próximo trimestre." className="bg-input" />
+                <Textarea id="campaign-objective" placeholder="¿Qué quieres lograr? Ej: Aumentar las ventas online un 20% en el próximo trimestre." className="bg-input" value={campaignObjective} onChange={(e) => setCampaignObjective(e.target.value)} />
               </div>
 
               <div className="flex items-center space-x-2 pt-2">
-                <Checkbox id="remarketing" />
+                <Checkbox id="remarketing" checked={isRemarketing} onCheckedChange={setIsRemarketing} />
                 <Label htmlFor="remarketing" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                   Campaña de Remarketing
                 </Label>
               </div>
 
               <div className="text-center pt-4">
-                <Button type="submit" size="lg" className="w-full md:w-1/2 font-bold text-lg" disabled={isLoading}>
-                  {isLoading ? <LoaderCircle className="animate-spin mr-2" /> : null}
-                  {isLoading ? 'Generando...' : 'Generar Ideas con IA'}
+                <Button type="submit" size="lg" className="w-full md:w-1/2 font-bold text-lg" disabled={isGenerating || isAnalyzingUrl}>
+                  {isGenerating ? <LoaderCircle className="animate-spin mr-2" /> : null}
+                  {isGenerating ? 'Generando...' : 'Generar Ideas con IA'}
                 </Button>
               </div>
             </form>
@@ -149,7 +174,7 @@ export default function HomePage() {
         </Card>
       </div>
 
-      {isLoading && (
+      {isGenerating && (
         <div className="w-full max-w-4xl mt-12 text-center">
           <LoaderCircle className="h-12 w-12 animate-spin text-primary mx-auto" />
           <p className="text-muted-foreground mt-4">Analizando y generando conceptos... esto puede tardar un momento.</p>
@@ -203,7 +228,7 @@ export default function HomePage() {
                     <div className="flex items-center gap-2">
                       <p className="flex-grow text-foreground p-2 bg-input rounded-md">{concept.headline}</p>
                       <Button variant="ghost" size="icon" onClick={() => handleCopy(concept.headline, `${concept.id}-headline`)}>
-                        <Copy className="h-4 w-4" />
+                        {copied[`${concept.id}-headline`] ? <Check className="h-4 w-4 text-primary" /> : <Copy className="h-4 w-4" />}
                       </Button>
                     </div>
                   </div>
@@ -213,7 +238,7 @@ export default function HomePage() {
                      <div className="flex items-start gap-2">
                       <p className="flex-grow text-foreground p-2 bg-input rounded-md whitespace-pre-wrap">{concept.primaryText}</p>
                       <Button variant="ghost" size="icon" onClick={() => handleCopy(concept.primaryText, `${concept.id}-primary`)}>
-                        <Copy className="h-4 w-4" />
+                        {copied[`${concept.id}-primary`] ? <Check className="h-4 w-4 text-primary" /> : <Copy className="h-4 w-4" />}
                       </Button>
                     </div>
                   </div>
@@ -237,7 +262,7 @@ export default function HomePage() {
                  <div className="flex items-center gap-2">
                   <Textarea value={results.imagePrompt.english} readOnly className="bg-input h-24" />
                   <Button variant="ghost" size="icon" onClick={() => handleCopy(results.imagePrompt.english, 'prompt-en')}>
-                    <Copy className="h-4 w-4" />
+                    {copied['prompt-en'] ? <Check className="h-4 w-4 text-primary" /> : <Copy className="h-4 w-4" />}
                   </Button>
                 </div>
               </div>
@@ -247,3 +272,4 @@ export default function HomePage() {
       )}
     </main>
   );
+}
