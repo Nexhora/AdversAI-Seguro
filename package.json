@@ -2,6 +2,7 @@
   "name": "adverse-ai",
   "version": "0.1.0",
   "private": true,
+
   "scripts": {
     "dev": "next dev --port 9003 --hostname 0.0.0.0",
     "build": "next build",
