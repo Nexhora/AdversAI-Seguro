@@ -16,8 +16,8 @@ const ptSans = PT_Sans({
 
 
 export const metadata: Metadata = {
-  title: "Nexhora | AdversAI",
-  description: "Tu copiloto inteligente para campañas de publicidad.",
+  title: "AdversAI",
+  description: "Resetting the project foundation.",
 };
 
 export default function RootLayout({
@@ -26,10 +26,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es" className="dark">
       <body className={cn(
         "min-h-screen bg-background text-foreground font-sans antialiased",
-        "dark",
         poppins.variable,
         ptSans.variable
       )}>
