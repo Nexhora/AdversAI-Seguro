@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Poppins, PT_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
+import type { Metadata } from "next";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -14,12 +15,16 @@ const ptSans = PT_Sans({
 });
 
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Nexhora | AdversAI",
   description: "Tu copiloto inteligente para campañas de publicidad.",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={cn(

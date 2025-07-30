@@ -11,7 +11,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Copy, LoaderCircle, Check } from "lucide-react";
 
 // Helper component to parse and render text with bold tags
-const BoldRenderer = ({ text }) => {
+const BoldRenderer = ({ text }: { text: string | null }) => {
   if (!text) return null;
   const parts = text.split(/(\*\*.*?\*\*)/g);
   return (
@@ -39,10 +39,10 @@ export default function DashboardPage() {
   // State for UI control
   const [isGenerating, setIsGenerating] = useState(false);
   const [isAnalyzingUrl, setIsAnalyzingUrl] = useState(false);
-  const [results, setResults] = useState(null);
-  const [copied, setCopied] = useState({});
+  const [results, setResults] = useState<any>(null);
+  const [copied, setCopied] = useState<{ [key: string]: boolean }>({});
 
-  const handleCopy = (text, id) => {
+  const handleCopy = (text: string, id: string) => {
     navigator.clipboard.writeText(text);
     setCopied(prev => ({ ...prev, [id]: true }));
     setTimeout(() => {
@@ -62,7 +62,7 @@ export default function DashboardPage() {
     }, 1500);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsGenerating(true);
     setResults(null);
@@ -161,7 +161,7 @@ export default function DashboardPage() {
               </div>
 
               <div className="flex items-center space-x-2 pt-2">
-                <Checkbox id="remarketing" checked={isRemarketing} onCheckedChange={setIsRemarketing} />
+                <Checkbox id="remarketing" checked={isRemarketing} onCheckedChange={setIsRemarketing as (checked: boolean) => void} />
                 <Label htmlFor="remarketing" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                   Campaña de Remarketing
                 </Label>
@@ -222,7 +222,7 @@ export default function DashboardPage() {
               <CardTitle className="text-2xl font-poppins">Conceptos de Anuncios</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
-              {results.adConcepts.map(concept => (
+              {results.adConcepts.map((concept: any) => (
                 <div key={concept.id} className="border border-border/70 rounded-lg p-4">
                   <h4 className="font-poppins font-bold text-primary">{concept.framework}</h4>
                   <p className="text-sm text-muted-foreground mb-4">{concept.description}</p>

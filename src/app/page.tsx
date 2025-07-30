@@ -14,7 +14,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleAuth = (e) => {
+  const handleAuth = (e: React.FormEvent) => {
     e.preventDefault();
     // Simulate successful login/registration
     router.push("/dashboard");
