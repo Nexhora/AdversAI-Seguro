@@ -58,16 +58,16 @@ export default function HomePage() {
             id: 'aida',
             framework: "AIDA (Atención, Interés, Deseo, Acción)",
             description: "Capta la atención, genera interés, crea deseo e impulsa a la acción. Ideal para respuesta directa.",
-            headline: "Tu Hogar, Tu Planeta, Una Sola Decisión.",
-            primaryText: "Atención: ¿Cansado de productos de limpieza llenos de químicos dañinos? 🌿\nInterés: Descubre Nexhora, la revolución en limpieza ecológica que protege a tu familia y al medio ambiente sin sacrificar la eficacia.\n Deseo: Imagina un hogar impecable, con un aroma fresco y natural, sabiendo que estás tomando la mejor decisión para el futuro.\n Acción: ¡Únete al cambio! Haz clic y recibe un 20% de descuento en tu primer pedido.",
+            headline: "Tu Hogar, Tu Planeta, Una Sola Decisión. 🌿",
+            primaryText: "Descubre Nexhora, la revolución en limpieza ecológica que protege a tu familia y al medio ambiente sin sacrificar la eficacia. Imagina un hogar impecable, con un aroma fresco y natural, sabiendo que estás tomando la mejor decisión para el futuro. ¡Únete al cambio! Haz clic y recibe un 20% de descuento en tu primer pedido.",
             cta: "Comprar con Descuento"
           },
           {
             id: 'pas',
             framework: "PAS (Problema, Agitación, Solución)",
             description: "Identifica un problema, agita la emoción y presenta tu producto como la solución definitiva.",
-            headline: "Los Químicos Tóxicos se Acabaron.",
-            primaryText: "Problema: Los limpiadores convencionales pueden dejar residuos tóxicos en tus superficies, afectando la salud de tus seres queridos y mascotas. 😟\nAgitación: Cada día, sin saberlo, podrías estar exponiendo a tu familia a ingredientes agresivos. ¿Vale la pena el riesgo?\nSolución: Nexhora te ofrece paz mental. Nuestra fórmula 100% natural y biodegradable es implacable con la suciedad y completamente segura para los tuyos. Respira tranquilo.",
+            headline: "Los Químicos Tóxicos se Acabaron. ¿Tu Familia está Segura?",
+            primaryText: "Los limpiadores convencionales pueden dejar residuos tóxicos en tus superficies, afectando la salud de tus seres queridos y mascotas. Cada día, sin saberlo, podrías estar exponiendo a tu familia a ingredientes agresivos. Nexhora te ofrece paz mental con nuestra fórmula 100% natural y biodegradable. Respira tranquilo.",
             cta: "Elige Seguridad"
           }
         ],
