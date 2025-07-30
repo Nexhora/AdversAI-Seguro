@@ -1,23 +1,13 @@
 import "./globals.css";
-import { Poppins, PT_Sans } from "next/font/google";
-import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { cn } from "@/lib/utils";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ['400', '600', '700'],
-  variable: '--font-poppins'
-});
-const ptSans = PT_Sans({
-  subsets: ["latin"],
-  weight: ['400', '700'],
-  variable: '--font-pt-sans'
-});
-
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "AdversAI",
-  description: "Resetting the project foundation.",
+  title: "AdversAI - Base",
+  description: "Proyecto base funcional.",
 };
 
 export default function RootLayout({
@@ -26,11 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="dark">
+    <html lang="es" className="dark" suppressHydrationWarning>
       <body className={cn(
-        "min-h-screen bg-background text-foreground font-sans antialiased",
-        poppins.variable,
-        ptSans.variable
+        "min-h-screen bg-background font-sans antialiased",
+        inter.variable
       )}>
         {children}
       </body>
