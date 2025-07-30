@@ -2,11 +2,6 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
- 
-    // Or if using `src` directory:
     './src/**/*.{js,ts,jsx,tsx,mdx}',
 	],
   prefix: "",
@@ -19,10 +14,6 @@ module.exports = {
       },
     },
     extend: {
-      fontFamily: {
-        poppins: ['var(--font-poppins)'],
-        'pt-sans': ['var(--font-pt-sans)'],
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
