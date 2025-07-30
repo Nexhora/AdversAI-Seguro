@@ -1,6 +1,6 @@
-
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,17 +12,13 @@ export default function LoginPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  const handleRegister = (e) => {
+  const handleAuth = (e) => {
     e.preventDefault();
-    console.log("Registering...");
+    // Simulate successful login/registration
+    router.push("/dashboard");
   };
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log("Logging in...");
-  };
-
 
   return (
     <main className="container mx-auto flex min-h-screen flex-col items-center justify-center p-8 font-sans">
@@ -47,7 +43,7 @@ export default function LoginPage() {
               <CardTitle className="text-center font-poppins text-2xl">Bienvenido de Vuelta</CardTitle>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleLogin} className="space-y-6">
+              <form onSubmit={handleAuth} className="space-y-6">
                 <div className="space-y-2">
                   <Label htmlFor="login-email">Email</Label>
                   <Input 
@@ -57,6 +53,7 @@ export default function LoginPage() {
                     className="bg-input" 
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="space-y-2">
@@ -68,6 +65,7 @@ export default function LoginPage() {
                     className="bg-input" 
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="pt-4">
@@ -83,7 +81,7 @@ export default function LoginPage() {
               <CardTitle className="text-center font-poppins text-2xl">Crea tu Cuenta</CardTitle>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleRegister} className="space-y-6">
+              <form onSubmit={handleAuth} className="space-y-6">
                  <div className="space-y-2">
                   <Label htmlFor="register-name">Nombre</Label>
                   <Input 
@@ -93,6 +91,7 @@ export default function LoginPage() {
                     className="bg-input" 
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="space-y-2">
@@ -104,6 +103,7 @@ export default function LoginPage() {
                     className="bg-input" 
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="space-y-2">
@@ -115,6 +115,8 @@ export default function LoginPage() {
                     className="bg-input" 
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
+                    minLength={6}
                   />
                 </div>
                 <div className="pt-4">
