@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { Header } from "@/components/header";
 
 export default function Home() {
@@ -12,7 +11,9 @@ export default function Home() {
         <p className="max-w-2xl text-lg md:text-xl text-muted-foreground mb-8">
           AdVerseAI te ayuda a generar conceptos creativos, textos persuasivos y estrategias de segmentación para tus anuncios.
         </p>
-        <Button size="lg">Comenzar Ahora</Button>
+        <button className="h-11 rounded-md px-8 bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center whitespace-nowrap text-sm font-medium">
+          Comenzar Ahora
+        </button>
       </main>
     </div>
   );
