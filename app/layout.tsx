@@ -1,8 +1,20 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Poppins, PT_Sans } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const poppins = Poppins({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-poppins',
+  weight: ['400', '500', '600', '700'],
+});
+
+const ptSans = PT_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-pt-sans',
+  weight: ['400', '700'],
+});
 
 export const metadata: Metadata = {
   title: 'AdVerseAI',
@@ -15,8 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={`${poppins.variable} ${ptSans.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

@@ -15,6 +15,10 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        display: ['var(--font-poppins)'],
+        sans: ['var(--font-pt-sans)'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -2,10 +2,10 @@ import { Header } from "@/components/header";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen font-sans">
       <Header />
       <main className="flex-1 flex flex-col items-center justify-center text-center px-4">
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-4">
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-4 font-display">
           Crea Campañas Publicitarias con IA
         </h1>
         <p className="max-w-2xl text-lg md:text-xl text-muted-foreground mb-8">
