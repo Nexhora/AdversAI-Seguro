@@ -6,7 +6,6 @@ export const Logo = (props: React.SVGProps<SVGSVGElement>) => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
     {...props}
@@ -18,9 +17,11 @@ export const Logo = (props: React.SVGProps<SVGSVGElement>) => (
       </linearGradient>
     </defs>
     <path
-      d="M12 2L2.5 20.5a1 1 0 00.866 1.5H20.634a1 1 0 00.866-1.5L12 2z"
-      fill="url(#logoGradient)"
-      stroke="none"
+      d="M21.25,18 L12,3.5 L2.75,18"
+      stroke="url(#logoGradient)"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
