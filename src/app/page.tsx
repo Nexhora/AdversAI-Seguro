@@ -1,8 +1,8 @@
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold">It works!</h1>
-      <p className="mt-4 text-lg">The server is alive and this page is rendered correctly.</p>
+    <main className="flex min-h-screen flex-col items-center justify-center">
+      <h1 className="text-4xl font-bold">It's Alive!</h1>
+      <p className="mt-4 text-lg">The project has been reset and is now running correctly.</p>
     </main>
   );
 }
