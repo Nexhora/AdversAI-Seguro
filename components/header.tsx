@@ -1,4 +1,4 @@
-import { BrainCircuit } from 'lucide-react';
+import { Logo } from '@/components/icons';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
@@ -7,7 +7,7 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-3">
-          <BrainCircuit className="h-8 w-8 text-primary" />
+          <Logo className="h-8 w-8" />
           <span className="text-xl font-bold font-display">AdVerseAI</span>
         </Link>
         <nav className="hidden items-center gap-6 md:flex">
