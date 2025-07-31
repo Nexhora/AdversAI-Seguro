@@ -1,6 +1,5 @@
 import { Logo } from '@/components/icons';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 
 export function Header() {
   return (
@@ -17,9 +16,6 @@ export function Header() {
            <Link href="#beneficios" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Beneficios</Link>
            <Link href="#herramientas" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Herramientas</Link>
         </nav>
-        <Button>
-          Probar Gratis
-        </Button>
       </div>
     </header>
   );
