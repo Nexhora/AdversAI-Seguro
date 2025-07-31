@@ -1,12 +1,23 @@
 import { BrainCircuit } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export function Header() {
   return (
-    <header className="px-4 lg:px-6 h-14 flex items-center">
-      <a className="flex items-center justify-center" href="#">
-        <BrainCircuit className="h-6 w-6 text-primary" />
-        <span className="ml-2 text-lg font-semibold">AdVerseAI</span>
-      </a>
+    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md">
+      <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
+        <Link href="/" className="flex items-center gap-3">
+          <BrainCircuit className="h-8 w-8 text-primary" />
+          <span className="text-xl font-bold font-display">AdVerseAI</span>
+        </Link>
+        <nav className="hidden items-center gap-6 md:flex">
+           <Link href="#beneficios" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Beneficios</Link>
+           <Link href="#herramientas" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Herramientas</Link>
+        </nav>
+        <Button>
+          Probar Gratis
+        </Button>
+      </div>
     </header>
   );
 }
