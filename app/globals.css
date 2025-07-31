@@ -4,33 +4,33 @@
 
 @layer base {
   :root {
-    --background: 222 47% 11%; /* bg-gray-900 */
-    --foreground: 210 40% 98%; /* text-white */
+    --background: 43 20% 94%; /* Very Light Yellow */
+    --foreground: 240 10% 3.9%; /* Near Black */
 
-    --card: 222 47% 15%; /* bg-gray-800 */
-    --card-foreground: 210 40% 98%; /* text-white */
+    --card: 43 20% 98%; /* Lighter version of background */
+    --card-foreground: 240 10% 3.9%;
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 43 20% 94%;
+    --popover-foreground: 240 10% 3.9%;
 
-    --primary: 38 92% 50%; /* amber-500 */
-    --primary-foreground: 222 47% 11%;
+    --primary: 43 90% 50%; /* Golden Yellow */
+    --primary-foreground: 240 10% 3.9%;
 
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 13 65% 80%; /* Lighter Salmon for secondary elements */
+    --secondary-foreground: 240 10% 3.9%;
 
-    --muted: 215 20% 65%; /* text-gray-400 */
-    --muted-foreground: 215 20% 65%; /* text-gray-400 */
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
 
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 13 65% 50%; /* Salmon */
+    --accent-foreground: 210 40% 98%; /* White text */
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 27%; /* border-gray-700 */
-    --input: 217 33% 27%; /* border-gray-700 */
-    --ring: 34 91% 58%; /* orange-500 */
+    --border: 43 20% 88%;
+    --input: 43 20% 88%;
+    --ring: 43 90% 50%;
 
     --radius: 0.5rem;
   }
