@@ -4,8 +4,8 @@ import Link from 'next/link';
 export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md">
-      <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
-        <Link href="/" className="flex items-center gap-3">
+      <div className="container relative mx-auto flex h-20 items-center justify-center px-4 md:px-6">
+        <Link href="/" className="absolute left-4 flex items-center gap-3 md:left-6">
           <Logo className="h-8 w-8" />
           <div>
             <span className="block text-xl font-bold font-display leading-tight">NEXHORA</span>
