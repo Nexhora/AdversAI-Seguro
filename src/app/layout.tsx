@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'AdVerseAI',
-  description: 'It works!',
+  description: 'AI-Powered Advertising Campaigns',
 }
 
 export default function RootLayout({
@@ -12,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>{children}</body>
     </html>
   )
