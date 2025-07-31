@@ -19,7 +19,7 @@ export const Logo = (props: React.SVGProps<SVGSVGElement>) => (
     <path
       d="M12 2L2 22h20L12 2z"
       stroke="url(#logoGradient)"
-      strokeWidth="2.5"
+      strokeWidth="3"
     />
   </svg>
 );
